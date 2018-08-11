@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface AdService {
 
-    List<AdDTO> filterAd(String model, String mark, String yearFrom, String yearTo, String priceFrom,
+    List<AdDTO> filterAd(String mark, String model, String yearFrom, String yearTo, String priceFrom,
                          String priceTo);
 
     List<AdDTO> findAll();

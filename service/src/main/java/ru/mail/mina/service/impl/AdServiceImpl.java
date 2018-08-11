@@ -46,10 +46,10 @@ public class AdServiceImpl implements AdService {
 
     @Override
     @Transactional
-    public List<AdDTO> filterAd(String model, String mark, String yearFrom, String yearTo,
+    public List<AdDTO> filterAd(String mark, String model, String yearFrom, String yearTo,
                                 String priceFrom, String priceTo) {
         List<AdDTO> adDTOList = new ArrayList<>();
-        List<Ad> list = adGenericHibernateDao.filter(model, mark, yearFrom, yearTo, priceFrom, priceTo);
+        List<Ad> list = adGenericHibernateDao.filter(mark, model, yearFrom, yearTo, priceFrom, priceTo);
         for (Ad element : list) {
             AdDTO adDTO = AdConverter.convert(element);
             adDTOList.add(adDTO);

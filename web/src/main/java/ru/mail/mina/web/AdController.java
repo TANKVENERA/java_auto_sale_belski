@@ -41,15 +41,14 @@ public class AdController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ModelAndView searchAds(Model model, @RequestParam( value = "CarModel") String carModel,
-                                  @RequestParam( value = "CarMark") String mark,
+    public ModelAndView searchAds(Model model, @RequestParam( value = "markId") Integer markId,
+                                  @RequestParam( value = "modelId") Integer modelId,
                                   @RequestParam( value = "YearOfIssueFrom") String yearFrom,
                                   @RequestParam( value = "YearOfIssueTo") String yearTo,
                                   @RequestParam( value = "PriceFrom") String priceFrom,
                                   @RequestParam( value = "PriceTo") String priceTo) {
         model.addAttribute("user", new UserDTO());
-
-        List<AdDTO> listAds = adService.filterAd(carModel, mark, yearFrom, yearTo, priceFrom, priceTo);
+        List<AdDTO> listAds = adService.filterAd(markId.toString(), modelId.toString(), yearFrom, yearTo, priceFrom, priceTo);
         return new ModelAndView("selectAds", "listAds", listAds);
     }
 

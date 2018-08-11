@@ -157,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .option {
     font-family: CitricaCyrillic;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 select {
@@ -176,16 +176,12 @@ select {
 }
 
 input[title] {
-    width: 90%;
-    font-family: CitricaCyrillic;
-    font-size: 22px;
     border-radius: 10px;
     border: 2px solid #777;
 }
 
 div[inline] {
     display: inline-block;
-    width: 13%;
     margin-right: 12px;
 }
 

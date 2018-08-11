@@ -20,7 +20,7 @@ public class AdGenericHibernateDaoImpl extends GenericHibernateDaoImpl<Ad, Integ
     }
 
 
-    public List<Ad> filter(String model, String mark, String yearFrom, String yearTo, String priceFrom,
+    public List<Ad> filter(String mark, String model, String yearFrom, String yearTo, String priceFrom,
                            String priceTo) {
 
         Criteria criteria = getSession().createCriteria(Ad.class);
