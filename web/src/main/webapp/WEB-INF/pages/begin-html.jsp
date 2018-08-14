@@ -8,51 +8,13 @@
 <html lang="en">
 <head>
     <title>Developing</title>
-    <%--<meta charset="utf-8">--%>
-    <%--<meta http-equiv="content-type" content="text/html; charset=UTF-8" />--%>
-    <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link  href="${pageContext.request.contextPath}/resources/libs/css/font-awesome.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet">
-    <%--<script>--%>
-        <%--var Model = Array('Any');--%>
-        <%--var Alfa_Romeo = Array('Any', '145', '146', '147', '155', '156', '159', '164', '166');--%>
-        <%--var Audi = Array('Any', '100', 'A1', 'A2', 'A3', 'A4(B5)', 'A4(B6)', 'A4(B7)', 'A4(B8)', 'A5', 'A6(C4)',--%>
-            <%--'A6(C5)', 'A6(C6)', 'A6(C7)', 'A7', 'A8(D2)', 'A8(D3)', 'A8(D4)');--%>
-        <%--var Acura = Array('Any', 'CL', 'RL', 'ILX', 'MDX', 'RDX', 'TL', 'TSX', 'ZDX');--%>
-        <%--var BMW = Array('Any', '3-reihe(E21)', '3-reihe(E30)', '3-reihe(E36)', '3-reihe(E46)', '3-reihe(E90)',--%>
-            <%--'5-reihe(E28)', '5-reihe(E34)', '5-reihe(E39)', '5-reihe(E60)', '7-reihe(E23)', 'X1', 'X3', 'X4', 'X5',--%>
-            <%--'X6', '7-reihe(E32)', '7-reihe(E65)', 'M3', 'M5', 'M6');--%>
-        <%--var Cadillac = Array('Any', 'ATS', 'BLS', 'Catera', 'CTS');--%>
-        <%--var Chevrolet = Array('Any', 'Lanos', 'Lacetti', 'Lumina', 'Malibu', 'Cruze', 'Cobalt');--%>
-        <%--var Chrysler = Array('Any', '200', '300', 'Aspen', 'Neon', 'Voyager', 'Stratus');--%>
-        <%--var Citroen = Array('Any', 'C1', 'C2', 'C3 Picasso', 'C4', 'C5', 'C6', 'C7', 'Xantia', 'Xsara');--%>
-        <%--var Daewoo = Array('Any', 'Matiz', 'Espero', 'Evanda', 'Gentra', 'Lanos', 'Lacetti', 'Nubira', 'Prince', 'Kalos');--%>
-        <%--var Fiat = Array('Any', '127', '500', 'Albea', 'Doblo', 'Punto', 'Lineo', 'Scudo', 'Multipla', 'Uno');--%>
-        <%--var Ford = Array('Any', 'Escort', 'Fiesta', 'Focus', 'Ka', 'Galaxy', 'Kuga', 'Orion', 'Explorer', 'S-Max', 'Scorpio');--%>
-        <%--var Honda = Array('Any', 'Accord', 'Civic', 'City', 'Fit', 'Pilot', 'Passport', 'CR-V', 'CR-Z', 'Logo', 'Jazz');--%>
-        <%--var Hyundai = Array('Any', 'Accent', 'Atos', 'Getz', 'i30', 'i40', 'ix20', 'ix35', 'ix55', 'Lantra', 'Matrix');--%>
-        <%--var Toyota = Array('Any', 'Camry', 'Corolla', 'Celica');--%>
-        <%--var Mercedes_Benz = Array('Any', 'S-classe(W220)', 'S-classe(W221)', 'S-classe(W222)', 'E-classe(W212)');--%>
-        <%--var Lexus = Array('Any', 'RX');--%>
-        <%--var Volkswagen = Array('Any', 'Golf', 'Passat', 'Jetta', 'Passat B3');--%>
-        <%--function showNames(v) {--%>
-            <%--var mas = eval(v);--%>
-            <%--var el = document.getElementById('model');--%>
-            <%--while (el.childNodes.length > 0) {--%>
-                <%--el.removeChild(el.childNodes[el.childNodes.length - 1]);--%>
-            <%--}--%>
-            <%--for (var i = 0; i < mas.length; i++) {--%>
-                <%--var opt = document.createElement("option");--%>
-                <%--opt.innerHTML = mas[i];--%>
-                <%--el.appendChild(opt);--%>
-            <%--}--%>
-        <%--}--%>
-    <%--</script>--%>
 </head>
-<body onload="showNames('Model')">
+<body >
 <nav class="navbar navbar-default menu">
     <div class="container">
         <div class="row">

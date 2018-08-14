@@ -2,13 +2,13 @@ package ru.mail.mina.web.initializer;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import ru.mail.mina.web.config.AppConfig;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+
+import javax.servlet.*;
 
 /**
  * Created by Администратор on 16.08.2017.
@@ -22,6 +22,9 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
 
     public void onStartup(ServletContext container) throws ServletException {
 
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
+        FilterRegistration.Dynamic dynamicFilter = container.addFilter("characterEncodingFilter", encodingFilter);
+        dynamicFilter.addMappingForUrlPatterns(null, true, "/*");
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(AppConfig.class);
         ctx.setServletContext(container);

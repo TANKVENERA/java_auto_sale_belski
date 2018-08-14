@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "t_model")
+@Table(name = "t_model_static")
 public class Model implements Serializable {
 
     private static final long serialVersionUID = 8343060893941883159L;

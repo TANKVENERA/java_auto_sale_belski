@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "t_mark")
+@Table(name = "t_mark_static")
 public class Mark implements Serializable{
 
     private static final long serialVersionUID = -4139721875408663348L;
