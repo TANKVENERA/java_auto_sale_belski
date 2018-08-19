@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.mail.mina.service.dto.CarFeatureService;
 import ru.mail.mina.service.dto.NewsService;
 import ru.mail.mina.service.dto.UserService;
 import ru.mail.mina.service.model.AdDTO;
@@ -26,17 +27,22 @@ import java.util.List;
 @Controller
 public class UserController {
 
+    public static final String Body_Style = "кузов";
+    public static final String Transmission = "трансмиссия";
+    public static final String Color = "цвет";
+
     private final UserService userService;
     private final UserValidator userValidator;
     private final NewsService newsService;
-
+    private final CarFeatureService featureService;
 
     @Autowired
     public UserController(UserService userService, UserValidator userValidator,
-                          NewsService newsService) {
+                          NewsService newsService, CarFeatureService featureService) {
         this.userService = userService;
         this.userValidator = userValidator;
         this.newsService = newsService;
+        this.featureService = featureService;
     }
 
     @RequestMapping(value = {"/close"}, method = RequestMethod.GET)
@@ -51,6 +57,9 @@ public class UserController {
     public String showAdBlank(Model model) {
         model.addAttribute("user", new UserDTO());
         model.addAttribute("ad", new AdDTO());
+        model.addAttribute("bodyStyle", featureService.getFeaturesByKey(Body_Style));
+        model.addAttribute("transmission", featureService.getFeaturesByKey(Transmission));
+        model.addAttribute("color", featureService.getFeaturesByKey(Color));
         return "createAd";
     }
 

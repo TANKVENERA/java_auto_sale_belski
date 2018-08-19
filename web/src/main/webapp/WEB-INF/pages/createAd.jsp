@@ -49,28 +49,35 @@
         <f:input type="text" path="engine"  id="Engine" size="25" class="textarea"/>
     </div>
     <div>
-        <label for="Transmission">Трансмиссия</label>
-        <f:input type="text" path="transmission"  id="Transmission" size="25" class="textarea"/>
+        <label for="transmission">Трансмиссия</label>
+        <select  name="transmission" id="transmission" class="textarea">
+            <option value="0">Трансмиссия</option>
+            <c:forEach var="transmKind" items="${transmission}">
+                <option value="${transmKind}">${transmKind}</option>
+            </c:forEach>
+        </select>
     </div>
     <div>
         <label for="Color">Цвет</label>
-        <f:input type="text" path="color"  id="Color" size="25" class="textarea"/>
+        <select  name="Color" id="Color" class="textarea">
+            <option value="0">Цвет</option>
+            <c:forEach var="colorKind" items="${color}">
+                <option value="${colorKind}">${colorKind}</option>
+            </c:forEach>
+        </select>
     </div>
     <div>
         <label for="MileAge">Пробег</label>
         <f:input type="text" path="mileAge"  id="MileAge" size="25" class="textarea"/>
     </div>
     <div>
-        <label for="BodyStyle">Тип кузова</label>
-        <f:select  path="bodyStyle" id="BodyStyle" class="textarea">
-            <option value="Cabriolet">Кабриолет</option>
-            <option value="Coupe">Купе</option>
-            <option value="Sedan">Седан</option>
-            <option value="Miniven">Минивен</option>
-            <option value="Universal">Универсал</option>
-            <option value="Allroad">Внедорожник</option>
-            <option value="Other">Другое</option>
-        </f:select>
+        <label for="BodyStyle">Кузов</label>
+        <select  name="bodyStyle" id="BodyStyle" class="textarea">
+            <option value="0">Кузов</option>
+            <c:forEach var="bodyKind" items="${bodyStyle}">
+                <option value="${bodyKind}">${bodyKind}</option>
+            </c:forEach>
+        </select>
     </div>
     <div class="div-form">
             <label in="upload" for="file"><i class="fa fa-upload fa-2x" aria-hidden="true" style="margin-right: 9px"></i>
