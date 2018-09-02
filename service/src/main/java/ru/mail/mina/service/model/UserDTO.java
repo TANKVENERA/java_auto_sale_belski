@@ -22,6 +22,15 @@ public class UserDTO {
 
     private Role role;
 
+    public UserDTO() {
+
+    }
+
+    public UserDTO(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
     private Set<AdDTO> ads = new HashSet<>();
 
     private Set<NewsDTO> news = new HashSet<>();

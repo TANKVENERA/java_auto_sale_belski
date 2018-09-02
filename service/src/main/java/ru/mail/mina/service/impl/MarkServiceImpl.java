@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 public class MarkServiceImpl implements MarkService {
 
-
     private final MarkGenericHibernateDao markGenericHibernateDao;
 
     @Autowired
@@ -30,10 +29,11 @@ public class MarkServiceImpl implements MarkService {
     @Transactional
     public List<MarkDTO> getAll() {
         List<MarkDTO> markDTOS = new ArrayList<>();
-        List<Mark> markList = markGenericHibernateDao.findAll();
+        List<Mark> markList = markGenericHibernateDao.findAll("id", "markAuto");
         for (Mark element : markList) {
             markDTOS.add(MarkConverter.convert(element));
         }
         return markDTOS;
     }
+
 }

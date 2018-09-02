@@ -16,7 +16,7 @@ public interface GenericHibernateDao<T extends Serializable, ID extends Serializ
 
     void delete( ID id);
 
-    List<T> findAll();
+    List<T> findAll(String ... parameters);
 
    T findById(ID id);
 

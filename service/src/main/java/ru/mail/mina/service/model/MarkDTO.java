@@ -1,5 +1,8 @@
 package ru.mail.mina.service.model;
 
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,15 @@ import java.util.List;
  */
 public class MarkDTO {
 
+    public interface mark {
+    }
+
+    @JsonView(MarkDTO.mark.class)
     private Integer id;
+
+    @JsonView(MarkDTO.mark.class)
     private String markAuto;
+
     private List<ModelDTO> models = new ArrayList<>();
 
     public Integer getId() {
@@ -20,6 +30,7 @@ public class MarkDTO {
         this.id = id;
     }
 
+    @JsonView(MarkDTO.mark.class)
     public String getMarkAuto() {
         return markAuto;
     }
@@ -34,5 +45,15 @@ public class MarkDTO {
 
     public void setModels(List<ModelDTO> models) {
         this.models = models;
+    }
+
+
+    @Override
+    public String toString() {
+        return "MarkDTO{" +
+                "id='" + id +
+                ",markAuto='" + markAuto + '\'' +
+                ",models'" + models +
+                "}";
     }
 }

@@ -10,15 +10,14 @@ import java.util.*;
  * Created by Администратор on 15.07.2017.
  */
 @Entity
-@Table(name="t_ad")
+@Table(name = "t_ad")
 public class Ad implements Serializable {
 
     private static final long serialVersionUID = 8348179393581584247L;
 
     @Id
-//    @GeneratedValue(strategy = IDENTITY)
-    @GenericGenerator(name="k" , strategy="increment")
-    @GeneratedValue (generator="k")
+    @GenericGenerator(name = "k", strategy = "increment")
+    @GeneratedValue(generator = "k")
     private Integer id;
 
     private String markAuto;
@@ -41,6 +40,20 @@ public class Ad implements Serializable {
 
     private String date;
 
+    public Ad() {
+    }
+
+    public Ad(Integer id, String markAuto, String modelAuto, Integer yearOfIssue, Integer price, String transmission, String engine,
+              Integer mileAge) {
+        this.id = id;
+        this.markAuto = markAuto;
+        this.modelAuto = modelAuto;
+        this.yearOfIssue = yearOfIssue;
+        this.price = price;
+        this.transmission = transmission;
+        this.engine = engine;
+        this.mileAge = mileAge;
+    }
 
     @Column(name = "F_CARDESCRIPTION", length = 2000)
     private String carDescription;
@@ -221,6 +234,7 @@ public class Ad implements Serializable {
                 ", color='" + color + '\'' +
                 ", bodyStyle='" + bodyStyle + '\'' +
                 ", carDescription='" + carDescription + '\'' +
+                ", user='" + carDescription + '\'' +
                 '}';
     }
 }

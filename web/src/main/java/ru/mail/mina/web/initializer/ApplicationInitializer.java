@@ -13,6 +13,7 @@ import javax.servlet.*;
 /**
  * Created by Администратор on 16.08.2017.
  */
+
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer implements WebApplicationInitializer {
 
     private static final String LOCATION = "D:\\projectData";

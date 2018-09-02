@@ -26,6 +26,27 @@
 hs_err_pid*
 target/
 
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
 dataSources/9d7b67e2-8072-4e9d-89cd-277ec5d9b9cf/_src_/
 dataSources/9d7b67e2-8072-4e9d-89cd-277ec5d9b9cf/_staging_/
 repository/target/generated-sources/
@@ -36,3 +57,8 @@ web/target/apache-tomcat-maven-plugin/
 web/target/autosale/META-INF/
 web/target/generated-sources/
 web/target/tomcat/webapps/
+web/src/main/resources/static/view_app/node_modules
+web/src/main/resources/static/view_app/README.md
+web/src/main/resources/static/view_app/package-lock.json
+web/src/main/resources/static/view_app/package.json
+web/src/main/resources/static/view_app/public/

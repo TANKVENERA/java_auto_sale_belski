@@ -1,9 +1,6 @@
 package ru.mail.mina.repository.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -53,5 +50,13 @@ public class Model implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, modelAuto);
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id='" + id +
+                ", modelAuto='" + modelAuto + '\'' +
+                "}";
     }
 }

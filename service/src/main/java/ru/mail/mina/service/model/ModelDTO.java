@@ -25,4 +25,12 @@ public class ModelDTO {
     public void setModelAuto(String modelAuto) {
         this.modelAuto = modelAuto;
     }
+
+    @Override
+    public String toString() {
+        return "ModelDTO{" +
+                "id='" + id +
+                ",markAuto='" + modelAuto + '\'' +
+                "}";
+    }
 }

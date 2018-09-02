@@ -3,10 +3,15 @@ package ru.mail.mina.repository.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mail.mina.repository.dao.GenericHibernateDao;
+
+import javax.persistence.criteria.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,15 +66,25 @@ public abstract class GenericHibernateDaoImpl<T extends Serializable, ID extends
     }
 
     @Override
-    public List<T> findAll() {
-        List<T> list = null;
+    public List<T> findAll(String ... parameters) {
+        List<T> list = new ArrayList<T>();
         try {
-            list = getSession().createCriteria(clazz).list();
+            CriteriaBuilder builder = getSession().getCriteriaBuilder();
+            CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);
+            Root<T> root =   criteriaQuery.from(clazz);
+            List<Selection<?>> selectionList = new ArrayList<>();
+            for (String param : parameters) {
+                selectionList.add(root.get(param));
+            }
+            criteriaQuery.multiselect(selectionList);
+            list=getSession().createQuery(criteriaQuery).getResultList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
+
 
     @Override
     public T findById(ID id) {

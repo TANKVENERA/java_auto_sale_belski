@@ -3,6 +3,7 @@ package ru.mail.mina.repository.impl;
 import org.springframework.stereotype.Repository;
 import ru.mail.mina.repository.dao.GenericHibernateDao;
 import ru.mail.mina.repository.dao.MarkGenericHibernateDao;
+import ru.mail.mina.repository.model.Ad;
 import ru.mail.mina.repository.model.Mark;
 
 import javax.persistence.Query;
@@ -16,5 +17,18 @@ public class MarkGenericHibernateDaoImpl extends GenericHibernateDaoImpl<Mark, I
 
     public MarkGenericHibernateDaoImpl() {
         super(Mark.class);
+    }
+
+    @Override
+    public List<Mark> findAllMarks() {
+        List<Mark> list = null;
+        try {
+            String hql = " From Mark";
+            Query query = getSession().createQuery(hql);
+            list =  query.getResultList();
+        } catch (Exception e) {
+
+        }
+        return list;
     }
 }

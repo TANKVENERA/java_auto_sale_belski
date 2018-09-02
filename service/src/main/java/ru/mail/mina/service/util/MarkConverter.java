@@ -18,11 +18,11 @@ public class MarkConverter {
         MarkDTO markDTO  = new MarkDTO();
         markDTO.setId(mark.getId());
         markDTO.setMarkAuto(mark.getMarkAuto());
-        List<ModelDTO> modelDTOS = new ArrayList<>();
-        for ( Model modelList :  mark.getModels() ) {
-            modelDTOS.add(ModelConverter.convert(modelList));
-        }
-        markDTO.setModels(modelDTOS);
+//        List<ModelDTO> modelDTOS = new ArrayList<>();
+//        for ( Model modelList :  mark.getModels() ) {
+//            modelDTOS.add(ModelConverter.convert(modelList));
+//        }
+//        markDTO.setModels(modelDTOS);
 
         return markDTO;
     }

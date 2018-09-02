@@ -1,5 +1,8 @@
 package ru.mail.mina.repository.model;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -24,9 +27,18 @@ public class Mark implements Serializable{
 
     private String markAuto;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_Mark")
     private Set<Model> models = new HashSet<>();
+
+    public Mark() {
+    }
+
+    public Mark( Integer id, String markAuto) {
+        this.id = id;
+        this.markAuto = markAuto;
+    }
 
     public Integer getId() {
         return id;
