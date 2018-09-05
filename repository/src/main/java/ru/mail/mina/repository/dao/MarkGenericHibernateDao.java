@@ -1,6 +1,7 @@
 package ru.mail.mina.repository.dao;
 
 import ru.mail.mina.repository.model.Mark;
+import ru.mail.mina.repository.model.Model;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ import java.util.List;
  */
 public interface MarkGenericHibernateDao extends GenericHibernateDao<Mark, Integer> {
 
-    List<Mark> findAllMarks();
+    List<Model> findMarkByKey(Integer fk_key);
 }

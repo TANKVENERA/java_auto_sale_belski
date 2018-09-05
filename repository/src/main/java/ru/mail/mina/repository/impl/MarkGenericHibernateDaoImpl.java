@@ -5,6 +5,7 @@ import ru.mail.mina.repository.dao.GenericHibernateDao;
 import ru.mail.mina.repository.dao.MarkGenericHibernateDao;
 import ru.mail.mina.repository.model.Ad;
 import ru.mail.mina.repository.model.Mark;
+import ru.mail.mina.repository.model.Model;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -20,12 +21,13 @@ public class MarkGenericHibernateDaoImpl extends GenericHibernateDaoImpl<Mark, I
     }
 
     @Override
-    public List<Mark> findAllMarks() {
-        List<Mark> list = null;
+    public List<Model> findMarkByKey(Integer fk_key) {
+        List<Model> list = null;
         try {
-            String hql = " From Mark";
+            String hql = " SELECT mark.models From  Mark mark where mark.id=:fk_key";
             Query query = getSession().createQuery(hql);
-            list =  query.getResultList();
+            query.setParameter("fk_key", fk_key);
+            list =  (List<Model>) query.getResultList();
         } catch (Exception e) {
 
         }

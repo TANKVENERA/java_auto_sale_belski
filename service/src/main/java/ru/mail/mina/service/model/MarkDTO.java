@@ -20,6 +20,7 @@ public class MarkDTO {
     @JsonView(MarkDTO.mark.class)
     private String markAuto;
 
+    @JsonView(MarkDTO.mark.class)
     private List<ModelDTO> models = new ArrayList<>();
 
     public Integer getId() {

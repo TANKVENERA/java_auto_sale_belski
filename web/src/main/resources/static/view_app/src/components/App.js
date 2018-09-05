@@ -12,16 +12,15 @@ class App extends Component {
     };
 
     handleChange = (selectedOption) => {
-        this.setState({selectedOption});
+        this.setState({selectedOption : selectedOption});
         console.log('Option selected:', selectedOption);
-    }
-
-
+}
 
     componentDidMount() {
+        console.log('Request is sent');
         fetch('http://localhost:8080')
-            .then(results => {
-                return results.json();
+            .then(result => {
+                return result.json();
             })
             .then(data => this.setState({marks: data}));
     }
@@ -30,19 +29,17 @@ class App extends Component {
         let options = this.state.marks.map(function (mark) {
             return {value: mark.id, label: mark.markAuto};
         })
-
+        console.log('setState:' , this.state.selectedOption);
         return (
                <div>
-            <Select
-                placeholder="Марка"
-                onChange={this.handleChange}
-                isClearable
-                options={options}
-            />
-            <Model
-                   passedMark={this.state.selectedOption}/>
+                    <Select
+                        placeholder="Марка"
+                        onChange={this.handleChange}
+                        isClearable
+                        options={options}
+                    />
+                    <Model passedMark={this.state.selectedOption}/>
                </div>
-
         )
     }
 }
