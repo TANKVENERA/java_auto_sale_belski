@@ -12,9 +12,9 @@ class App extends Component {
     };
 
     handleChange = (selectedOption) => {
-        this.setState({selectedOption : selectedOption});
+        this.setState({selectedOption: selectedOption});
         console.log('Option selected:', selectedOption);
-}
+    }
 
     componentDidMount() {
         console.log('Request is sent');
@@ -29,17 +29,21 @@ class App extends Component {
         let options = this.state.marks.map(function (mark) {
             return {value: mark.id, label: mark.markAuto};
         })
-        console.log('setState:' , this.state.selectedOption);
+        console.log('setState:', this.state.selectedOption);
         return (
-               <div>
+            <div>
+                <div className="oppa">
                     <Select
                         placeholder="Марка"
                         onChange={this.handleChange}
                         isClearable
                         options={options}
                     />
+                </div>
+                <div>
                     <Model passedMark={this.state.selectedOption}/>
-               </div>
+                </div>
+            </div>
         )
     }
 }
