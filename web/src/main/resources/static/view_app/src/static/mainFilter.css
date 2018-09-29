@@ -1,0 +1,14 @@
+
+.mark_box {
+    width: 450px;
+}
+
+.container_box {
+    width: 200px;
+}
+
+.main_filter_box {
+    display: flex;
+    justify-content: space-between;
+    max-width: 700px;
+}

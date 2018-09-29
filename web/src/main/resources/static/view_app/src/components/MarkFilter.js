@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
-import Select from '../../node_modules/react-select';
-import Model from './Model'
+import Select from '../../node_modules/react-responsive-select';
+import ModelFilter from './ModelFilter'
+import '../static/markAndModel.css';
+import  '../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
+import ArrowDown from '../static/ArrowDown';
 
-class App extends Component {
+class MarkFilter extends Component {
     constructor() {
         super();
         this.state = {
@@ -10,6 +13,7 @@ class App extends Component {
             marks: [],
         }
     };
+
 
     handleChange = (selectedOption) => {
         this.setState({selectedOption: selectedOption});
@@ -26,26 +30,27 @@ class App extends Component {
     }
 
     render() {
-        let options = this.state.marks.map(function (mark) {
-            return {value: mark.id, label: mark.markAuto};
+        let marks = this.state.marks.map(function (mark) {
+            return {value: mark.id, text: mark.markAuto};
         })
         console.log('setState:', this.state.selectedOption);
         return (
-            <div>
-                <div className="oppa">
+            <div className="mark_model_box">
+                <div className="container_box">
                     <Select
-                        placeholder="Марка"
+                        noSelectionLabel="Марка"
                         onChange={this.handleChange}
                         isClearable
-                        options={options}
+                        options={marks}
+                        caretIcon={ArrowDown}
                     />
                 </div>
-                <div>
-                    <Model passedMark={this.state.selectedOption}/>
+                <div className="container_box">
+                    <ModelFilter passedMark={this.state.selectedOption}/>
                 </div>
             </div>
         )
     }
 }
 
-export default App
+export default MarkFilter;

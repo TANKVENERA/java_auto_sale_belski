@@ -1,5 +1,5 @@
 import {render} from 'react-dom'
-import App from './components/App.js'
+import MainFilter from './components/MainFilter.js'
 import React from 'react'
 
-render(<App/>, document.getElementById('root'))
+render(<MainFilter/>, document.getElementById('root'))

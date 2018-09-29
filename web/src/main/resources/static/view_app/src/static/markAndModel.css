@@ -1,0 +1,33 @@
+.rrs__options {
+  transition: all .8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-property: max-height, opacity;
+  max-height: 0;
+  opacity: 0;
+}
+
+.rrs--options-visible .rrs__options {
+  opacity: 1;
+}
+
+.caret-icon {
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+  fill: #333;
+  transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.rrs--options-visible .caret-icon {
+  transform: rotate(180deg);
+}
+
+.mark_model_box {
+   display: flex;
+   justify-content: space-between;
+   max-width: 450px;
+ }
+
+
+
+
+

@@ -61,4 +61,5 @@ web/src/main/resources/static/view_app/node_modules
 web/src/main/resources/static/view_app/README.md
 web/src/main/resources/static/view_app/package-lock.json
 web/src/main/resources/static/view_app/package.json
-web/src/main/resources/static/view_app/public/
+web/src/main/resources/static/view_app/scripts
+web/src/main/resources/static/view_app/config

@@ -1,0 +1,77 @@
+.Select-control {
+    border-radius: 4px;
+    height: 28px;
+    width: 90px;
+}
+
+.Select-input {
+    height: 28px;
+}
+
+.Select-placeholder {
+    top: -4px;
+}
+
+.Select-option {
+    height: 28px;
+}
+
+
+.Select-menu-outer {
+    width: 90px;
+}
+
+.arrow_box {
+    margin-top: 12px;
+    position: relative;
+    background: #88b7d5;
+    height: 78px;
+    width: 200px;
+}
+
+.arrow_box:after, .arrow_box:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    position: absolute;
+}
+
+.arrow_box:after {
+    border-bottom-color: #88b7d5;
+    border-width: 11px;
+    margin-left: -90px;
+}
+
+.title {
+    padding-left: 11px;
+    padding-top: 10px;
+}
+
+.select_box {
+    display: flex;
+    justify-content: space-between;
+    max-width: 190px;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.message-enter {
+    max-height: 0px;
+    transition: width .3s ease-out,height .3s ease-out,max-height .3s ease-out;
+}
+.message-enter-active {
+    height: 78px;
+    max-height: 100px;
+}
+
+.message-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+}
+
+.message-exit-active {
+    opacity: 0.01;
+    transform: scale(0.9) translateY(50%);
+    transition: all 300ms ease-out;
+}
