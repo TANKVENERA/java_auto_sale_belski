@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import Select from '../../node_modules/react-responsive-select';
-import  '../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import ArrowDown from '../static/ArrowDown';
 
 class ModelFilter extends Component {
@@ -18,23 +17,17 @@ class ModelFilter extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('previous parameter:', prevProps);
-        const previousMark = prevProps.passedMark === null ? '' : prevProps.passedMark.text
-        console.log('!!!!', this.props.passedMark.text,  this.props.passedMark.value);
-        const markId = this.props.passedMark.text === null ? '' : this.props.passedMark.text
-        if (markId !== previousMark) {
-            if (markId === '') {
-                this.setState({models: []});
-            } else {
-                console.log('markId:', this.props.passedMark.value);
-                fetch(`http://localhost:8080/models?mid=${markId}`, {
-                    method: 'GET'
+        const previousMarkId = prevProps.passedMark.value
+        const markId = this.props.passedMark.value
+        console.log('compare:', this.props.passedMark.value);
+        if (markId!==previousMarkId && previousMarkId) {
+            fetch(`http://localhost:8080/models?mid=${markId}`, {
+                method: 'GET'
+            })
+                .then(result => {
+                    return result.json();
                 })
-                    .then(result => {
-                        return result.json();
-                    })
-                    .then(data => this.setState({models: data}));
-            }
+                .then(data => this.setState({models: data}));
         }
     }
 
@@ -42,13 +35,12 @@ class ModelFilter extends Component {
         let options = this.state.models.map(function (model) {
             return {value: model.id, text: model.modelAuto};
         })
-        console.log('updated models', this.state.models);
 
         return (
             <Select
                 noSelectionLabel="Модель"
                 onChange={this.handleChange}
-                disabled={this.state.selectedModel.text === 'Модель' ? true : false}
+                disabled={this.state.models.length === 0 ? true : false}
                 options={options}
                 caretIcon={ArrowDown}
             />

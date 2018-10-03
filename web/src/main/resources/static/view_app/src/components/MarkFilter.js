@@ -21,7 +21,6 @@ class MarkFilter extends Component {
     }
 
     componentDidMount() {
-        console.log('Request is sent');
         fetch('http://localhost:8080')
             .then(result => {
                 return result.json();
@@ -33,7 +32,7 @@ class MarkFilter extends Component {
         let marks = this.state.marks.map(function (mark) {
             return {value: mark.id, text: mark.markAuto};
         })
-        console.log('setState:', this.state.selectedOption);
+
         return (
             <div className="mark_model_box">
                 <div className="container_box">

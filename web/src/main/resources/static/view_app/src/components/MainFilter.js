@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MarkFilter from './MarkFilter';
 import PeriodFilter from './PeriodFilter';
+import PriceFilter from './PriceFilter'
 import '../static/mainFilter.css';
 
 class MainFilter extends Component {
@@ -13,6 +14,9 @@ class MainFilter extends Component {
                 </div>
                 <div className="container_box">
                    <PeriodFilter/>
+                </div>
+                <div className="container_box">
+                    <PriceFilter/>
                 </div>
             </div>
         )

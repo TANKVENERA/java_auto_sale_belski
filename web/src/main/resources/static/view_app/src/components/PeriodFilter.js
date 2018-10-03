@@ -3,7 +3,6 @@
  */
 
 import React, {Component} from 'react'
-import  '../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import {CSSTransition} from '../../node_modules/react-transition-group'
 import Select from '../../node_modules/react-select-v1'
 import '../../node_modules/react-select-v1/dist/react-select.css';
@@ -39,7 +38,6 @@ class PeriodFilter extends Component {
     }
 
     period(yearFrom, yearOn) {
-        console.log('!!!!!!!!', yearFrom === '' && yearOn === '')
         switch (true) {
             case ((yearFrom === '' && yearOn === '') || (yearFrom === null && yearOn === '') || (yearFrom === '' && yearOn === null)):
                 return 'Год выпуска';
@@ -50,7 +48,7 @@ class PeriodFilter extends Component {
             case (yearFrom !== null && yearOn === null) || (yearFrom !== null && yearOn === ''):
                 return 'c ' + yearFrom.label;
             case (yearFrom !== null && yearOn !== null):
-                return 'c ' + yearFrom.label + ' по ' + yearOn.label;
+                return 'c ' + yearFrom.label + '  -  по ' + yearOn.label;
             default :
                 return 'Год выпуска';
         }
@@ -97,8 +95,12 @@ class PeriodFilter extends Component {
         const yearOn = this.state.selectedYearOn
         return (
             <div className={visible === true ? 'rrs rrs--options-visible' : 'rrs'}>
-                <div role="button" className="rrs__button" tabIndex="0"
-                     onClick={this.handleToggle.bind(this)}>
+                <div role="button"
+                     className="rrs__button"
+                     tabIndex="0"
+                     onClick={this.handleToggle.bind(this)}
+                   //  onBlur={() => this.setState({visible: false})}
+                >
                     <div className="rrs__label">
                         <span>{this.period(yearFrom, yearOn)}</span>
                         {ArrowDown}
@@ -119,6 +121,7 @@ class PeriodFilter extends Component {
                                     placeholder="c"
                                     onChange={this.handleChangeYearFrom}
                                     value={this.state.selectedYearFrom}
+                                    searchable={false}
                                 />
                             </div>
                             <div >
@@ -127,6 +130,7 @@ class PeriodFilter extends Component {
                                     placeholder="по"
                                     onChange={this.handleChangeYearOn}
                                     value={this.state.selectedYearOn}
+                                    searchable={false}
                                 />
                             </div>
                         </div>

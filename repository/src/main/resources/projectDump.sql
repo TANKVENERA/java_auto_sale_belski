@@ -47,7 +47,7 @@ CREATE TABLE `t_ad` (
 
 LOCK TABLES `t_ad` WRITE;
 /*!40000 ALTER TABLE `t_ad` DISABLE KEYS */;
-INSERT INTO `t_ad` VALUES (1,'седан-баклажан','Автомобиль в идеальном состоянии, максимальной комплектации, полностью обслужен, панель Алькантара, эксплуатация с 10.11.2010 года. Застрахован в Автокаско. Из США, не РФ. \r\nP.S. в случае если телефон вне зоны действия сети, пишите на Viber того же номера. С торгом.','ывывыв','14-08-2018 22-17','','',150340,'Alfa_Romeo',25000,'передний',2010,1);
+INSERT INTO `t_ad` VALUES (1,'седан-баклажан','Автомобиль в идеальном состоянии, максимальной комплектации, полностью обслужен, панель Алькантара, эксплуатация с 10.11.2010 года. Застрахован в Автокаско. Из США, не РФ. \r\nP.S. в случае если телефон вне зоны действия сети, пишите на Viber того же номера. С торгом.','ывывыв','14-08-2018 22-17','','',150340,'Alfa_Romeo',25000,'передний',2010,1),(2,'хэтчбек 3дв.','','белый','19-08-2018 23-33','',NULL,NULL,'Start',NULL,'автомат',NULL,1),(3,'родстер','',NULL,'19-08-2018 23-35','',NULL,NULL,'Start',NULL,'автомат',NULL,1);
 /*!40000 ALTER TABLE `t_ad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `t_adentity` (
   `FK_Ad` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKe95f3avoai1dhjgo9tjtrmjc7` (`FK_Ad`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `t_adentity` (
 
 LOCK TABLES `t_adentity` WRITE;
 /*!40000 ALTER TABLE `t_adentity` DISABLE KEYS */;
-INSERT INTO `t_adentity` VALUES (2,'13-08-2018 22-41','D:\\projectData\\ads\\13-08-2018 22-41\\',2),(3,'14-08-2018 22-17','D:\\projectData\\ads\\14-08-2018 22-17\\',1);
+INSERT INTO `t_adentity` VALUES (2,'13-08-2018 22-41','D:\\projectData\\ads\\13-08-2018 22-41\\',2),(3,'14-08-2018 22-17','D:\\projectData\\ads\\14-08-2018 22-17\\',1),(4,'19-08-2018 23-06','D:\\projectData\\ads\\19-08-2018 23-06\\',2),(5,'19-08-2018 23-33','D:\\projectData\\ads\\19-08-2018 23-33\\',2),(6,'19-08-2018 23-35','D:\\projectData\\ads\\19-08-2018 23-35\\',3);
 /*!40000 ALTER TABLE `t_adentity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,6 +105,31 @@ INSERT INTO `t_basket` VALUES (1,1,1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `t_carfeature_static`
+--
+
+DROP TABLE IF EXISTS `t_carfeature_static`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_carfeature_static` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feature` varchar(255) DEFAULT NULL,
+  `carSign` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_carfeature_static`
+--
+
+LOCK TABLES `t_carfeature_static` WRITE;
+/*!40000 ALTER TABLE `t_carfeature_static` DISABLE KEYS */;
+INSERT INTO `t_carfeature_static` VALUES (1,'внедорожник 3дв.','bodyStyle'),(2,'внедорожник 5дв.','bodyStyle'),(3,'кабриолет','bodyStyle'),(4,'купе','bodyStyle'),(5,'легковой фургон','bodyStyle'),(6,'минивен','bodyStyle'),(7,'лимузин','bodyStyle'),(8,'микравтобус грузовой','bodyStyle'),(9,'микроавтобус пассажирский','bodyStyle'),(10,'пикап','bodyStyle'),(11,'родстер','bodyStyle'),(12,'седан','bodyStyle'),(13,'универсал','bodyStyle'),(14,'хэтчбек 3дв.','bodyStyle'),(15,'хэтчбек 5дв.','bodyStyle'),(16,'другой','bodyStyle'),(17,'автомат','transmission'),(18,'механика','transmission'),(19,'белый','color'),(20,'желтый','color'),(21,'зеленый','color'),(22,'черный','color'),(23,'синий','color'),(24,'красный','color'),(25,'серебристый','color'),(26,'серый','color'),(27,'другой','color'),(28,'1980','year_of_issue'),(29,'1981','year_of_issue'),(30,'1982','year_of_issue'),(31,'1983','year_of_issue'),(32,'1984','year_of_issue'),(33,'1985','year_of_issue'),(34,'1986','year_of_issue'),(35,'1987','year_of_issue'),(36,'1987','year_of_issue'),(37,'1988','year_of_issue'),(38,'1989','year_of_issue'),(39,'1990','year_of_issue'),(40,'1991','year_of_issue'),(41,'1992','year_of_issue'),(42,'1993','year_of_issue'),(43,'1994','year_of_issue'),(44,'1995','year_of_issue'),(45,'1996','year_of_issue'),(46,'1997','year_of_issue'),(47,'1998','year_of_issue'),(48,'1999','year_of_issue'),(49,'2000','year_of_issue'),(50,'2001','year_of_issue'),(51,'2002','year_of_issue'),(52,'2003','year_of_issue'),(53,'2004','year_of_issue'),(54,'2005','year_of_issue'),(55,'2006','year_of_issue'),(56,'2007','year_of_issue'),(57,'2008','year_of_issue'),(58,'2009','year_of_issue'),(59,'2010','year_of_issue'),(60,'2011','year_of_issue'),(61,'2012','year_of_issue'),(62,'2013','year_of_issue'),(63,'2014','year_of_issue'),(64,'2015','year_of_issue'),(65,'2016','year_of_issue'),(66,'2017','year_of_issue'),(67,'2018','year_of_issue'),(68,'500','price'),(69,'1000','price'),(70,'2000','price'),(71,'3000','price'),(72,'4000','price'),(73,'5000','price'),(74,'6000','price'),(75,'7000','price'),(76,'8000','price'),(77,'9000','price'),(78,'10000','price'),(79,'11000','price'),(80,'12000','price'),(81,'13000','price'),(82,'14000','price'),(83,'15000','price'),(84,'15000','price'),(85,'16000','price'),(86,'17000','price'),(87,'18000','price'),(88,'19000','price'),(89,'20000','price'),(90,'25000','price'),(91,'30000','price'),(92,'35000','price'),(93,'40000','price'),(94,'50000','price');
+/*!40000 ALTER TABLE `t_carfeature_static` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `t_comments`
 --
 
@@ -132,29 +157,6 @@ LOCK TABLES `t_comments` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_mark`
---
-
-DROP TABLE IF EXISTS `t_mark`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_mark` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `markAuto` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_mark`
---
-
-LOCK TABLES `t_mark` WRITE;
-/*!40000 ALTER TABLE `t_mark` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_mark` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_mark_static`
 --
 
@@ -179,28 +181,27 @@ INSERT INTO `t_mark_static` VALUES (1,'Chevrolet'),(2,'Audi'),(3,'Volkswagen'),(
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_model`
+-- Table structure for table `t_mark_static_t_model_static`
 --
 
-DROP TABLE IF EXISTS `t_model`;
+DROP TABLE IF EXISTS `t_mark_static_t_model_static`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_model` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `modelAuto` varchar(255) DEFAULT NULL,
-  `FK_Mark` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK72cqg2sm7mjn6nxmg7u4u15k5` (`FK_Mark`)
+CREATE TABLE `t_mark_static_t_model_static` (
+  `Mark_id` int(11) NOT NULL,
+  `models_id` int(11) NOT NULL,
+  PRIMARY KEY (`Mark_id`,`models_id`),
+  UNIQUE KEY `UK_7vbpv5u6fobtlccp6syy60o6u` (`models_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_model`
+-- Dumping data for table `t_mark_static_t_model_static`
 --
 
-LOCK TABLES `t_model` WRITE;
-/*!40000 ALTER TABLE `t_model` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_model` ENABLE KEYS */;
+LOCK TABLES `t_mark_static_t_model_static` WRITE;
+/*!40000 ALTER TABLE `t_mark_static_t_model_static` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_mark_static_t_model_static` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -318,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-14 23:18:14
+-- Dump completed on 2018-09-29 22:54:14
