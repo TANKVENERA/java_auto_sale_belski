@@ -9,15 +9,21 @@ class MarkFilter extends Component {
     constructor() {
         super();
         this.state = {
-            selectedOption: '',
-            marks: [],
+            selectedMark: '',
+            marks: []
         }
     };
 
 
-    handleChange = (selectedOption) => {
-        this.setState({selectedOption: selectedOption});
-        console.log('Option selected:', selectedOption);
+    handleChange = (selectedMark) => {
+        this.setState({selectedMark: selectedMark});
+        console.log('Option selected:', selectedMark);
+        this.props.onSelectMark(selectedMark);
+    }
+
+    handleModel = (modelValue) => {
+        this.props.onSelectModel(modelValue);
+        console.log('received model in mark controller ', modelValue.text);
     }
 
     componentDidMount() {
@@ -45,7 +51,7 @@ class MarkFilter extends Component {
                     />
                 </div>
                 <div className="container_box">
-                    <ModelFilter passedMark={this.state.selectedOption}/>
+                    <ModelFilter passedMark={this.state.selectedMark} onSelectModelFromModelComp={this.handleModel}/>
                 </div>
             </div>
         )

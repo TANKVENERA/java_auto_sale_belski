@@ -24,11 +24,13 @@ class PeriodFilter extends Component {
     handleChangeYearFrom = (selectedYearFrom) => {
         this.setState({selectedYearFrom: selectedYearFrom});
         console.log('Selected year from:', selectedYearFrom);
+        this.props.onSelectYearFrom(selectedYearFrom);
     }
 
     handleChangeYearOn = (selectedYearOn) => {
         this.setState({selectedYearOn: selectedYearOn});
         console.log('Selected year on:', selectedYearOn);
+        this.props.onSelectYearOn(selectedYearOn);
     }
 
     handleToggle() {

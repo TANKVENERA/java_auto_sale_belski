@@ -21,23 +21,28 @@ class PriceFilter extends Component {
             visible: false,
             selectedPriceFrom: '',
             selectedPriceTo: '',
-            selectedCurrency: ''
+            selectedCurrency: 'byn'
         }
     }
 
     handleCurrencyChange = (selectedCurrency) => {
         this.setState({selectedCurrency: selectedCurrency});
         console.log('Selected currency:', selectedCurrency);
+        this.props.onSelectCurrency(selectedCurrency);
     }
+
+
 
     handleChangePriceFrom = (selectedPriceFrom) => {
         this.setState({selectedPriceFrom: selectedPriceFrom});
         console.log('Selected price from:', selectedPriceFrom);
+        this.props.onSelectPriceFrom(selectedPriceFrom);
     }
 
     handleChangePriceTo = (selectedPriceTo) => {
         this.setState({selectedPriceTo: selectedPriceTo});
         console.log('Selected price to:', selectedPriceTo);
+        this.props.onSelectPriceTo(selectedPriceTo);
     }
 
     handleToggle() {

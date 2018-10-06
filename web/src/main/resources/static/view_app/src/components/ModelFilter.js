@@ -13,8 +13,10 @@ class ModelFilter extends Component {
 
     handleChange = (selectedModel) => {
         this.setState({selectedModel: selectedModel});
+        this.props.onSelectModelFromModelComp(selectedModel);
         console.log('Option selected model:', selectedModel);
     }
+
 
     componentDidUpdate(prevProps) {
         const previousMarkId = prevProps.passedMark.value
