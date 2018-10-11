@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import Select from '../../node_modules/react-responsive-select';
+import Select from '../../../node_modules/react-responsive-select';
 import ModelFilter from './ModelFilter'
-import '../static/markAndModel.css';
-import  '../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
-import ArrowDown from '../static/ArrowDown';
+import '../../static/markAndModel.css';
+import  '../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
+import ArrowDown from '../../static/ArrowDown';
+import {getMarks} from '../utils/retrieveMarks'
 
 class MarkFilter extends Component {
     constructor() {
@@ -14,7 +15,6 @@ class MarkFilter extends Component {
         }
     };
 
-
     handleChange = (selectedMark) => {
         this.setState({selectedMark: selectedMark});
         console.log('Option selected:', selectedMark);
@@ -23,22 +23,18 @@ class MarkFilter extends Component {
 
     handleModel = (modelValue) => {
         this.props.onSelectModel(modelValue);
-        console.log('received model in mark controller ', modelValue.text);
+        console.log('received  in mark controller ', modelValue);
     }
 
-    componentDidMount() {
-        fetch('http://localhost:8080')
-            .then(result => {
-                return result.json();
-            })
-            .then(data => this.setState({marks: data}));
+    componentWillMount() {
+       getMarks.call(this);
     }
 
     render() {
         let marks = this.state.marks.map(function (mark) {
             return {value: mark.id, text: mark.markAuto};
         })
-
+        console.log('received!!!  mark in MARK controller ', marks);
         return (
             <div className="mark_model_box">
                 <div className="container_box">

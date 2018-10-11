@@ -51,7 +51,7 @@ yarn-error.log*
 dataSources/9d7b67e2-8072-4e9d-89cd-277ec5d9b9cf/_src_/
 dataSources/9d7b67e2-8072-4e9d-89cd-277ec5d9b9cf/_staging_/
 web/src/main/resources/static/view_app/node_modules
-repository/src/main/resources/projectDump.sql
+repository/src/main/resources/dataDump.sql
 web/src/main/resources/static/view_app/README.md
 web/src/main/resources/static/view_app/package-lock.json
 web/src/main/resources/static/view_app/package.json

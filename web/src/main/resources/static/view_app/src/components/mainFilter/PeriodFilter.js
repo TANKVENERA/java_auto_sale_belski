@@ -3,11 +3,9 @@
  */
 
 import React, {Component} from 'react'
-import {CSSTransition} from '../../node_modules/react-transition-group'
-import Select from '../../node_modules/react-select-v1'
-import '../../node_modules/react-select-v1/dist/react-select.css';
-import '../static/arrowBox.css'
-import ArrowDown from '../static/ArrowDown';
+import {CSSTransition} from '../../../node_modules/react-transition-group'
+import StyledReactSelect from '../../static/StyledReactSelect';
+import ArrowDown from '../../static/ArrowDown';
 
 class PeriodFilter extends Component {
 
@@ -17,7 +15,8 @@ class PeriodFilter extends Component {
             yearOfIssue: [],
             visible: false,
             selectedYearFrom: '',
-            selectedYearOn: ''
+            selectedYearOn: '',
+            index: 1
         }
     }
 
@@ -118,7 +117,7 @@ class PeriodFilter extends Component {
                         <div className="title">Год выпуска</div>
                         <div className="select_box">
                             <div>
-                                <Select
+                                <StyledReactSelect
                                     options={this.disabledYearsFrom(this.state.selectedYearOn)}
                                     placeholder="c"
                                     onChange={this.handleChangeYearFrom}
@@ -127,7 +126,7 @@ class PeriodFilter extends Component {
                                 />
                             </div>
                             <div >
-                                <Select
+                                <StyledReactSelect
                                     options={this.disabledYearsOn(this.state.selectedYearFrom)}
                                     placeholder="по"
                                     onChange={this.handleChangeYearOn}

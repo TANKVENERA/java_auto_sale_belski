@@ -3,14 +3,11 @@
  */
 
 import React, {Component} from 'react'
-import {CSSTransition} from '../../node_modules/react-transition-group'
-import Select from '../../node_modules/react-select-v1'
-import '../../node_modules/react-select-v1/dist/react-select.css';
-import '../static/arrowBox.css'
-import ArrowDown from '../static/ArrowDown';
-// import ButtonGroup from '../../node_modules/react-bootstrap/lib/ButtonGroup'
-// import Button from '../../node_modules/react-bootstrap/lib/Button'
-import {RadioGroup, RadioButton} from '../../node_modules/react-custom-radio'
+import {CSSTransition} from '../../../node_modules/react-transition-group'
+import StyledReactSelect from '../../static/StyledReactSelect';
+import '../../static/arrowBox.css'
+import ArrowDown from '../../static/ArrowDown';
+import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio'
 
 class PriceFilter extends Component {
 
@@ -30,8 +27,6 @@ class PriceFilter extends Component {
         console.log('Selected currency:', selectedCurrency);
         this.props.onSelectCurrency(selectedCurrency);
     }
-
-
 
     handleChangePriceFrom = (selectedPriceFrom) => {
         this.setState({selectedPriceFrom: selectedPriceFrom});
@@ -149,7 +144,7 @@ class PriceFilter extends Component {
                         </div>
                         <div className="select_box">
                             <div>
-                                <Select
+                                <StyledReactSelect
                                     options={this.disabledPricesFrom(this.state.selectedPriceTo)}
                                     placeholder="от"
                                     onChange={this.handleChangePriceFrom}
@@ -158,7 +153,7 @@ class PriceFilter extends Component {
                                 />
                             </div>
                             <div >
-                                <Select
+                                <StyledReactSelect
                                     options={this.disabledPricesTo(this.state.selectedPriceFrom)}
                                     placeholder="до"
                                     onChange={this.handleChangePriceTo}

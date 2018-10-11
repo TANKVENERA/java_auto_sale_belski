@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MarkFilter from './MarkFilter';
 import PeriodFilter from './PeriodFilter';
 import PriceFilter from './PriceFilter'
-import '../static/mainFilter.css';
+import '../../static/mainFilter.css';
 
 class MainFilter extends Component {
     constructor() {
@@ -50,6 +50,7 @@ class MainFilter extends Component {
     render() {
         return (
             <div className="main_filter_box">
+
                 <div className="mark_box">
                     <MarkFilter onSelectMark={this.handleMark} onSelectModel={this.handleModel}/>
                 </div>

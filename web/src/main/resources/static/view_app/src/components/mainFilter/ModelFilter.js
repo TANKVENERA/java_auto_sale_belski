@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Select from '../../node_modules/react-responsive-select';
-import ArrowDown from '../static/ArrowDown';
+import Select from '../../../node_modules/react-responsive-select';
+import ArrowDown from '../../static/ArrowDown';
 
 class ModelFilter extends Component {
     constructor(props) {
@@ -16,7 +16,6 @@ class ModelFilter extends Component {
         this.props.onSelectModelFromModelComp(selectedModel);
         console.log('Option selected model:', selectedModel);
     }
-
 
     componentDidUpdate(prevProps) {
         const previousMarkId = prevProps.passedMark.value
