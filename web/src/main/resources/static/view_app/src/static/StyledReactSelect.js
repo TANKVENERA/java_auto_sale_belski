@@ -4,8 +4,8 @@ import styled from '../../node_modules/styled-components';
 const  StyledReactSelect = styled(Select)`
     & .Select-control {
         border-radius: 4px;
-        height: ${props => props.large ? "38px" : "28px"};
-        width:  ${props => props.large ? "300px" : "94px"};
+        height: ${props => props.large ? "40px" : "28px"};
+        width:  ${props => props.large ? "350px" : "94px"};
     }
     
     & .Select-input {
@@ -21,7 +21,7 @@ const  StyledReactSelect = styled(Select)`
     }
 
     & .Select-menu-outer {
-        width: ${props => props.large ? "300px" : "94px"};
+        width: ${props => props.large ? "350px" : "94px"};
     }
     
     & .Select--single > .Select-control .Select-value {

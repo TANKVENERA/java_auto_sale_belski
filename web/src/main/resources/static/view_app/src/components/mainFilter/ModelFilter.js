@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Select from '../../../node_modules/react-responsive-select';
 import ArrowDown from '../../static/ArrowDown';
+import {getModelsByMarkId} from '../utils/retrieveModel';
 
 class ModelFilter extends Component {
     constructor(props) {
@@ -14,22 +15,15 @@ class ModelFilter extends Component {
     handleChange = (selectedModel) => {
         this.setState({selectedModel: selectedModel});
         this.props.onSelectModelFromModelComp(selectedModel);
-        console.log('Option selected model:', selectedModel);
     }
 
     componentDidUpdate(prevProps) {
         const previousMarkId = prevProps.passedMark.value
         const markId = this.props.passedMark.value
-        console.log('compare:', this.props.passedMark.value);
-        if (markId!==previousMarkId && previousMarkId) {
-            fetch(`http://localhost:8080/models?mid=${markId}`, {
-                method: 'GET'
-            })
-                .then(result => {
-                    return result.json();
-                })
-                .then(data => this.setState({models: data}));
-        }
+        if (markId!==previousMarkId && previousMarkId)
+         {
+            getModelsByMarkId.call(this, markId);
+         }
     }
 
     render() {

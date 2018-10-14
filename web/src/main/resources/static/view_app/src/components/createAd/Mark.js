@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
 import {getMarks} from '../utils/retrieveMarks';
+import Model from './Model';
 
 class Mark extends Component {
     constructor() {
@@ -15,7 +16,7 @@ class Mark extends Component {
         this.setState({selectedMark: selectedMark});
     }
 
-    componentWillMount(){
+    componentDidMount(){
         getMarks.call(this)
     }
 
@@ -26,6 +27,7 @@ class Mark extends Component {
         console.log('received marks in create Ad', marks);
         return (
             <div>
+            <div>
                 <StyledSelect large
                     options={marks}
                     onChange={this.handleChange}
@@ -33,6 +35,10 @@ class Mark extends Component {
                     value={this.state.selectedMark}
                     searchable={false}
                 />
+            </div>
+                <div>
+                    <Model passedMark={this.state.selectedMark}/>
+                </div>
             </div>
         );
     }
