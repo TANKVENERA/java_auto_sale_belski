@@ -12,7 +12,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "t_carFeature_static")
 public class CarFeature implements Serializable {
 
-
     private static final long serialVersionUID = 8275333110897317640L;
 
     @Id

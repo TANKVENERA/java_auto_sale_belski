@@ -5,8 +5,9 @@
 import React, {Component} from 'react'
 import {CSSTransition} from '../../../node_modules/react-transition-group'
 import StyledReactSelect from '../../static/StyledReactSelect';
-import '../../static/arrowBox.css'
+import '../../static/arrowBox.css';
 import ArrowDown from '../../static/ArrowDown';
+import {retrieveData} from '../utils/util';
 import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio'
 
 class PriceFilter extends Component {
@@ -64,12 +65,7 @@ class PriceFilter extends Component {
     }
 
     componentDidMount() {
-        console.log('Request is sent to retrieve prices');
-        fetch('http://localhost:8080/prices')
-            .then(result => {
-                return result.json();
-            })
-            .then(data => this.setState({prices: data}));
+      retrieveData.call(this, 'prices', 'prices');
     }
 
     disabledPricesFrom(priceTo) {

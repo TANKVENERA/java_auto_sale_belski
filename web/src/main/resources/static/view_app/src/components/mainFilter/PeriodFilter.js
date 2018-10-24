@@ -6,6 +6,7 @@ import React, {Component} from 'react'
 import {CSSTransition} from '../../../node_modules/react-transition-group'
 import StyledReactSelect from '../../static/StyledReactSelect';
 import ArrowDown from '../../static/ArrowDown';
+import {retrieveData} from '../utils/util';
 
 class PeriodFilter extends Component {
 
@@ -16,7 +17,6 @@ class PeriodFilter extends Component {
             visible: false,
             selectedYearFrom: '',
             selectedYearOn: '',
-            index: 1
         }
     }
 
@@ -56,12 +56,7 @@ class PeriodFilter extends Component {
     }
 
     componentDidMount() {
-        console.log('Request is sent to retrieve years');
-        fetch('http://localhost:8080/years')
-            .then(result => {
-                return result.json();
-            })
-            .then(data => this.setState({yearOfIssue: data}));
+      retrieveData.call(this, 'yearOfIssue', 'years');
     }
 
     disabledYearsFrom(yearOn) {

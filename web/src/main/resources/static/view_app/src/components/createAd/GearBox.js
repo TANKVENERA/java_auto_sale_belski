@@ -5,27 +5,27 @@ class Transmission extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedTransmission: 'mechanical'
+            selectedGearBox: 'mechanical'
         }
     }
 
-    handleTransmissionChange = (selectedTransmission) => {
-        this.setState({selectedTransmission: selectedTransmission});
-        console.log('Selected selectedTransmission:',selectedTransmission);
+    handleTransmissionChange = (selectedGearBox) => {
+        this.setState({selectedGearBox: selectedGearBox});
+        console.log('Selected selectedGearBox:',selectedGearBox);
     }
 
     render() {
         return (
             <RadioGroup
-                selectedValue={this.state.selectedTransmission}
+                selectedValue={this.state.selectedGearBox}
                 onChange={this.handleTransmissionChange}
             >
                 <RadioButton value="mechanical" className="radio-button-left"
-                             disabled={this.state.selectedTransmission === 'mechanical'}>
+                             disabled={this.state.selectedGearBox === 'mechanical'}>
                    Механика
                 </RadioButton>
                 <RadioButton value="automatic" className="radio-button-right"
-                             disabled={this.state.selectedTransmission === 'automatic'}>
+                             disabled={this.state.selectedGearBox === 'automatic'}>
                     Автомат
                 </RadioButton>
             </RadioGroup>

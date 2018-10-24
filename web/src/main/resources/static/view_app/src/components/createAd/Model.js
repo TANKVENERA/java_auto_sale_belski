@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {getModelsByMarkId} from '../utils/retrieveModel';
+import {retrieveData} from '../utils/util';
 
 class Model extends Component {
     constructor(props) {
@@ -25,9 +25,8 @@ class Model extends Component {
                 this.setState({models : []})
             }
             else {
-                getModelsByMarkId.call(this, markId);
+                retrieveData.call(this, 'models', `models?mid=${markId}`);
             }
-
         }
     }
 
@@ -42,8 +41,10 @@ class Model extends Component {
                           placeholder="Модель"
                           options={models}
                           value={models.length === 0 ? 'Модель' : this.state.selectedModel}
-                          searchable={false}
                           disabled={models.length === 0 ? true : false}
+                          backspaceRemoves={false}
+                          escapeClearsValue={false}
+                          deleteRemoves={false}
             />
         )
     }

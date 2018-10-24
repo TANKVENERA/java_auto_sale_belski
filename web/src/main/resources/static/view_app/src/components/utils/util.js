@@ -8,7 +8,6 @@ export function retrieveData(property, reqMapParam) {
 }
 
 export function validateField(property, errorMessage) {
-    console.log('TRANSMIT',  ' ',property, ': ', errorMessage)
     let  isValid = property.length > 0 ? true : false;
     let error = isValid ? '' : errorMessage;
     this.setState({

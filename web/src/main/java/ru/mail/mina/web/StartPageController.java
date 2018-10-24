@@ -17,13 +17,12 @@ import java.util.List;
 @RestController
 public class StartPageController {
 
-    private final static String  Year_Of_Issue = "year_of_issue";
-    private final static String  Price = "price";
+
 
     private final NewsService newsService;
     private final MarkService markService;
     private final ModelService modelService;
-    private final CarFeatureService featureService;
+
 
     @Autowired
     public StartPageController(NewsService newsService, MarkService markService,
@@ -31,9 +30,8 @@ public class StartPageController {
         this.newsService = newsService;
         this.markService = markService;
         this.modelService = modelService;
-        this.featureService = featureService;
-    }
 
+    }
 
     @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
     public List<MarkDTO> showStartPage() {
@@ -47,18 +45,6 @@ public class StartPageController {
         List<ModelDTO> modelDTOS = markService.findMarkByKey(fk_key);
 
         return modelDTOS;
-    }
-
-    @RequestMapping(value = {"/years"}, method = RequestMethod.GET)
-    public List<String> loadYears() {
-        List<String> tableOfYears = featureService.getFeaturesByKey(Year_Of_Issue);
-        return tableOfYears;
-    }
-
-    @RequestMapping(value = {"/prices"}, method = RequestMethod.GET)
-    public List<String> loadPrices() {
-        List<String> tableOfYears = featureService.getFeaturesByKey(Price);
-        return tableOfYears;
     }
 
 }

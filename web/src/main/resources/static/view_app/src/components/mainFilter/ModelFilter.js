@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Select from '../../../node_modules/react-responsive-select';
 import ArrowDown from '../../static/ArrowDown';
-import {getModelsByMarkId} from '../utils/retrieveModel';
+import {retrieveData} from '../utils/util';
 
 class ModelFilter extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class ModelFilter extends Component {
         const markId = this.props.passedMark.value
         if (markId!==previousMarkId && previousMarkId)
          {
-            getModelsByMarkId.call(this, markId);
+            retrieveData.call(this, 'models', `models?mid=${markId}`);
          }
     }
 

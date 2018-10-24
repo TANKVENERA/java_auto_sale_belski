@@ -4,7 +4,7 @@ import ModelFilter from './ModelFilter'
 import '../../static/markAndModel.css';
 import  '../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import ArrowDown from '../../static/ArrowDown';
-import {getMarks} from '../utils/retrieveMarks'
+import {retrieveData} from '../utils/util'
 
 class MarkFilter extends Component {
     constructor() {
@@ -26,8 +26,8 @@ class MarkFilter extends Component {
         console.log('received  in mark controller ', modelValue);
     }
 
-    componentWillMount() {
-       getMarks.call(this);
+    componentDidMount() {
+        retrieveData.call(this, 'marks', '');
     }
 
     render() {

@@ -1,23 +1,29 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {getMarks} from '../utils/retrieveMarks';
+import {retrieveData, validateField} from '../utils/util';
 import Model from './Model';
+import {ErrorPrinter} from '../utils/errorPrinter';
+
+const error = 'Введите марку авто';
 
 class Mark extends Component {
     constructor() {
         super();
         this.state = {
             marks: [],
-            selectedMark: ''
+            selectedMark: '',
+            error: error
         }
     }
 
     handleChange = (selectedMark) => {
         this.setState({selectedMark: selectedMark});
+        const mark = selectedMark === null ? '' : selectedMark.label;
+        validateField.call(this, mark, error)
     }
 
-    componentDidMount(){
-        getMarks.call(this)
+    componentDidMount() {
+        retrieveData.call(this, 'marks', '');
     }
 
     render() {
@@ -27,15 +33,23 @@ class Mark extends Component {
         console.log('received marks in create Ad', marks);
         return (
             <div>
-            <div>
-                <StyledSelect large
-                    options={marks}
-                    onChange={this.handleChange}
-                    placeholder="Марка"
-                    value={this.state.selectedMark}
-                    searchable={false}
-                />
-            </div>
+                <div style={{display: 'flex'}}>
+                    <div>
+                        <StyledSelect large
+                                      placeholder="Марка"
+                                      options={marks}
+                                      onChange={this.handleChange}
+                                      value={this.state.selectedMark}
+                                      backspaceRemoves={false}
+                                      escapeClearsValue={false}
+                                      deleteRemoves={false}
+                        />
+
+                    </div>
+                    <div>
+                        <ErrorPrinter formErrors={this.state.error}/>
+                    </div>
+                </div>
                 <div>
                     <Model passedMark={this.state.selectedMark}/>
                 </div>

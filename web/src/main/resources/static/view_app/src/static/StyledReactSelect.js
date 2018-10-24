@@ -15,7 +15,7 @@ const  StyledReactSelect = styled(Select)`
     & .Select-option {
         height: 28px;
     }
-    
+      
     & .Select.has-value.is-clearable.Select--single  > .Select-control .Select-value {
     padding-right: 0px;
     }

@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.mail.mina.service.dto.AdService;
+import ru.mail.mina.service.dto.CarFeatureService;
 import ru.mail.mina.service.dto.CommentService;
 import ru.mail.mina.service.dto.UserService;
 import ru.mail.mina.service.model.AdDTO;
@@ -24,20 +25,30 @@ import java.util.*;
  * Created by Администратор on 15.08.2017.
  */
 
-@Controller
+@RestController
 public class AdController {
+
+    private final static String  Year_Of_Issue = "year_of_issue";
+    private final static String  Price = "price";
+    private final static String Body_Style = "bodyStyle";
+    private final static String Color = "color";
+    private final static String Transmission = "transmission";
 
     final static Logger logger = Logger.getLogger(AdController.class);
 
     private final AdService adService;
     private final CommentService commentService;
     private final UserService userService;
+    private final CarFeatureService featureService;
+
 
     @Autowired
-    public AdController(AdService adService, CommentService commentService, UserService userService) {
+    public AdController(AdService adService, CommentService commentService, UserService userService,
+                        CarFeatureService featureService) {
         this.adService = adService;
         this.commentService = commentService;
         this.userService = userService;
+        this.featureService = featureService;
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -121,5 +132,36 @@ public class AdController {
         adService.saveAd(adDTO);
         return "redirect:/userAds";
     }
+
+    @RequestMapping(value = {"/years"}, method = RequestMethod.GET)
+    public List<String> loadYears() {
+        List<String> tableOfYears = featureService.getFeaturesByKey(Year_Of_Issue);
+        return tableOfYears;
+    }
+
+    @RequestMapping(value = {"/prices"}, method = RequestMethod.GET)
+    public List<String> loadPrices() {
+        List<String> tableOfPrices = featureService.getFeaturesByKey(Price);
+        return tableOfPrices;
+    }
+
+    @RequestMapping(value = {"/bodyStyles"}, method = RequestMethod.GET)
+    public List<String> loadBodyStyles () {
+        List<String> bodyStyles = featureService.getFeaturesByKey(Body_Style);
+        return bodyStyles;
+    }
+
+    @RequestMapping(value = {"/colors"}, method = RequestMethod.GET)
+    public List<String> loadColors () {
+        List<String> colors = featureService.getFeaturesByKey(Color);
+        return colors;
+    }
+
+    @RequestMapping(value = {"/transm"}, method = RequestMethod.GET)
+    public List<String> loadTransmission () {
+        List<String> transmissions = featureService.getFeaturesByKey(Transmission);
+        return transmissions;
+    }
+
 
 }
