@@ -8,6 +8,10 @@ import BodyStyle from '../createAd/BodyStyle';
 import GearBox from '../createAd/GearBox';
 import Transmission from '../createAd/Transmission';
 import Color from '../createAd/Color';
+import PriceAndCurrency from '../createAd/PriceAndCurrency';
+import Fuel from '../createAd/Fuel';
+import Mileage from '../createAd/Mileage';
+import Engine from '../createAd/Engine';
 
 class createAd extends Component {
     constructor(){
@@ -40,6 +44,18 @@ class createAd extends Component {
                 </div>
                 <div>
                     <Color/>
+                </div>
+                <div>
+                    <Engine/>
+                </div>
+                <div>
+                    <Fuel/>
+                </div>
+                <div>
+                    <PriceAndCurrency/>
+                </div>
+                <div>
+                    <Mileage/>
                 </div>
                 <div>
                     <Description/>

@@ -54,8 +54,7 @@
     transition: all 300ms ease-out;
 }
 
-
-.radio-button-left:disabled, .radio-button-right:disabled{
+.radio-button-left:disabled, .radio-button-middle:disabled, .radio-button-right:disabled{
     background-image: linear-gradient(to top,#969696,#727272);
     box-shadow: inset 0 1px 6px rgba(41, 41, 41, 0.2),
     0 1px 2px rgba(0, 0, 0, 0.05);
@@ -73,6 +72,12 @@
     box-shadow: inset 0 -8px 9px rgba(41, 41, 41, 0.2)
 }
 
+.radio-button-middle  {
+    border-color: transparent;
+    border-width: thin;
+    box-shadow: inset 0 -8px 9px rgba(41, 41, 41, 0.2)
+}
+
 .radio-button-right  {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -85,6 +90,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .radio_buttons_currency{
     padding-top: 10px;
 }
