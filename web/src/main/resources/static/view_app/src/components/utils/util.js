@@ -11,7 +11,8 @@ export function validateField(property, errorMessage) {
     let isValid = property.length > 0 ? true : false;
     if ((this.constructor.name === 'PriceAndCurrency' && property.length > 6) ||
         (this.constructor.name === 'Mileage' && property.length > 7) ||
-        (this.constructor.name === 'Engine' && property.length > 5)) {
+        (this.constructor.name === 'Engine' && property.length > 5) ||
+        (this.constructor.name === 'Engine' && Number((property/1000).toFixed(1)) < 0.1)) {
         isValid = false;
     }
     let error = isValid ? '' : errorMessage;

@@ -44,32 +44,37 @@ class PriceAndCurrency extends Component {
 
     render() {
         const currency = [{value: '1', label: 'usd'},
-                                {value: '2', label: 'бел. руб.'}]
+                          {value: '2', label: 'бел. руб.'}]
         return (
-            <div style={{display: 'flex'}}>
-                <div style={{display: 'flex'}}>
-                    <div>
-                        <input value={this.state.price}
-                               onChange={this.handleChange}
-                               placeholder="Цена"
-                               style={{height: '34px'}}
-                               size="10"
-                        />
-                    </div>
-                    <div>
-                        <StyledSelect large
-                                      onChange={this.handleCurrencyChange}
-                                      options={currency}
-                                      value={this.state.selectedOption === '' ? currency[0] : this.state.selectedOption}
-                                      backspaceRemoves={false}
-                                      escapeClearsValue={false}
-                                      deleteRemoves={false}
-                                      clearable={false}
-                                      searchable={false}
-                        />
+            <div className="form_item">
+                <div className="form_item_label">
+                    Цена
+                </div>
+                <div className="form_item_field">
+                    <div style={{display: 'flex'}}>
+                        <div>
+                            <input value={this.state.price}
+                                   className="form_item_input price"
+                                   onChange={this.handleChange}
+                                   placeholder="Цена"
+                                   size="10"
+                            />
+                        </div>
+                        <div>
+                            <StyledSelect currency_distance
+                                          onChange={this.handleCurrencyChange}
+                                          options={currency}
+                                          value={this.state.selectedOption === '' ? currency[0] : this.state.selectedOption}
+                                          backspaceRemoves={false}
+                                          escapeClearsValue={false}
+                                          deleteRemoves={false}
+                                          clearable={false}
+                                          searchable={false}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div>
+                <div className="form_item_error">
                     <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>

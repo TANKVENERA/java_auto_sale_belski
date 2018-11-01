@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData} from '../utils/util';
+import {retrieveData, validateField} from '../utils/util';
+import {ErrorPrinter} from '../utils/errorPrinter';
+
+const error = 'Введите марку авто';
 
 class Model extends Component {
     constructor(props) {
@@ -8,11 +11,14 @@ class Model extends Component {
         this.state = {
             selectedModel: '',
             models: [],
+            error: error
         }
     }
 
     handleChange = (selectedModel) => {
         this.setState({selectedModel: selectedModel});
+        const model = selectedModel === null ? '' : selectedModel.label;
+        validateField.call(this, model, error)
     }
 
     componentDidUpdate(prevProps) {
@@ -36,16 +42,26 @@ class Model extends Component {
         })
 
         return (
-            <StyledSelect large
-                          onChange={this.handleChange}
-                          placeholder="Модель"
-                          options={models}
-                          value={models.length === 0 ? 'Модель' : this.state.selectedModel}
-                          disabled={models.length === 0 ? true : false}
-                          backspaceRemoves={false}
-                          escapeClearsValue={false}
-                          deleteRemoves={false}
-            />
+            <div className="form_item">
+                <div className="form_item_label">
+                    Модель автомобиля
+                </div>
+                <div className="form_item_field">
+                    <StyledSelect large
+                                  onChange={this.handleChange}
+                                  placeholder="Модель"
+                                  options={models}
+                                  value={models.length === 0 ? 'Модель' : this.state.selectedModel}
+                                  disabled={models.length === 0 ? true : false}
+                                  backspaceRemoves={false}
+                                  escapeClearsValue={false}
+                                  deleteRemoves={false}
+                    />
+                </div>
+                <div className="form_item_error">
+                    <ErrorPrinter formErrors={this.state.error}/>
+                </div>
+            </div>
         )
     }
 }

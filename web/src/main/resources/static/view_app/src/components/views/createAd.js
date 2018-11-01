@@ -12,6 +12,19 @@ import PriceAndCurrency from '../createAd/PriceAndCurrency';
 import Fuel from '../createAd/Fuel';
 import Mileage from '../createAd/Mileage';
 import Engine from '../createAd/Engine';
+import '../../static/createAd.css'
+
+document.body.style = 'background: #eff2f3';
+
+// const wrapper = {
+//     backgroundColor: "#fff",
+//     width: '92%',
+//     position: 'absolute',
+//     left: '4%',
+//     -webkit-box-shadow: '10px 10px 21px -10px rgba(0,0,0,0.75)',
+//     moz_box_shadow: '10px 10px 21px -10px rgba(0,0,0,0.75)',
+//     box_shadow: '10px 10px 21px -10px rgba(0,0,0,0.75)'
+// };
 
 class createAd extends Component {
     constructor(){
@@ -23,7 +36,7 @@ class createAd extends Component {
 
     render() {
         return (
-            <div>
+            <div className="main_wrapper">
                 <h2>
                     <Link to='/'>Home Page</Link>
                 </h2>

@@ -33,8 +33,11 @@ class Mark extends Component {
         console.log('received marks in create Ad', marks);
         return (
             <div>
-                <div style={{display: 'flex'}}>
-                    <div>
+                <div className="form_item">
+                    <div className="form_item_label">
+                        Макра автомобиля
+                    </div>
+                    <div className="form_item_field">
                         <StyledSelect large
                                       placeholder="Марка"
                                       options={marks}
@@ -44,9 +47,8 @@ class Mark extends Component {
                                       escapeClearsValue={false}
                                       deleteRemoves={false}
                         />
-
                     </div>
-                    <div>
+                    <div className="form_item_error">
                         <ErrorPrinter formErrors={this.state.error}/>
                     </div>
                 </div>

@@ -30,8 +30,11 @@ class Transmission extends Component {
             return {value: index, label: transmission};
         })
         return (
-            <div style={{display : 'flex'}}>
-                <div>
+            <div className="form_item">
+                <div className="form_item_label">
+                    Привод
+                </div>
+                <div className="form_item_field">
                     <StyledSelect large
                                   options={transmissions}
                                   onChange={this.handleChange}
@@ -42,7 +45,7 @@ class Transmission extends Component {
                                   deleteRemoves={false}
                     />
                 </div>
-                <div>
+                <div className="form_item_error">
                     <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>

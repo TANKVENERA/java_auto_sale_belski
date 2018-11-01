@@ -8,8 +8,8 @@ const errors = ['Укажите пробег авто',
 
 class Mileage extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             mileage: '',
             error: errors[0],
@@ -46,30 +46,35 @@ class Mileage extends Component {
         const measureOptions = [{value: '1', label: 'км'},
                                 {value: '2', label: 'мили'}]
         return (
-            <div style={{display: 'flex'}}>
-                <div style={{display: 'flex'}}>
-                    <div>
-                        <input value={this.state.mileage}
-                               onChange={this.handleChange}
-                               placeholder="Пробег"
-                               style={{height: '34px'}}
-                               size="10"
-                        />
-                    </div>
-                   <div>
-                       <StyledSelect large
-                                     onChange={this.handleMeasureChange}
-                                     options={measureOptions}
-                                     value={this.state.selectedOption === '' ? measureOptions[0] : this.state.selectedOption}
-                                     backspaceRemoves={false}
-                                     escapeClearsValue={false}
-                                     deleteRemoves={false}
-                                     clearable={false}
-                                     searchable={false}
-                       />
-                   </div>
+            <div className="form_item">
+                <div className="form_item_label">
+                   <label>Пробег</label>
                 </div>
-                <div>
+                <div className="form_item_field">
+                    <div style={{display: 'flex'}}>
+                        <div>
+                            <input value={this.state.mileage}
+                                   className="form_item_input mileage"
+                                   onChange={this.handleChange}
+                                   placeholder="Пробег"
+                                   size="10"
+                            />
+                        </div>
+                        <div>
+                            <StyledSelect currency_distance
+                                          onChange={this.handleMeasureChange}
+                                          options={measureOptions}
+                                          value={this.state.selectedOption === '' ? measureOptions[0] : this.state.selectedOption}
+                                          backspaceRemoves={false}
+                                          escapeClearsValue={false}
+                                          deleteRemoves={false}
+                                          clearable={false}
+                                          searchable={false}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="form_item_error">
                     <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>

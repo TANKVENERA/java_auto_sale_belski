@@ -20,7 +20,7 @@ class Color extends Component {
     handleChange = (selectedColor) => {
         this.setState({selectedColor: selectedColor})
         const color = selectedColor === null ? '' : selectedColor.label;
-       validateField.call(this, color, error);
+        validateField.call(this, color, error);
     }
 
 
@@ -34,8 +34,11 @@ class Color extends Component {
             return {value: index, label: color}
         });
         return (
-            <div style={{display : 'flex'}}>
-                <div>
+            <div className="form_item">
+                <div className="form_item_label">
+                    Цвет
+                </div>
+                <div className="form_item_field">
                     <StyledSelect large
                                   onChange={this.handleChange}
                                   placeholder="Цвет"
@@ -46,10 +49,8 @@ class Color extends Component {
                                   deleteRemoves={false}
                     />
                 </div>
-                <div>
-                    <div>
-                        <ErrorPrinter formErrors={this.state.error}/>
-                    </div>
+                <div className="form_item_error">
+                    <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>
 

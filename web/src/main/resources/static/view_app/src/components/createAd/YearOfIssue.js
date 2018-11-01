@@ -32,9 +32,14 @@ class YearOfIssue extends Component {
             return {value: index, label: year}
         });
         return (
-            <div style={{display : 'flex'}}>
-                <div>
+            <div className="form_item">
+                <div className="form_item_label">
+                    Год выпуска
+                </div>
+                <div className="form_item_field" style={{paddingRight: '150px'}}>
                     <StyledSelect large
+                                  style={{width: '180px'}}
+                                  menuContainerStyle={{width: '180px'}}
                                   onChange={this.handleChange}
                                   placeholder="Год выпуска"
                                   options={yearsOfIssue}
@@ -44,10 +49,8 @@ class YearOfIssue extends Component {
                                   deleteRemoves={false}
                     />
                 </div>
-                <div>
-                    <div>
-                        <ErrorPrinter formErrors={this.state.error}/>
-                    </div>
+                <div className="form_item_error">
+                    <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>
 

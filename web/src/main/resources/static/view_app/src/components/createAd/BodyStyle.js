@@ -30,8 +30,11 @@ class BodyStyle extends Component {
             return {value: index, label: style};
         })
         return (
-            <div style={{display : 'flex'}}>
-                <div>
+            <div className="form_item">
+                <div className="form_item_label">
+                    Кузов
+                </div>
+                <div className="form_item_field">
                     <StyledSelect large
                                   options={styles}
                                   onChange={this.handleChange}
@@ -42,7 +45,7 @@ class BodyStyle extends Component {
                                   deleteRemoves={false}
                     />
                 </div>
-                <div>
+                <div className="form_item_error">
                     <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>

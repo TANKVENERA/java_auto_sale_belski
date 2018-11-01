@@ -11,26 +11,34 @@ class Transmission extends Component {
 
     handleTransmissionChange = (selectedGearBox) => {
         this.setState({selectedGearBox: selectedGearBox});
-        console.log('Selected selectedGearBox:',selectedGearBox);
+        console.log('Selected selectedGearBox:', selectedGearBox);
     }
 
     render() {
         return (
-            <RadioGroup
-                selectedValue={this.state.selectedGearBox}
-                onChange={this.handleTransmissionChange}
-            >
-                <RadioButton value="mechanical" className="radio-button-left"
-                             disabled={this.state.selectedGearBox === 'mechanical'}>
-                   Механика
-                </RadioButton>
-                <RadioButton value="automatic" className="radio-button-right"
-                             disabled={this.state.selectedGearBox === 'automatic'}>
-                    Автомат
-                </RadioButton>
-            </RadioGroup>
+            <div className="form_item">
+                <div className="form_item_label">
+                    <label>Коробка передач</label>
+                </div>
+                <div className="form_item_field">
+                    <RadioGroup
+                        selectedValue={this.state.selectedGearBox}
+                        onChange={this.handleTransmissionChange}
+                    >
+                        <RadioButton value="mechanical" className="radio-button-left gear-box"
+                                     disabled={this.state.selectedGearBox === 'mechanical'}>
+                            Механика
+                        </RadioButton>
+                        <RadioButton value="automatic" className="radio-button-right gear-box"
+                                     disabled={this.state.selectedGearBox === 'automatic'}>
+                            Автомат
+                        </RadioButton>
+                    </RadioGroup>
+                </div>
+            </div>
+
         )
-}
+    }
 
 }
 

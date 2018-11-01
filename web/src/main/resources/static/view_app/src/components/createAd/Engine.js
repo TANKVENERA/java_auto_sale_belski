@@ -5,6 +5,13 @@ import {validateField, addWhiteSpace} from '../utils/util'
 const errors = ['Укажите объём двигателя',
                 'Объём превышает допустимый максимум']
 
+const volumeCalc = {
+    verticalAlign: '-10px',
+    fontSize: '18px',
+    fontFamily: 'Arial',
+    paddingRight: '10px',
+}
+
 class Engine extends Component {
 
     constructor() {
@@ -36,21 +43,28 @@ class Engine extends Component {
 
     render() {
         return (
-            <div style={{display: 'flex'}}>
-                <div>
+            <div className="form_item">
+                <div className="form_item_label">
+                    Объём двигатля
+                </div>
+                <div className="form_item_field" style={{paddingRight: '98px'}}>
                     <input value={this.state.volume}
+                           className="form_item_input"
                            onChange={this.handleChange}
                            placeholder="Объём двигателя"
-                           style={{height: '34px'}}
                            size="10"
                     />
                 </div>
-                <div  style={{display: 'flex'}}>
-                    <div>
-                       ({Number((this.state.volume.split(' ').join('')/1000).toFixed(1) )} л.)
-                    </div>
-                    <div>
-                        <ErrorPrinter formErrors={this.state.error}/>
+                <div className="form_item_error">
+                    <div  style={{display: 'flex'}}>
+                        <div>
+                            <label style={volumeCalc}>
+                                ({Number((this.state.volume.split(' ').join('')/1000).toFixed(1) )} л.)
+                            </label>
+                        </div>
+                        <div>
+                            <ErrorPrinter formErrors={this.state.error}/>
+                        </div>
                     </div>
                 </div>
             </div>

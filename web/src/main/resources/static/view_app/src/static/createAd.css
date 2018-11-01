@@ -1,0 +1,61 @@
+
+.main_wrapper {
+    background: #fff;
+    width: 92%;
+    position: absolute;
+    left: 4%;
+    -webkit-box-shadow: 0px 11px 21px 5px rgba(199,175,199,1);
+}
+
+.form_item {
+    display: table;
+    margin-bottom: 20px;
+}
+
+.form_item_label{
+    display: table-cell;
+    width: 160px;
+}
+
+.form_item_field{
+    display: table-cell;
+    padding-right: 30px;
+}
+
+.price, .mileage{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-right: 1.5px solid transparent !important;
+}
+
+.form_item_error {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.gear-box, .fuel {
+    height: 40px;
+    width: 150px;
+    outline: none;
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.form_item_input {
+    border: 1px solid #ccc ;
+    box-sizing: border-box;
+    height: 40px;
+    width: 180px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 20px;
+    font-family: Arial;
+
+}
+.form_item_input::-webkit-input-placeholder{
+    color: #aaa;
+}
+
+.form_item_input:focus {
+    border: 1.5px solid #007eff !important;
+}
