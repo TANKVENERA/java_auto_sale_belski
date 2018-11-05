@@ -3,22 +3,35 @@ import StyledSelect from '../../static/StyledReactSelect';
 import {retrieveData, validateField} from '../utils/util';
 import Model from './Model';
 import {ErrorPrinter} from '../utils/errorPrinter';
+import {updateMark} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
 
 const error = 'Введите марку авто';
+
+const MapStateToProps = (state) => {
+        return {
+            receivedMark: state.mark
+        }
+}
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateMark: (mark) => dispatch(updateMark(mark))
+    };
+};
 
 class Mark extends Component {
     constructor() {
         super();
         this.state = {
             marks: [],
-            selectedMark: '',
             error: error
         }
     }
 
     handleChange = (selectedMark) => {
-        this.setState({selectedMark: selectedMark});
         const mark = selectedMark === null ? '' : selectedMark.label;
+        this.props.updateMark(selectedMark);
         validateField.call(this, mark, error)
     }
 
@@ -30,7 +43,7 @@ class Mark extends Component {
         let marks = this.state.marks.map(function (mark) {
             return {value: mark.id, label: mark.markAuto};
         })
-        console.log('received marks in create Ad', marks);
+        console.log('mark from react-redux', this.props.receivedMark);
         return (
             <div>
                 <div className="form_item">
@@ -42,7 +55,7 @@ class Mark extends Component {
                                       placeholder="Марка"
                                       options={marks}
                                       onChange={this.handleChange}
-                                      value={this.state.selectedMark}
+                                      value={this.props.receivedMark}
                                       backspaceRemoves={false}
                                       escapeClearsValue={false}
                                       deleteRemoves={false}
@@ -53,11 +66,11 @@ class Mark extends Component {
                     </div>
                 </div>
                 <div>
-                    <Model passedMark={this.state.selectedMark}/>
+                    <Model/>
                 </div>
             </div>
         );
     }
 }
 
-export default Mark;
+export default connect(MapStateToProps, MapDispatchToProps)(Mark);
