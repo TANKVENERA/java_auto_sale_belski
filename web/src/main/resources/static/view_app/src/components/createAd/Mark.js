@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData, validateField} from '../utils/util';
+import {validateField} from '../utils/util';
 import Model from './Model';
 import {ErrorPrinter} from '../utils/errorPrinter';
 import {updateMark} from '../../actions/index';
 import {connect} from '../../../node_modules/react-redux';
+import {store} from '../../store/index';
 
 const error = 'Введите марку авто';
+console.log('EEEEEEE', store.getState());
 
 const MapStateToProps = (state) => {
         return {
-            receivedMark: state.mark
+            receivedMark: state.mark,
+            marks: state.dataObject.marks
         }
 }
 
@@ -24,7 +27,6 @@ class Mark extends Component {
     constructor() {
         super();
         this.state = {
-            marks: [],
             error: error
         }
     }
@@ -35,15 +37,10 @@ class Mark extends Component {
         validateField.call(this, mark, error)
     }
 
-    componentDidMount() {
-        retrieveData.call(this, 'marks', '');
-    }
-
     render() {
-        let marks = this.state.marks.map(function (mark) {
+        let marks = this.props.marks.map(function (mark) {
             return {value: mark.id, label: mark.markAuto};
         })
-        console.log('mark from react-redux', this.props.receivedMark);
         return (
             <div>
                 <div className="form_item">

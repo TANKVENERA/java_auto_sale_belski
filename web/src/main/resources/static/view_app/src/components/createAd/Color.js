@@ -1,36 +1,43 @@
 import React, {Component} from 'react'
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData, validateField} from '../utils/util';
+import {validateField} from '../utils/util';
 import {ErrorPrinter} from '../utils/errorPrinter';
+import {connect} from '../../../node_modules/react-redux';
+import {updateColor} from '../../actions/index';
+
 
 const error = 'Выберите цвет';
+
+const MapStateToProps = (state) => {
+    return {
+        colors: state.dataObject.colors,
+        color: state.color
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateColor: (color) => dispatch(updateColor(color))
+    }
+};
 
 class Color extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            colors: [],
             error: error,
-            colorIsValid: false,
-            selectedColor: ''
         }
     }
 
     handleChange = (selectedColor) => {
-        this.setState({selectedColor: selectedColor})
+        this.props.updateColor(selectedColor);
         const color = selectedColor === null ? '' : selectedColor.label;
         validateField.call(this, color, error);
     }
 
-
-    componentDidMount() {
-        console.log('Request is sent to retrieve colors');
-        retrieveData.call(this, 'colors', 'colors');
-    }
-
     render() {
-        const yearsOfIssue = this.state.colors.map(function (color, index) {
+        const colors = this.props.colors.map(function (color, index) {
             return {value: index, label: color}
         });
         return (
@@ -42,8 +49,8 @@ class Color extends Component {
                     <StyledSelect large
                                   onChange={this.handleChange}
                                   placeholder="Цвет"
-                                  options={yearsOfIssue}
-                                  value={this.state.selectedColor}
+                                  options={colors}
+                                  value={this.props.color}
                                   backspaceRemoves={false}
                                   escapeClearsValue={false}
                                   deleteRemoves={false}
@@ -59,4 +66,4 @@ class Color extends Component {
 
 }
 
-export default Color;
+export default connect(MapStateToProps, MapDispatchToProps)(Color);

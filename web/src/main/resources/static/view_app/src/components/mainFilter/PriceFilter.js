@@ -7,38 +7,47 @@ import {CSSTransition} from '../../../node_modules/react-transition-group'
 import StyledReactSelect from '../../static/StyledReactSelect';
 import '../../static/arrowBox.css';
 import ArrowDown from '../../static/ArrowDown';
-import {retrieveData} from '../utils/util';
 import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio'
+import {updatePriceFrom, updatePriceOn} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
+
+const MapStateToProps = (state) => {
+    return {
+        prices: state.dataObject.prices,
+        priceFrom: state.priceFrom,
+        priceOn: state.priceOn,
+    }
+}
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updatePriceFrom: (priceFrom) => dispatch(updatePriceFrom(priceFrom)),
+        updatePriceOn: (priceFrom) => dispatch(updatePriceOn(priceFrom)),
+    }
+};
+
 
 class PriceFilter extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            prices: [],
             visible: false,
-            selectedPriceFrom: '',
-            selectedPriceTo: '',
             selectedCurrency: 'byn'
         }
     }
 
     handleCurrencyChange = (selectedCurrency) => {
         this.setState({selectedCurrency: selectedCurrency});
-        console.log('Selected currency:', selectedCurrency);
         this.props.onSelectCurrency(selectedCurrency);
     }
 
     handleChangePriceFrom = (selectedPriceFrom) => {
-        this.setState({selectedPriceFrom: selectedPriceFrom});
-        console.log('Selected price from:', selectedPriceFrom);
-        this.props.onSelectPriceFrom(selectedPriceFrom);
+        this.props.updatePriceFrom(selectedPriceFrom);
     }
 
     handleChangePriceTo = (selectedPriceTo) => {
-        this.setState({selectedPriceTo: selectedPriceTo});
-        console.log('Selected price to:', selectedPriceTo);
-        this.props.onSelectPriceTo(selectedPriceTo);
+        this.props.updatePriceOn(selectedPriceTo);
     }
 
     handleToggle() {
@@ -49,9 +58,8 @@ class PriceFilter extends Component {
 
     priceLimit(priceFrom, priceTo) {
         switch (true) {
-            case (priceFrom === '' && priceTo === '') || (priceFrom === null && priceTo === '') || (priceFrom === '' && priceTo === null):
-                return 'Цена';
-            case priceFrom === null && priceTo === null :
+            case (priceFrom === '' && priceTo === '') || (priceFrom === null && priceTo === '')
+                 || (priceFrom === '' && priceTo === null) || ( priceFrom === null && priceTo === null):
                 return 'Цена';
             case (priceFrom === null && priceTo !== null) || (priceFrom === '' && priceTo !== null ):
                 return 'до ' + priceTo.label
@@ -64,12 +72,8 @@ class PriceFilter extends Component {
         }
     }
 
-    componentDidMount() {
-      retrieveData.call(this, 'prices', 'prices');
-    }
-
     disabledPricesFrom(priceTo) {
-        let pricesFrom = this.state.prices.map(function (price, index) {
+        let pricesFrom = this.props.prices.map(function (price, index) {
             if (priceTo === null) {
                 return {value: index, label: price, disabled: false}
             }
@@ -82,7 +86,7 @@ class PriceFilter extends Component {
     }
 
     disabledPricesTo(priceFrom) {
-        let pricesTo = this.state.prices.map(function (price, index) {
+        let pricesTo = this.props.prices.map(function (price, index) {
             if (priceFrom === null) {
                 return {value: index, label: price, disabled: false}
             }
@@ -96,8 +100,8 @@ class PriceFilter extends Component {
 
     render() {
         const {visible} = this.state;
-        const priceFrom = this.state.selectedPriceFrom;
-        const priceTo = this.state.selectedPriceTo;
+        const priceFrom = this.props.priceFrom;
+        const priceTo = this.props.priceOn;
 
         return (
             <div className={visible === true ? 'rrs rrs--options-visible' : 'rrs'}>
@@ -105,7 +109,6 @@ class PriceFilter extends Component {
                      className="rrs__button"
                      tabIndex="0"
                      onClick={this.handleToggle.bind(this)}
-                    //  onBlur={() => this.setState({visible: false})}
                 >
                     <div className="rrs__label">
                         <span>{this.priceLimit(priceFrom, priceTo)}</span>
@@ -141,19 +144,19 @@ class PriceFilter extends Component {
                         <div className="select_box">
                             <div>
                                 <StyledReactSelect
-                                    options={this.disabledPricesFrom(this.state.selectedPriceTo)}
+                                    options={this.disabledPricesFrom(this.props.priceOn)}
                                     placeholder="от"
                                     onChange={this.handleChangePriceFrom}
-                                    value={this.state.selectedPriceFrom}
+                                    value={this.props.priceFrom}
                                     searchable={false}
                                 />
                             </div>
                             <div >
                                 <StyledReactSelect
-                                    options={this.disabledPricesTo(this.state.selectedPriceFrom)}
+                                    options={this.disabledPricesTo(this.props.priceFrom)}
                                     placeholder="до"
                                     onChange={this.handleChangePriceTo}
-                                    value={this.state.selectedPriceTo}
+                                    value={this.props.priceOn}
                                     searchable={false}
                                 />
                             </div>
@@ -165,4 +168,4 @@ class PriceFilter extends Component {
     }
 }
 
-export default PriceFilter;
+export default connect(MapStateToProps, MapDispatchToProps)(PriceFilter);

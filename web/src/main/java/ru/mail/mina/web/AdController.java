@@ -28,12 +28,6 @@ import java.util.*;
 @RestController
 public class AdController {
 
-    private final static String  Year_Of_Issue = "year_of_issue";
-    private final static String  Price = "price";
-    private final static String Body_Style = "bodyStyle";
-    private final static String Color = "color";
-    private final static String Transmission = "transmission";
-
     final static Logger logger = Logger.getLogger(AdController.class);
 
     private final AdService adService;
@@ -132,36 +126,4 @@ public class AdController {
         adService.saveAd(adDTO);
         return "redirect:/userAds";
     }
-
-    @RequestMapping(value = {"/years"}, method = RequestMethod.GET)
-    public List<String> loadYears() {
-        List<String> tableOfYears = featureService.getFeaturesByKey(Year_Of_Issue);
-        return tableOfYears;
-    }
-
-    @RequestMapping(value = {"/prices"}, method = RequestMethod.GET)
-    public List<String> loadPrices() {
-        List<String> tableOfPrices = featureService.getFeaturesByKey(Price);
-        return tableOfPrices;
-    }
-
-    @RequestMapping(value = {"/bodyStyles"}, method = RequestMethod.GET)
-    public List<String> loadBodyStyles () {
-        List<String> bodyStyles = featureService.getFeaturesByKey(Body_Style);
-        return bodyStyles;
-    }
-
-    @RequestMapping(value = {"/colors"}, method = RequestMethod.GET)
-    public List<String> loadColors () {
-        List<String> colors = featureService.getFeaturesByKey(Color);
-        return colors;
-    }
-
-    @RequestMapping(value = {"/transm"}, method = RequestMethod.GET)
-    public List<String> loadTransmission () {
-        List<String> transmissions = featureService.getFeaturesByKey(Transmission);
-        return transmissions;
-    }
-
-
 }

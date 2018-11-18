@@ -1,34 +1,42 @@
 import React, {Component} from 'react'
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData, validateField} from '../utils/util';
+import {validateField} from '../utils/util';
 import {ErrorPrinter} from '../utils/errorPrinter';
+import {connect} from '../../../node_modules/react-redux';
+import {updateYearOfIssueFrom} from '../../actions/index';
 
 const error = 'Выберите год выпуска';
+
+const MapStateToProps = (state) => {
+    return {
+        years: state.dataObject.yearsOfIssue,
+        yearOfIssue: state.yearOfIssueFrom
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateYearOfIssue: (year) => dispatch(updateYearOfIssueFrom(year))
+    }
+};
 
 class YearOfIssue extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            yearsOfIssue: [],
-            error: error,
-            selectedYear: ''
+            error: error
         }
     }
 
     handleChange = (selectedYear) => {
-        this.setState({selectedYear: selectedYear})
+        this.props.updateYearOfIssue(selectedYear)
         const yearOfIssue = selectedYear === null ? '' : selectedYear.label;
         validateField.call(this, yearOfIssue, error);
-    }
-
-    componentDidMount() {
-        console.log('Request is sent to retrieve yearsOF');
-        retrieveData.call(this, 'yearsOfIssue', 'years');
-    }
+    };
 
     render() {
-        const yearsOfIssue = this.state.yearsOfIssue.map(function (year, index) {
+        const yearsOfIssue = this.props.years.map(function (year, index) {
             return {value: index, label: year}
         });
         return (
@@ -43,7 +51,7 @@ class YearOfIssue extends Component {
                                   onChange={this.handleChange}
                                   placeholder="Год выпуска"
                                   options={yearsOfIssue}
-                                  value={this.state.selectedYear}
+                                  value={this.props.yearOfIssue}
                                   backspaceRemoves={false}
                                   escapeClearsValue={false}
                                   deleteRemoves={false}
@@ -59,4 +67,4 @@ class YearOfIssue extends Component {
 
 }
 
-export default YearOfIssue;
+export default connect(MapStateToProps, MapDispatchToProps)(YearOfIssue);

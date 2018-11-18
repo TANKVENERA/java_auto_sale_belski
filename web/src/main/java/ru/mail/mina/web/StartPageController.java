@@ -7,8 +7,8 @@ import ru.mail.mina.service.dto.MarkService;
 import ru.mail.mina.service.dto.ModelService;
 import ru.mail.mina.service.dto.NewsService;
 import ru.mail.mina.service.model.*;
+import ru.mail.mina.web.util.StaticDataEntity;
 
-import java.time.Year;
 import java.util.List;
 
 /**
@@ -17,12 +17,15 @@ import java.util.List;
 @RestController
 public class StartPageController {
 
-
-
+    private final static String  Year_Of_Issue = "year_of_issue";
+    private final static String  Price = "price";
+    private final static String Body_Style = "bodyStyle";
+    private final static String Color = "color";
+    private final static String Transmission = "transmission";
     private final NewsService newsService;
     private final MarkService markService;
     private final ModelService modelService;
-
+    private final CarFeatureService featureService;
 
     @Autowired
     public StartPageController(NewsService newsService, MarkService markService,
@@ -30,13 +33,18 @@ public class StartPageController {
         this.newsService = newsService;
         this.markService = markService;
         this.modelService = modelService;
-
+        this.featureService = featureService;
     }
 
     @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
-    public List<MarkDTO> showStartPage() {
+    public StaticDataEntity showStartPage() {
         List<MarkDTO> markDTOS = markService.getAll();
-        return markDTOS;
+        List<String> tableOfYears = featureService.getFeaturesByKey(Year_Of_Issue);
+        List<String> tableOfPrices = featureService.getFeaturesByKey(Price);
+        List<String> bodyStyles = featureService.getFeaturesByKey(Body_Style);
+        List<String> colors = featureService.getFeaturesByKey(Color);
+        List<String> transmissions = featureService.getFeaturesByKey(Transmission);
+        return new StaticDataEntity(markDTOS, tableOfYears, tableOfPrices, bodyStyles, colors, transmissions);
     }
 
     @RequestMapping(value = "/models", params = {"mid"}, method = RequestMethod.GET)

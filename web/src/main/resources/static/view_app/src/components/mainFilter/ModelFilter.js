@@ -1,41 +1,58 @@
 import React, {Component} from 'react'
 import Select from '../../../node_modules/react-responsive-select';
 import ArrowDown from '../../static/ArrowDown';
-import {retrieveData} from '../utils/util';
+import {uploadModels, updateModel, updatePrevMark} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
+import {initData} from  '../utils/util';
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        uploadModels: models => dispatch(uploadModels(models)),
+        updateModel: model => dispatch(updateModel(model)),
+        updatePrevMark: prevMark => dispatch(updatePrevMark(prevMark))
+    }
+}
+
+const MapStateToProps = (state) => {
+    return {
+        receivedMark: state.mark,
+        prevMark: state.previousMark,
+        model: state.model,
+        models: state.models
+    }
+}
 
 class ModelFilter extends Component {
     constructor(props) {
         super(props)
         this.state = {
             selectedModel: '',
-            models: [],
         }
     }
 
     handleChange = (selectedModel) => {
-        this.setState({selectedModel: selectedModel});
-        this.props.onSelectModelFromModelComp(selectedModel);
+        this.props.updateModel(selectedModel);
     }
 
-    componentDidUpdate(prevProps) {
-        const previousMarkId = prevProps.passedMark.value
-        const markId = this.props.passedMark.value
-        if (markId!==previousMarkId && previousMarkId)
-         {
-            retrieveData.call(this, 'models', `models?mid=${markId}`);
-         }
+    componentDidUpdate() {
+        const previousMarkId = this.props.prevMark;
+        const markId = this.props.receivedMark.text === 'Марка' ? '' : this.props.receivedMark.value;
+        console.log('model-filter', this.props.receivedMark.text , 'previous mark', previousMarkId, ':::');
+        if (markId !== previousMarkId) {
+            this.props.updatePrevMark(markId);
+            initData(this.props.uploadModels, `models?mid=${markId}`)
+        }
     }
 
     render() {
-        let options = this.state.models.map(function (model) {
+        let options = this.props.models.map(function (model) {
             return {value: model.id, text: model.modelAuto};
-        })
-
+        });
         return (
             <Select
                 noSelectionLabel="Модель"
                 onChange={this.handleChange}
-                disabled={this.state.models.length === 0 ? true : false}
+                disabled={this.props.models.length === 0 ? true : false}
                 options={options}
                 caretIcon={ArrowDown}
             />
@@ -43,4 +60,4 @@ class ModelFilter extends Component {
     }
 }
 
-export default ModelFilter;
+export default  connect(MapStateToProps, MapDispatchToProps)(ModelFilter);

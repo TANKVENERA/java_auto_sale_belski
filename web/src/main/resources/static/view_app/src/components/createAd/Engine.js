@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {ErrorPrinter} from '../utils/errorPrinter';
 import {validateField, addWhiteSpace} from '../utils/util'
+import {updateEngineValue} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
 
 const errors = ['Укажите объём двигателя',
                 'Объём превышает допустимый максимум']
@@ -10,20 +12,32 @@ const volumeCalc = {
     fontSize: '18px',
     fontFamily: 'Arial',
     paddingRight: '10px',
-}
+};
+
+const MapStateToProps = (state) => {
+    return {
+        engineValue: state.engineValue
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateEngineValue: (engineValue) => dispatch(updateEngineValue(engineValue))
+    }
+};
 
 class Engine extends Component {
 
     constructor() {
         super()
         this.state = {
-            volume: '',
             error: errors[0]
         }
     }
 
     handleChange = (event) => {
-        let volume = event.target.value
+        let volume = event.target.value;
+        console.log('LLLLL', volume)
         if (volume.includes(' ')) {
             volume = volume.split(' ').join('');
         }
@@ -35,9 +49,7 @@ class Engine extends Component {
             else {
                 validateField.call(this, volume, errors[0]);
             }
-            this.setState({
-               volume: addWhiteSpace.call(this, volume)
-            })
+           this.props.updateEngineValue(addWhiteSpace.call(this, volume))
         }
     }
 
@@ -48,7 +60,7 @@ class Engine extends Component {
                     Объём двигатля
                 </div>
                 <div className="form_item_field" style={{paddingRight: '98px'}}>
-                    <input value={this.state.volume}
+                    <input value={this.props.engineValue}
                            className="form_item_input"
                            onChange={this.handleChange}
                            placeholder="Объём двигателя"
@@ -59,7 +71,7 @@ class Engine extends Component {
                     <div  style={{display: 'flex'}}>
                         <div>
                             <label style={volumeCalc}>
-                                ({Number((this.state.volume.split(' ').join('')/1000).toFixed(1) )} л.)
+                                ({Number((this.props.engineValue.split(' ').join('')/1000).toFixed(1) )} л.)
                             </label>
                         </div>
                         <div>
@@ -74,4 +86,4 @@ class Engine extends Component {
 
 }
 
-export default Engine;
+export default connect(MapStateToProps, MapDispatchToProps)(Engine);

@@ -1,34 +1,42 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData, validateField} from '../utils/util';
+import {validateField} from '../utils/util';
 import {ErrorPrinter} from '../utils/errorPrinter';
-
+import {connect} from '../../../node_modules/react-redux';
+import {updateTransmission} from '../../actions/index';
 const error = 'Выберите тип привода';
+
+const MapStateToProps = (state) => {
+    return {
+        transmissions: state.dataObject.transmissions,
+        transmission: state.transmission
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateTransmission: (transmission) => dispatch(updateTransmission(transmission))
+    }
+};
 
 class Transmission extends Component {
     constructor() {
         super();
         this.state = {
-            transmissions: [],
-            selectedTransmission: '',
             error: error
         }
     }
 
     handleChange = (selectedTransmission) => {
-        this.setState({selectedTransmission: selectedTransmission});
+        this.props.updateTransmission(selectedTransmission);
         const transmission = selectedTransmission === null ? '' : selectedTransmission.label;
         validateField.call(this, transmission, error);
     }
 
-    componentDidMount(){
-        retrieveData.call(this, 'transmissions', 'transm');
-    }
-
     render() {
-        let transmissions = this.state.transmissions.map(function (transmission, index) {
+        let transmissions = this.props.transmissions.map(function (transmission, index) {
             return {value: index, label: transmission};
-        })
+        });
         return (
             <div className="form_item">
                 <div className="form_item_label">
@@ -39,7 +47,7 @@ class Transmission extends Component {
                                   options={transmissions}
                                   onChange={this.handleChange}
                                   placeholder="Привод"
-                                  value={this.state.selectedTransmission}
+                                  value={this.props.transmission}
                                   backspaceRemoves={false}
                                   escapeClearsValue={false}
                                   deleteRemoves={false}
@@ -53,4 +61,4 @@ class Transmission extends Component {
     }
 }
 
-export default Transmission;
+export default connect(MapStateToProps, MapDispatchToProps)(Transmission);

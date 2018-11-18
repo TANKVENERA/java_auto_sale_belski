@@ -4,21 +4,32 @@ import ModelFilter from './ModelFilter'
 import '../../static/markAndModel.css';
 import  '../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import ArrowDown from '../../static/ArrowDown';
-import {retrieveData} from '../utils/util'
+import {updateMark} from '../../actions/index'
+import {connect} from '../../../node_modules/react-redux';
+
+const MapStateToProps = (state) => {
+    return {
+        receivedMark: state.mark,
+        marks: state.dataObject.marks
+    }
+}
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateMark: (mark) => dispatch(updateMark(mark))
+    }
+}
 
 class MarkFilter extends Component {
     constructor() {
         super();
         this.state = {
-            selectedMark: '',
-            marks: []
+            selectedMark: ''
         }
     };
 
     handleChange = (selectedMark) => {
-        this.setState({selectedMark: selectedMark});
-        console.log('Option selected:', selectedMark);
-        this.props.onSelectMark(selectedMark);
+        this.props.updateMark(selectedMark);
     }
 
     handleModel = (modelValue) => {
@@ -26,15 +37,11 @@ class MarkFilter extends Component {
         console.log('received  in mark controller ', modelValue);
     }
 
-    componentDidMount() {
-        retrieveData.call(this, 'marks', '');
-    }
-
     render() {
-        let marks = this.state.marks.map(function (mark) {
-            return {value: mark.id, text: mark.markAuto};
-        })
-        console.log('received!!!  mark in MARK controller ', marks);
+         let marks = this.props.marks.map( (mark) => {
+                return {value: mark.id, text: mark.markAuto};
+            });
+
         return (
             <div className="mark_model_box">
                 <div className="container_box">
@@ -54,4 +61,4 @@ class MarkFilter extends Component {
     }
 }
 
-export default MarkFilter;
+export default connect(MapStateToProps, MapDispatchToProps)(MarkFilter);

@@ -6,30 +6,39 @@ import React, {Component} from 'react'
 import {CSSTransition} from '../../../node_modules/react-transition-group'
 import StyledReactSelect from '../../static/StyledReactSelect';
 import ArrowDown from '../../static/ArrowDown';
-import {retrieveData} from '../utils/util';
+import {connect} from '../../../node_modules/react-redux';
+import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../actions/index';
+
+const MapStateToProps = (state) => {
+    return {
+        yearsOfIssue: state.dataObject.yearsOfIssue,
+        yearOfIssueFrom: state.yearOfIssueFrom,
+        yearOfIssueOn: state.yearOfIssueOn
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateYearOfIssueFrom: (yearFrom) => dispatch(updateYearOfIssueFrom(yearFrom)),
+        updateYearOfIssueOn: (yearOn) => dispatch(updateYearOfIssueON(yearOn))
+    }
+};
 
 class PeriodFilter extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            yearOfIssue: [],
             visible: false,
-            selectedYearFrom: '',
-            selectedYearOn: '',
         }
     }
 
     handleChangeYearFrom = (selectedYearFrom) => {
-        this.setState({selectedYearFrom: selectedYearFrom});
-        console.log('Selected year from:', selectedYearFrom);
-        this.props.onSelectYearFrom(selectedYearFrom);
+        this.props.updateYearOfIssueFrom(selectedYearFrom);
     }
 
     handleChangeYearOn = (selectedYearOn) => {
-        this.setState({selectedYearOn: selectedYearOn});
-        console.log('Selected year on:', selectedYearOn);
-        this.props.onSelectYearOn(selectedYearOn);
+        this.props.updateYearOfIssueOn(selectedYearOn);
     }
 
     handleToggle() {
@@ -40,9 +49,8 @@ class PeriodFilter extends Component {
 
     period(yearFrom, yearOn) {
         switch (true) {
-            case ((yearFrom === '' && yearOn === '') || (yearFrom === null && yearOn === '') || (yearFrom === '' && yearOn === null)):
-                return 'Год выпуска';
-            case yearFrom === null && yearOn === null :
+            case ((yearFrom === '' && yearOn === '') || (yearFrom === null && yearOn === '')
+                  || (yearFrom === '' && yearOn === null) || (yearFrom === null && yearOn === null)):
                 return 'Год выпуска';
             case (yearFrom === null && yearOn !== null) || (yearFrom === '' && yearOn !== null ):
                 return 'по ' + yearOn.label
@@ -55,12 +63,8 @@ class PeriodFilter extends Component {
         }
     }
 
-    componentDidMount() {
-      retrieveData.call(this, 'yearOfIssue', 'years');
-    }
-
     disabledYearsFrom(yearOn) {
-        let yearsFrom = this.state.yearOfIssue.map(function (year, index) {
+        let yearsFrom = this.props.yearsOfIssue.map(function (year, index) {
             if (yearOn === null) {
                 return {value: index, label: year, disabled: false}
             }
@@ -73,7 +77,7 @@ class PeriodFilter extends Component {
     }
 
     disabledYearsOn(yearFrom) {
-        let yearsOn = this.state.yearOfIssue.map(function (year, index) {
+        let yearsOn = this.props.yearsOfIssue.map(function (year, index) {
             if (yearFrom === null) {
                 return {value: index, label: year, disabled: false}
             }
@@ -87,15 +91,14 @@ class PeriodFilter extends Component {
 
     render() {
         const {visible} = this.state;
-        const yearFrom = this.state.selectedYearFrom
-        const yearOn = this.state.selectedYearOn
+        const yearFrom = this.props.yearOfIssueFrom
+        const yearOn = this.props.yearOfIssueOn
         return (
             <div className={visible === true ? 'rrs rrs--options-visible' : 'rrs'}>
                 <div role="button"
                      className="rrs__button"
                      tabIndex="0"
                      onClick={this.handleToggle.bind(this)}
-                   //  onBlur={() => this.setState({visible: false})}
                 >
                     <div className="rrs__label">
                         <span>{this.period(yearFrom, yearOn)}</span>
@@ -113,19 +116,19 @@ class PeriodFilter extends Component {
                         <div className="select_box">
                             <div>
                                 <StyledReactSelect
-                                    options={this.disabledYearsFrom(this.state.selectedYearOn)}
+                                    options={this.disabledYearsFrom(this.props.yearOfIssueOn)}
                                     placeholder="c"
                                     onChange={this.handleChangeYearFrom}
-                                    value={this.state.selectedYearFrom}
+                                    value={this.props.yearOfIssueFrom}
                                     searchable={false}
                                 />
                             </div>
                             <div >
                                 <StyledReactSelect
-                                    options={this.disabledYearsOn(this.state.selectedYearFrom)}
+                                    options={this.disabledYearsOn(this.props.yearOfIssueFrom)}
                                     placeholder="по"
                                     onChange={this.handleChangeYearOn}
-                                    value={this.state.selectedYearOn}
+                                    value={this.props.yearOfIssueOn}
                                     searchable={false}
                                 />
                             </div>
@@ -137,4 +140,4 @@ class PeriodFilter extends Component {
     }
 }
 
-export default PeriodFilter;
+export default connect(MapStateToProps, MapDispatchToProps)(PeriodFilter);

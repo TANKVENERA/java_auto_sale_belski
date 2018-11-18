@@ -1,32 +1,41 @@
 import React, {Component} from 'react';
 import StyledSelect from '../../static/StyledReactSelect';
-import {retrieveData, validateField} from '../utils/util';
+import {validateField} from '../utils/util';
 import {ErrorPrinter} from '../utils/errorPrinter';
+import {connect} from '../../../node_modules/react-redux';
+import {updateBodyStyle} from '../../actions/index';
 
 const error = 'Выберите кузов авто';
+
+const MapStateToProps = (state) => {
+    return {
+        bodyStyles: state.dataObject.bodyStyles,
+        bodyStyle: state.bodyStyle
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateBodyStyle: (bodyStyle) => dispatch(updateBodyStyle(bodyStyle))
+    }
+};
 
 class BodyStyle extends Component {
     constructor() {
         super();
         this.state = {
-            styles: [],
-            selectedStyle: '',
             error: error,
         }
     }
 
     handleChange = (selectedStyle) => {
-        this.setState({selectedStyle: selectedStyle});
+        this.props.updateBodyStyle(selectedStyle);
         const style = selectedStyle === null ? '' : selectedStyle.label;
         validateField.call(this, style, error);
     }
 
-    componentDidMount(){
-        retrieveData.call(this, 'styles', 'bodyStyles');
-    }
-
     render() {
-        let styles = this.state.styles.map(function (style, index) {
+        let styles = this.props.bodyStyles.map(function (style, index) {
             return {value: index, label: style};
         })
         return (
@@ -39,7 +48,7 @@ class BodyStyle extends Component {
                                   options={styles}
                                   onChange={this.handleChange}
                                   placeholder="Кузов"
-                                  value={this.state.selectedStyle}
+                                  value={this.props.bodyStyle}
                                   backspaceRemoves={false}
                                   escapeClearsValue={false}
                                   deleteRemoves={false}
@@ -53,4 +62,4 @@ class BodyStyle extends Component {
     }
 }
 
-export default BodyStyle;
+export default connect(MapStateToProps, MapDispatchToProps)(BodyStyle);

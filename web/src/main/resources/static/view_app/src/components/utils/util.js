@@ -1,10 +1,11 @@
-export function retrieveData(property, reqMapParam) {
-    console.log('SendRq', property, '  ', reqMapParam)
-    fetch(`http://localhost:8080/${reqMapParam}`)
+
+export function initData(someFunc, param) {
+    console.log('INIT')
+    fetch(`http://localhost:8080/${param}`)
         .then(result => {
             return result.json();
         })
-        .then(data => this.setState({[property]: data}));
+        .then(data => someFunc(data));
 }
 
 export function validateField(property, errorMessage) {
