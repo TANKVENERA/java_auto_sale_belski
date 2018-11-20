@@ -22,20 +22,20 @@ export function validateField(property, errorMessage) {
     })
 }
 
-export function addWhiteSpace(price) {
-    if (price.length > 3) {
-        const reminder = parseInt(price.length % 3, 10);
+export function addWhiteSpace(param) {
+    if (param.length > 3) {
+        const reminder = parseInt(param.length % 3, 10);
         let number = '';
         if (reminder > 0) {
-            number = price.substring(0, reminder);
-            price = price.substring(reminder);
+            number = param.substring(0, reminder);
+            param = param.substring(reminder);
         }
-        while (price.length > 0) {
-            number = (number + ' ' + price.substring(0, 3)).trim();
-            price = price.substring(3);
+        while (param.length > 0) {
+            number = (number + ' ' + param.substring(0, 3)).trim();
+            param = param.substring(3);
         }
         return number
     }
     else
-        return price;
+        return param;
 }

@@ -1,16 +1,24 @@
 import React, {Component} from 'react'
 import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio';
+import {updateFuelType} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
+
+const MapStateToProps = (state) => {
+    return {
+        fuelType: state.createAdParams.fuelType
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateFuelType: (fuelType) => dispatch(updateFuelType(fuelType))
+    }
+};
 
 class Fuel extends Component {
-    constructor(){
-        super()
-        this.state = {
-            selectedFuelType: 'oil'
-        }
-    }
 
     handleFuelTypeChange = (selectedFuelType) => {
-        this.setState({selectedFuelType: selectedFuelType});
+        this.props.updateFuelType(selectedFuelType);
     }
 
     render() {
@@ -21,15 +29,15 @@ class Fuel extends Component {
                 </div>
                 <div className="form_item_field">
                     <RadioGroup
-                        selectedValue={this.state.selectedFuelType}
+                        selectedValue={this.props.fuelType}
                         onChange={this.handleFuelTypeChange}
                     >
                         <RadioButton value="oil" className="radio-button-left fuel"
-                                     disabled={this.state.selectedFuelType === 'oil'}>
+                                     disabled={this.props.fuelType === 'oil'}>
                             Бензин
                         </RadioButton>
                         <RadioButton value="diesel" className="radio-button-right fuel"
-                                     disabled={this.state.selectedFuelType === 'diesel'}>
+                                     disabled={this.props.fuelType === 'diesel'}>
                             Дизель
                         </RadioButton>
                     </RadioGroup>
@@ -40,4 +48,4 @@ class Fuel extends Component {
     }
 }
 
-export default Fuel
+export default connect(MapStateToProps, MapDispatchToProps)(Fuel);

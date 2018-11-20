@@ -2,26 +2,39 @@ import React, {Component} from 'react';
 import {ErrorPrinter} from '../utils/errorPrinter';
 import {validateField, addWhiteSpace} from '../utils/util'
 import StyledSelect from '../../static/StyledReactSelect'
+import {updatePrice, updateCurrencyType} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
 
 const errors = ['Укажите цену',
                'Цена превышает допустимый максимум']
+
+const MapStateToProps = (state) => {
+    return {
+        price: state.createAdParams.price,
+        currencyType: state.createAdParams.currencyType
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updatePrice: (price) => dispatch(updatePrice(price)),
+        updateCurrencyType: (currencyType) => dispatch(updateCurrencyType(currencyType))
+    }
+};
 
 class PriceAndCurrency extends Component {
 
     constructor() {
         super()
         this.state = {
-            price: '',
-            error: errors[0],
-            selectedOption: ''
+            error: errors[0]
         }
     }
 
     handleCurrencyChange = (selectedOption) => {
-        this.setState({
-            selectedOption: selectedOption
-        })
-    }
+        console.log('FROM_ACTION', selectedOption)
+        this.props.updateCurrencyType(selectedOption)
+    };
 
     handleChange = (event) => {
         let price = event.target.value
@@ -36,9 +49,7 @@ class PriceAndCurrency extends Component {
             else {
                 validateField.call(this, price, errors[0]);
             }
-            this.setState({
-                price: addWhiteSpace.call(this, price)
-            })
+            this.props.updatePrice(addWhiteSpace.call(this, price))
         }
     }
 
@@ -53,7 +64,7 @@ class PriceAndCurrency extends Component {
                 <div className="form_item_field">
                     <div style={{display: 'flex'}}>
                         <div>
-                            <input value={this.state.price}
+                            <input value={this.props.price}
                                    className="form_item_input price"
                                    onChange={this.handleChange}
                                    placeholder="Цена"
@@ -64,7 +75,7 @@ class PriceAndCurrency extends Component {
                             <StyledSelect currency_distance
                                           onChange={this.handleCurrencyChange}
                                           options={currency}
-                                          value={this.state.selectedOption === '' ? currency[0] : this.state.selectedOption}
+                                          value={this.props.currencyType === '' ? currency[0] : this.props.currencyType}
                                           backspaceRemoves={false}
                                           escapeClearsValue={false}
                                           deleteRemoves={false}
@@ -83,4 +94,4 @@ class PriceAndCurrency extends Component {
     }
 }
 
-export default PriceAndCurrency;
+export default connect(MapStateToProps, MapDispatchToProps)(PriceAndCurrency);

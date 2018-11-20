@@ -16,14 +16,11 @@ class StaticDataUpload extends Component {
                 return result.json();
             })
             .then(data => this.props.uploadStaticData(data));
-        console.log('STSTICDATA')
     }
 
     render() {
         return (
-           <div>
                <div/>
-           </div>
         );
     }
 }

@@ -2,26 +2,39 @@ import React, {Component} from 'react';
 import {ErrorPrinter} from '../utils/errorPrinter';
 import {validateField, addWhiteSpace} from '../utils/util'
 import StyledSelect from '../../static/StyledReactSelect'
+import {updateMileage, updateUnitOfDistanceMeasure} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
 
 const errors = ['Укажите пробег авто',
-                'Пробег превышает допустимый максимум']
+    'Пробег превышает допустимый максимум']
+
+const MapStateToProps = (state) => {
+    return {
+        mileage: state.createAdParams.mileage,
+        unitOfDistanceMeasure: state.createAdParams.unitOfDistanceMeasure
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateMileage: (mileage) => dispatch(updateMileage(mileage)),
+        updateUnitOfDistanceMeasure: (unitOfDistanceMeasure) =>
+            dispatch(updateUnitOfDistanceMeasure(unitOfDistanceMeasure)),
+    }
+};
 
 class Mileage extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            mileage: '',
-            error: errors[0],
-            selectedOption: ''
+            error: errors[0]
         }
     }
 
     handleMeasureChange = (selectedOption) => {
-        this.setState({
-            selectedOption: selectedOption
-        })
-    }
+        this.props.updateUnitOfDistanceMeasure(selectedOption)
+    };
 
     handleChange = (event) => {
         let mileage = event.target.value
@@ -36,24 +49,22 @@ class Mileage extends Component {
             else {
                 validateField.call(this, mileage, errors[0]);
             }
-            this.setState({
-                mileage: addWhiteSpace.call(this, mileage)
-            })
+            this.props.updateMileage(addWhiteSpace.call(this, mileage))
         }
-    }
+    };
 
     render() {
         const measureOptions = [{value: '1', label: 'км'},
-                                {value: '2', label: 'мили'}]
+                                {value: '2', label: 'мили'}];
         return (
             <div className="form_item">
                 <div className="form_item_label">
-                   <label>Пробег</label>
+                    <label>Пробег</label>
                 </div>
                 <div className="form_item_field">
                     <div style={{display: 'flex'}}>
                         <div>
-                            <input value={this.state.mileage}
+                            <input value={this.props.mileage}
                                    className="form_item_input mileage"
                                    onChange={this.handleChange}
                                    placeholder="Пробег"
@@ -64,7 +75,8 @@ class Mileage extends Component {
                             <StyledSelect currency_distance
                                           onChange={this.handleMeasureChange}
                                           options={measureOptions}
-                                          value={this.state.selectedOption === '' ? measureOptions[0] : this.state.selectedOption}
+                                          value={this.props.unitOfDistanceMeasure === '' ? measureOptions[0]
+                                              : this.props.unitOfDistanceMeasure}
                                           backspaceRemoves={false}
                                           escapeClearsValue={false}
                                           deleteRemoves={false}
@@ -78,10 +90,8 @@ class Mileage extends Component {
                     <ErrorPrinter formErrors={this.state.error}/>
                 </div>
             </div>
-
         )
     }
-
 }
 
-export default Mileage;
+export default connect(MapStateToProps, MapDispatchToProps)(Mileage);

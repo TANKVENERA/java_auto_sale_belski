@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
 import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio';
+import {updateGearBoxType} from '../../actions/index';
+import {connect} from '../../../node_modules/react-redux';
 
-class Transmission extends Component {
+const MapStateToProps = (state) => {
+    return {
+        gearBoxType: state.createAdParams.gearBoxType
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateGearBoxType: (gearBoxType) => dispatch(updateGearBoxType(gearBoxType))
+    }
+};
+
+class GearBox extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -10,7 +24,7 @@ class Transmission extends Component {
     }
 
     handleTransmissionChange = (selectedGearBox) => {
-        this.setState({selectedGearBox: selectedGearBox});
+        this.props.updateGearBoxType(selectedGearBox);
         console.log('Selected selectedGearBox:', selectedGearBox);
     }
 
@@ -22,15 +36,15 @@ class Transmission extends Component {
                 </div>
                 <div className="form_item_field">
                     <RadioGroup
-                        selectedValue={this.state.selectedGearBox}
+                        selectedValue={this.props.gearBoxType}
                         onChange={this.handleTransmissionChange}
                     >
                         <RadioButton value="mechanical" className="radio-button-left gear-box"
-                                     disabled={this.state.selectedGearBox === 'mechanical'}>
+                                     disabled={this.props.gearBoxType === 'mechanical'}>
                             Механика
                         </RadioButton>
                         <RadioButton value="automatic" className="radio-button-right gear-box"
-                                     disabled={this.state.selectedGearBox === 'automatic'}>
+                                     disabled={this.props.gearBoxType === 'automatic'}>
                             Автомат
                         </RadioButton>
                     </RadioGroup>
@@ -42,4 +56,4 @@ class Transmission extends Component {
 
 }
 
-export default Transmission;
+export default connect(MapStateToProps, MapDispatchToProps)(GearBox);

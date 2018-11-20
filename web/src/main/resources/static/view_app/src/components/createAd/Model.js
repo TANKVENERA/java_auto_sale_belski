@@ -10,10 +10,10 @@ const error = 'Введите марку авто';
 
 const MapStateToProps = (state) => {
     return {
-        receivedMark: state.mark,
-        prevMark: state.previousMark,
-        model: state.model,
-        models: state.models
+        receivedMark: state.createAdParams.mark,
+        prevMark: state.createAdParams.previousMark,
+        model: state.createAdParams.model,
+        models: state.createAdParams.models
     }
 }
 
@@ -21,7 +21,7 @@ const MapDispatchToProps = (dispatch) => {
    return {
        uploadModels: models => dispatch(uploadModels(models)),
        updatePrevMark: prevMark => dispatch(updatePrevMark(prevMark)),
-       updateModel: model => dispatch(updateModel(model))
+       updateModel: model => dispatch(updateModel(model, 'create_ad'))
    };
 };
 

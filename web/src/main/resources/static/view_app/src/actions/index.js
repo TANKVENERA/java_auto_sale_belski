@@ -1,16 +1,20 @@
-import {MARK_IS_UPDATED, MODEL_IS_UPDATED,
+import {MARK_IS_UPDATED_, MODEL_IS_UPDATED_,
         PREVMARK_IS_UPDATED, UPLOAD_STATIC_DATA,
         UPLOAD_MODELS, YEAR_OF_ISSUE_FROM_IS_UPDATED, YEAR_OF_ISSUE_ON_IS_UPDATED,
         PRICE_FROM_IS_UPDATED, PRICE_ON_IS_UPDATED, BODY_STYLE_IS_UPDATED,
-        TRANSMISSION_IS_UPDATED, COLOR_IS_UPDATED, ENGINE_VALUE_IS_UPDATED} from  './action-types';
+        TRANSMISSION_IS_UPDATED, COLOR_IS_UPDATED, ENGINE_VALUE_IS_UPDATED,
+        PRICE_IS_UPDATED, YEAR_OF_ISSUE_IS_UPDATED, FUEL_TYPE_IS_UPDATED,
+        GEAR_BOX_TYPE_IS_UPDATED, MILEAGE_VALUE_IS_UPDATED,
+        UNIT_OF_DISTANSE_MEASURE_IS_UPDATED, CURRENCY_TYPE_IS_UPDATED,
+        DESCRIPTION_IS_UPDATED} from  './action-types';
 
-export const updateMark = mark => ({
-    type: MARK_IS_UPDATED,
+export const updateMark = (mark, param) => ({
+    type: MARK_IS_UPDATED_ + param.toUpperCase(),
     mark: mark,
     });
 
-export const updateModel = model => ({
-    type: MODEL_IS_UPDATED,
+export const updateModel = (model, param) => ({
+    type: MODEL_IS_UPDATED_ + param.toUpperCase(),
     model: model
 });
 
@@ -39,6 +43,11 @@ export const updateYearOfIssueON = yearOfIssueOn => ({
     yearOfIssueOn: yearOfIssueOn
 });
 
+export const updateYearOfIssue = yearOfIssue => ({
+    type: YEAR_OF_ISSUE_IS_UPDATED,
+    yearOfIssue: yearOfIssue
+});
+
 export const updatePriceFrom = priceFrom => ({
     type: PRICE_FROM_IS_UPDATED,
     priceFrom: priceFrom
@@ -47,6 +56,11 @@ export const updatePriceFrom = priceFrom => ({
 export const updatePriceOn = priceOn => ({
     type: PRICE_ON_IS_UPDATED,
     priceOn: priceOn
+});
+
+export const updatePrice = price => ({
+    type: PRICE_IS_UPDATED,
+    price: price
 });
 
 export const updateBodyStyle = bodyStyle => ({
@@ -67,4 +81,34 @@ export const updateColor = color => ({
 export const updateEngineValue = engineValue => ({
     type: ENGINE_VALUE_IS_UPDATED,
     engineValue: engineValue
+});
+
+export const updateFuelType = fuelType => ({
+    type: FUEL_TYPE_IS_UPDATED,
+    fuelType: fuelType
+});
+
+export const updateGearBoxType = gearBoxType => ({
+    type: GEAR_BOX_TYPE_IS_UPDATED,
+    gearBoxType: gearBoxType
+});
+
+export const updateMileage = mileage => ({
+    type: MILEAGE_VALUE_IS_UPDATED,
+    mileage: mileage
+});
+
+export const updateCurrencyType = currencyType => ({
+    type: CURRENCY_TYPE_IS_UPDATED,
+    currencyType: currencyType
+});
+
+export const updateUnitOfDistanceMeasure = unitOfDistanceMeasure => ({
+    type: UNIT_OF_DISTANSE_MEASURE_IS_UPDATED,
+    unitOfDistanceMeasure: unitOfDistanceMeasure
+});
+
+export const updateDescription = description => ({
+    type: DESCRIPTION_IS_UPDATED,
+    description: description
 });

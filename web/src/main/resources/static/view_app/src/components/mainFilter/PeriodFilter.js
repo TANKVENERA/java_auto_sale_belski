@@ -11,9 +11,9 @@ import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../actions/index';
 
 const MapStateToProps = (state) => {
     return {
-        yearsOfIssue: state.dataObject.yearsOfIssue,
-        yearOfIssueFrom: state.yearOfIssueFrom,
-        yearOfIssueOn: state.yearOfIssueOn
+        yearsOfIssue: state.staticData.dataObject.yearsOfIssue,
+        yearOfIssueFrom: state.mainFilterParams.yearOfIssueFrom,
+        yearOfIssueOn: state.mainFilterParams.yearOfIssueOn
     }
 };
 
@@ -91,8 +91,8 @@ class PeriodFilter extends Component {
 
     render() {
         const {visible} = this.state;
-        const yearFrom = this.props.yearOfIssueFrom
-        const yearOn = this.props.yearOfIssueOn
+        const yearFrom = this.props.yearOfIssueFrom;
+        const yearOn = this.props.yearOfIssueOn;
         return (
             <div className={visible === true ? 'rrs rrs--options-visible' : 'rrs'}>
                 <div role="button"

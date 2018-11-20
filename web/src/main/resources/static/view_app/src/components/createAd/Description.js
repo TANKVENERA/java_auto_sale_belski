@@ -2,24 +2,36 @@ import React, {Component} from 'react';
 import {StyledTextArea} from '../../static/StyledTextArea';
 import {validateField} from '../utils/util'
 import {ErrorPrinter} from '../utils/errorPrinter';
+import {connect} from '../../../node_modules/react-redux';
+import {updateDescription} from '../../actions/index';
 
 const error = ['Опишите ваш автомобиль']
+
+const MapStateToProps = (state) => {
+    return {
+        description: state.createAdParams.description,
+
+    }
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        updateDescription: (description) => dispatch(updateDescription(description)),
+
+    }
+};
 
 class Description extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            description: '',
             error: error
         }
     }
 
     handleChange = (event) => {
-        let descr = event.target.value
-        console.log('Descrip', descr)
-        this.setState({
-            description: descr
-        })
+        let descr = event.target.value;
+       this.props.updateDescription(descr)
         validateField.call(this, descr, error)
     }
 
@@ -33,7 +45,7 @@ class Description extends Component {
                     <StyledTextArea
                         placeholder='Описание...'
                         minRows={5}
-                        value={this.state.description}
+                        value={this.props.description}
                         onChange={this.handleChange}
                     />
                 </div>
@@ -47,4 +59,4 @@ class Description extends Component {
 
 }
 
-export default Description;
+export default connect(MapStateToProps, MapDispatchToProps)(Description);

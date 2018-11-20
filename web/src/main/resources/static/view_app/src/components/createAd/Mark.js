@@ -8,18 +8,18 @@ import {connect} from '../../../node_modules/react-redux';
 import {store} from '../../store/index';
 
 const error = 'Введите марку авто';
-console.log('EEEEEEE', store.getState());
 
 const MapStateToProps = (state) => {
+    console.log('CHECK STORE FROM MARK', store.getState())
         return {
-            receivedMark: state.mark,
-            marks: state.dataObject.marks
+            receivedMark: state.createAdParams.mark,
+            marks: state.staticData.dataObject.marks
         }
 }
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        updateMark: (mark) => dispatch(updateMark(mark))
+        updateMark: (mark) => dispatch(updateMark(mark, 'create_ad'))
     };
 };
 

@@ -16,7 +16,7 @@ const volumeCalc = {
 
 const MapStateToProps = (state) => {
     return {
-        engineValue: state.engineValue
+        engineValue: state.createAdParams.engineValue
     }
 };
 
@@ -37,7 +37,6 @@ class Engine extends Component {
 
     handleChange = (event) => {
         let volume = event.target.value;
-        console.log('LLLLL', volume)
         if (volume.includes(' ')) {
             volume = volume.split(' ').join('');
         }

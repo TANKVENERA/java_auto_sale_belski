@@ -3,20 +3,20 @@ import StyledSelect from '../../static/StyledReactSelect';
 import {validateField} from '../utils/util';
 import {ErrorPrinter} from '../utils/errorPrinter';
 import {connect} from '../../../node_modules/react-redux';
-import {updateYearOfIssueFrom} from '../../actions/index';
+import {updateYearOfIssue} from '../../actions/index';
 
 const error = 'Выберите год выпуска';
 
 const MapStateToProps = (state) => {
     return {
-        years: state.dataObject.yearsOfIssue,
-        yearOfIssue: state.yearOfIssueFrom
+        years: state.staticData.dataObject.yearsOfIssue,
+        yearOfIssue: state.createAdParams.yearOfIssue
     }
 };
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        updateYearOfIssue: (year) => dispatch(updateYearOfIssueFrom(year))
+        updateYearOfIssue: (year) => dispatch(updateYearOfIssue(year))
     }
 };
 

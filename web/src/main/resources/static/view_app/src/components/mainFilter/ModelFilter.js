@@ -5,20 +5,20 @@ import {uploadModels, updateModel, updatePrevMark} from '../../actions/index';
 import {connect} from '../../../node_modules/react-redux';
 import {initData} from  '../utils/util';
 
-const MapDispatchToProps = (dispatch) => {
+const MapStateToProps = (state) => {
     return {
-        uploadModels: models => dispatch(uploadModels(models)),
-        updateModel: model => dispatch(updateModel(model)),
-        updatePrevMark: prevMark => dispatch(updatePrevMark(prevMark))
+        receivedMark: state.mainFilterParams.mark,
+        prevMark: state.mainFilterParams.previousMark,
+        model: state.mainFilterParams.model,
+        models: state.mainFilterParams.models
     }
 }
 
-const MapStateToProps = (state) => {
+const MapDispatchToProps = (dispatch) => {
     return {
-        receivedMark: state.mark,
-        prevMark: state.previousMark,
-        model: state.model,
-        models: state.models
+        uploadModels: models => dispatch(uploadModels(models)),
+        updateModel: model => dispatch(updateModel(model, 'main_filter')),
+        updatePrevMark: prevMark => dispatch(updatePrevMark(prevMark))
     }
 }
 

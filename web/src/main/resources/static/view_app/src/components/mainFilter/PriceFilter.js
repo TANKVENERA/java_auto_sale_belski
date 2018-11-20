@@ -13,9 +13,9 @@ import {connect} from '../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {
-        prices: state.dataObject.prices,
-        priceFrom: state.priceFrom,
-        priceOn: state.priceOn,
+        prices: state.staticData.dataObject.prices,
+        priceFrom: state.mainFilterParams.priceFrom,
+        priceOn: state.mainFilterParams.priceOn,
     }
 }
 

@@ -10,8 +10,8 @@ const error = 'Выберите цвет';
 
 const MapStateToProps = (state) => {
     return {
-        colors: state.dataObject.colors,
-        color: state.color
+        colors: state.staticData.dataObject.colors,
+        color: state.createAdParams.color
     }
 };
 

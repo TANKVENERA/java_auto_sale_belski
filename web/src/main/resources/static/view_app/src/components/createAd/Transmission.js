@@ -8,8 +8,8 @@ const error = 'Выберите тип привода';
 
 const MapStateToProps = (state) => {
     return {
-        transmissions: state.dataObject.transmissions,
-        transmission: state.transmission
+        transmissions: state.staticData.dataObject.transmissions,
+        transmission: state.createAdParams.transmission
     }
 };
 

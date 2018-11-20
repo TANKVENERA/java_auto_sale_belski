@@ -9,8 +9,8 @@ const error = 'Выберите кузов авто';
 
 const MapStateToProps = (state) => {
     return {
-        bodyStyles: state.dataObject.bodyStyles,
-        bodyStyle: state.bodyStyle
+        bodyStyles: state.staticData.dataObject.bodyStyles,
+        bodyStyle: state.createAdParams.bodyStyle
     }
 };
 
