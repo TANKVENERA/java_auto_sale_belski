@@ -25,8 +25,7 @@ const  StyledReactSelect = styled(Select)`
     }
     
     & .Select-input {
-        height: 35px;
-        
+        height: 35px;  
     }
     
     & .Select-option {

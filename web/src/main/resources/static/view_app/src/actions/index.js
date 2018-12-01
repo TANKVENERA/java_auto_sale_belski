@@ -6,7 +6,7 @@ import {MARK_IS_UPDATED_, MODEL_IS_UPDATED_,
         PRICE_IS_UPDATED, YEAR_OF_ISSUE_IS_UPDATED, FUEL_TYPE_IS_UPDATED,
         GEAR_BOX_TYPE_IS_UPDATED, MILEAGE_VALUE_IS_UPDATED,
         UNIT_OF_DISTANSE_MEASURE_IS_UPDATED, CURRENCY_TYPE_IS_UPDATED,
-        DESCRIPTION_IS_UPDATED} from  './action-types';
+        DESCRIPTION_IS_UPDATED, IMAGES_ARE_UPDATED, IMAGE_IS_DELETED} from  './action-types';
 
 export const updateMark = (mark, param) => ({
     type: MARK_IS_UPDATED_ + param.toUpperCase(),
@@ -111,4 +111,14 @@ export const updateUnitOfDistanceMeasure = unitOfDistanceMeasure => ({
 export const updateDescription = description => ({
     type: DESCRIPTION_IS_UPDATED,
     description: description
+});
+
+export const updateImages = (images) => ({
+    type: IMAGES_ARE_UPDATED,
+    images: images
+});
+
+export const imageDeleted = (index) => ({
+    type: IMAGE_IS_DELETED,
+    index: index
 });

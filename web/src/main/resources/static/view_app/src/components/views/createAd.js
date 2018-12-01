@@ -7,6 +7,7 @@ import Description from '../createAd/Description';
 import BodyStyle from '../createAd/BodyStyle';
 import GearBox from '../createAd/GearBox';
 import Transmission from '../createAd/Transmission';
+import Images from '../createAd/Images';
 import Color from '../createAd/Color';
 import PriceAndCurrency from '../createAd/PriceAndCurrency';
 import Fuel from '../createAd/Fuel';
@@ -62,6 +63,9 @@ class createAd extends Component {
                 </div>
                 <div>
                     <Description/>
+                </div>
+                <div>
+                    <Images/>
                 </div>
             </div>
         );

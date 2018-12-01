@@ -6,20 +6,19 @@ import  '../../../node_modules/react-responsive-select/dist/ReactResponsiveSelec
 import ArrowDown from '../../static/ArrowDown';
 import {updateMark} from '../../actions/index'
 import {connect} from '../../../node_modules/react-redux';
-import {store} from '../../store/index';
 
 const MapStateToProps = (state) => {
     return {
         receivedMark: state.mainFilterParams.mark,
         marks: state.staticData.dataObject.marks
     }
-}
+};
 
 const MapDispatchToProps = (dispatch) => {
     return {
         updateMark: (mark) => dispatch(updateMark(mark, 'main_filter'))
     }
-}
+};
 
 class MarkFilter extends Component {
     constructor() {
@@ -31,18 +30,17 @@ class MarkFilter extends Component {
 
     handleChange = (selectedMark) => {
         this.props.updateMark(selectedMark);
-    }
+    };
 
     handleModel = (modelValue) => {
         this.props.onSelectModel(modelValue);
         console.log('received  in mark controller ', modelValue);
-    }
+    };
 
     render() {
          let marks = this.props.marks.map( (mark) => {
                 return {value: mark.id, text: mark.markAuto};
             });
-        console.log('check store FROM MARL FILTER ', store.getState());
         return (
             <div className="mark_model_box">
                 <div className="container_box">
