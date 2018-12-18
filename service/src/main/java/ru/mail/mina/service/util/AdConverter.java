@@ -26,13 +26,10 @@ public class AdConverter {
         ad.setColor(adDTO.getColor());
         ad.setTransmission(adDTO.getTransmission());
         ad.setAdEntities(adDTO.getAdEntities());
-//       ad.setComments(CommentConverter.convert(adDTO.getComments()));
         return ad;
     }
 
     public static AdDTO convert(Ad ad) {
-//        System.out.println("+++++++++++++++++++++++++++++++++++++++");
-//        System.out.println(ad.toString());
         AdDTO adDTO = new AdDTO();
         adDTO.setId(ad.getId());
         adDTO.setDate(ad.getDate());

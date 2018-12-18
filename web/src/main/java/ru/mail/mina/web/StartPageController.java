@@ -51,7 +51,6 @@ public class StartPageController {
     @CrossOrigin
     public List<ModelDTO> loadModels( @RequestParam(value = "mid") Integer fk_key) {
         List<ModelDTO> modelDTOS = markService.findMarkByKey(fk_key);
-
         return modelDTOS;
     }
 

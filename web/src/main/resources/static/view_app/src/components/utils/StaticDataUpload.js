@@ -11,7 +11,7 @@ const MapDispatchToProps = (dispatch) => {
 class StaticDataUpload extends Component {
 
     componentWillMount() {
-        fetch(`http://localhost:8080`)
+        fetch(`http://192.168.1.106:8080`)
             .then(result => {
                 return result.json();
             })

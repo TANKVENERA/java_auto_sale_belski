@@ -3,7 +3,8 @@ import {
     PRICE_IS_UPDATED, BODY_STYLE_IS_UPDATED, TRANSMISSION_IS_UPDATED,
     COLOR_IS_UPDATED, ENGINE_VALUE_IS_UPDATED, FUEL_TYPE_IS_UPDATED,
     GEAR_BOX_TYPE_IS_UPDATED, MILEAGE_VALUE_IS_UPDATED, UNIT_OF_DISTANSE_MEASURE_IS_UPDATED,
-    CURRENCY_TYPE_IS_UPDATED, DESCRIPTION_IS_UPDATED, IMAGES_ARE_UPDATED, IMAGE_IS_DELETED
+    CURRENCY_TYPE_IS_UPDATED, DESCRIPTION_IS_UPDATED, IMAGES_ARE_UPDATED, IMAGE_IS_DELETED,
+    PRIMARY_IMG_INDEX
 } from '../actions/action-types';
 
 const initialState = {
@@ -22,8 +23,11 @@ const initialState = {
     mileage: '',
     currencyType: {value: '1', label: 'usd'},
     unitOfDistanceMeasure: {value: '1', label: 'км'},
-    images: [{index: '', preview: ''}],
-    description: ''
+    description: '',
+    primaryImgIndex: '',
+    images: [{index: '', base64String: '', name: ''}],
+
+
 };
 
 export default function createAdParams(state = initialState, action) {
@@ -63,8 +67,10 @@ export default function createAdParams(state = initialState, action) {
         case IMAGES_ARE_UPDATED:
             console.log('CREATEADDD', action.images)
             return {...state, images: state.images.filter(element => {
-                return element.preview !== ''
+                return element.base64String !== ''
             }).concat(action.images)};
+        case PRIMARY_IMG_INDEX:
+            return {...state, primaryImgIndex: action.index};
         case IMAGE_IS_DELETED:
             return {...state, images: state.images.filter(element =>{
                 return element.index !== action.index

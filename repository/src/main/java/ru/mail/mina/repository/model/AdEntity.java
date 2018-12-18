@@ -26,6 +26,8 @@ public class AdEntity implements Serializable {
     @Column(name = "F_FileName")
     private String fileName;
 
+    @Column(name = "PrimaryImgIndex")
+    private Integer primaryImgIndex;
 
 
     public Integer getId() {
@@ -42,6 +44,14 @@ public class AdEntity implements Serializable {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public Integer getPrimaryImgIndex() {
+        return primaryImgIndex;
+    }
+
+    public void setPrimaryImgIndex(Integer primaryImgIndex) {
+        this.primaryImgIndex = primaryImgIndex;
     }
 
     public String getFileName() {
@@ -70,9 +80,10 @@ public class AdEntity implements Serializable {
     @Override
     public String toString() {
         return "AdEntity{" +
-                "id=" + id +
-                ", filePath='" + filePath + '\'' +
+                "filePath='" + filePath + '\'' +
                 ", fileName='" + fileName + '\'' +
+                ", primaryImgIndex=" + primaryImgIndex +
                 '}';
     }
+
 }

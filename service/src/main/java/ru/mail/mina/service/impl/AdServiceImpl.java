@@ -149,7 +149,6 @@ public class AdServiceImpl implements AdService {
     public List<AdDTO> getAll(Integer page) {
         List<AdDTO> adDTOList = new ArrayList<>();
         List<Ad> list = adGenericHibernateDao.getAll(page);
-        System.out.println("WWWWWW" + list.toString());
         for (Ad element : list) {
             AdDTO adDTO = AdConverter.convert(element);
             adDTOList.add(adDTO);

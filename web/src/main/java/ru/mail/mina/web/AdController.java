@@ -2,19 +2,15 @@ package ru.mail.mina.web;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.mail.mina.service.dto.AdService;
-import ru.mail.mina.service.dto.CarFeatureService;
-import ru.mail.mina.service.dto.CommentService;
-import ru.mail.mina.service.dto.UserService;
+import ru.mail.mina.service.dto.*;
 import ru.mail.mina.service.model.AdDTO;
 import ru.mail.mina.service.model.CommentDTO;
 import ru.mail.mina.service.model.UserDTO;
-import ru.mail.mina.service.util.GetDate;
+import ru.mail.mina.service.util.AdDataObject;
 import ru.mail.mina.web.util.Pagination;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +30,16 @@ public class AdController {
     private final CommentService commentService;
     private final UserService userService;
     private final CarFeatureService featureService;
-
+    private final AdEntityService adEntityService;
 
     @Autowired
     public AdController(AdService adService, CommentService commentService, UserService userService,
-                        CarFeatureService featureService) {
+                        CarFeatureService featureService, AdEntityService adEntityService) {
         this.adService = adService;
         this.commentService = commentService;
         this.userService = userService;
         this.featureService = featureService;
+        this.adEntityService = adEntityService;
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -108,7 +105,6 @@ public class AdController {
         return "redirect:/ad/" + id;
     }
 
-
     @RequestMapping(value = "/ad/{id}", method = RequestMethod.GET)
     public String showUserAd(Model model, @PathVariable Integer id) {
         AdDTO adDTO = adService.getById(id);
@@ -119,11 +115,9 @@ public class AdController {
     }
 
     @RequestMapping(value = "/createAd", method = RequestMethod.POST)
-    public String createAd(Model model, @ModelAttribute("ad") AdDTO adDTO, HttpServletRequest request) throws IOException {
-        model.addAttribute("user", new UserDTO());
-        adDTO.setDate(GetDate.currentDate());
-        adDTO.setCarDescription(request.getParameter("carDescription"));
-        adService.saveAd(adDTO);
-        return "redirect:/userAds";
+    public String createAd(@RequestBody AdDataObject result ) throws IOException {
+        adEntityService.saveImages(result.getImages());
+        System.out.println("SSSSSOOO" + result.toString() +  " " + result.getPrimaryImgIndex());
+        return "";
     }
 }

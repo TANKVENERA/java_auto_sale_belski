@@ -1,16 +1,32 @@
+.dropzone {
+    width: 100%;
+    min-height: 200px;
+    background: #7b898e;
+}
+
+.images .button-block{
+    padding: 20px 20px 20px;
+}
+
+.images-hor-block{
+    padding-left: 16px;
+}
+
 .image-active {
     height: 185px;
     width: 210px;
     background: yellow;
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .image {
     height: 185px;
     width: 210px;
     display: inline-block;
-    padding-right: 6px;
+    margin-right: 10px;
+    margin-bottom: 15px;
 }
 
 .img-view{

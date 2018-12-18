@@ -13,6 +13,7 @@ import PriceAndCurrency from '../createAd/PriceAndCurrency';
 import Fuel from '../createAd/Fuel';
 import Mileage from '../createAd/Mileage';
 import Engine from '../createAd/Engine';
+import PrimaryButton from '../createAd/PrimaryButton';
 import '../../static/createAd.css'
 
 document.body.style = 'background: #eff2f3';
@@ -66,6 +67,9 @@ class createAd extends Component {
                 </div>
                 <div>
                     <Images/>
+                </div>
+                <div>
+                    <PrimaryButton/>
                 </div>
             </div>
         );
