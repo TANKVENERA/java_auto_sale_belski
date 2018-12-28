@@ -26,7 +26,7 @@ const MapStateToProps = (state) => {
 class PrimaryButton extends Component {
 
     sendRQWithAdData = () => {
-        fetch('http://192.168.1.106:8080/createAd', {
+        fetch('http://localhost:8080/createAd', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
