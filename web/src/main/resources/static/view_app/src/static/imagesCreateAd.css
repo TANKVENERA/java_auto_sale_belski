@@ -6,6 +6,14 @@
 
 .images .button-block{
     padding: 20px 20px 20px;
+    display: table;
+}
+
+.progressBar{
+    display: table-cell;
+    width: 75%;
+    transform: scaleY(1.4);
+    padding-left: 40px;
 }
 
 .images-hor-block{
@@ -14,7 +22,7 @@
 
 .image-active {
     height: 185px;
-    width: 210px;
+    width: 200px;
     background: yellow;
     display: inline-block;
     margin-right: 10px;
@@ -23,7 +31,7 @@
 
 .image {
     height: 185px;
-    width: 210px;
+    width: 200px;
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 15px;
@@ -42,6 +50,10 @@
     height: 150px;
     padding: 5px 5px;
     display: inline;
+}
+
+.progress{
+    background: #ccbfc4
 }
 
 .warning-active {

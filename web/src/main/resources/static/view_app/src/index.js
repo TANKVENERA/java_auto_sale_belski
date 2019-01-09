@@ -1,8 +1,8 @@
 import {render} from 'react-dom';
 import React from 'react';
-import main from './components/views/main';
+import main from './components/pages/main_page/main';
 import StaticDataUpload from '../src/components/utils/StaticDataUpload';
-import createAd from './components/views/createAd';
+import createAd from './components/pages/create_ad_page/createAd';
 import {BrowserRouter as Router, Route} from '../node_modules/react-router-dom';
 import {Provider} from '../node_modules/react-redux';
 import {store} from './store/index';

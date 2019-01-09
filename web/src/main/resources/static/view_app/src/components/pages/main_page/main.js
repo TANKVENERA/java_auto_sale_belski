@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
-import MainFilter from '../mainFilter/MainFilter';
+import Head from './head/Head';
+import MainFilter from './mainFilter/MainFilter'
 
 class main extends Component {
 
     render() {
         return (
             <div>
-                <MainFilter/>
+                <div>
+                    <Head/>
+                </div>
+                <div>
+                    <MainFilter/>
+                </div>
             </div>
         );
     }

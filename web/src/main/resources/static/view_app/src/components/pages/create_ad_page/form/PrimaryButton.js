@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import  '../../static/createAdButton.css'
-import {connect} from '../../../node_modules/react-redux';
+import  '../../../../static/createAdButton.css'
+import {connect} from '../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {

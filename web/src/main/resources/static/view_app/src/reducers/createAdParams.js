@@ -25,7 +25,7 @@ const initialState = {
     unitOfDistanceMeasure: {value: '1', label: 'км'},
     description: '',
     primaryImgIndex: '',
-    images: [{index: '', base64String: '', name: ''}],
+    images: [{index: '', preview: '', base64String: '', name: '', size: ''}]
 
 
 };
@@ -65,9 +65,8 @@ export default function createAdParams(state = initialState, action) {
         case DESCRIPTION_IS_UPDATED:
             return {...state, description: action.description};
         case IMAGES_ARE_UPDATED:
-            console.log('CREATEADDD', action.images)
             return {...state, images: state.images.filter(element => {
-                return element.base64String !== ''
+                return element.preview !== ''
             }).concat(action.images)};
         case PRIMARY_IMG_INDEX:
             return {...state, primaryImgIndex: action.index};

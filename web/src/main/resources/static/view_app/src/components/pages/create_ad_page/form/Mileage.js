@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {ErrorPrinter} from '../utils/errorPrinter';
-import {validateField, addWhiteSpace} from '../utils/util'
-import StyledSelect from '../../static/StyledReactSelect'
-import {updateMileage, updateUnitOfDistanceMeasure} from '../../actions/index';
-import {connect} from '../../../node_modules/react-redux';
+import {ErrorPrinter} from '../../../utils/errorPrinter';
+import {validateField, addWhiteSpace} from '../../../utils/util'
+import StyledSelect from '../../../../static/StyledReactSelect'
+import {updateMileage, updateUnitOfDistanceMeasure} from '../../../../actions/index';
+import {connect} from '../../../../../node_modules/react-redux';
 
 const errors = ['Укажите пробег авто',
     'Пробег превышает допустимый максимум']

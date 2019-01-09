@@ -39,7 +39,7 @@
         <resource>
           <directory>src/main/resources</directory>
           <excludes>
-            <exclude>static/view_app/node_modules/**/*.*</exclude>
+            <exclude>static/view_app/**</exclude>
           </excludes>
         </resource>
       </resources>

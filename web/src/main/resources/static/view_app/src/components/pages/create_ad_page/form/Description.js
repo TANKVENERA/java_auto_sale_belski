@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {StyledTextArea} from '../../static/StyledTextArea';
-import {validateField} from '../utils/util'
-import {ErrorPrinter} from '../utils/errorPrinter';
-import {connect} from '../../../node_modules/react-redux';
-import {updateDescription} from '../../actions/index';
+import {StyledTextArea} from '../../../../static/StyledTextArea';
+import {validateField} from '../../../utils/util'
+import {ErrorPrinter} from '../../../utils/errorPrinter';
+import {connect} from '../../../../../node_modules/react-redux';
+import {updateDescription} from '../../../../actions/index';
 
 const error = ['Опишите ваш автомобиль']
 

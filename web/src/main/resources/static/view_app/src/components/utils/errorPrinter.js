@@ -5,7 +5,7 @@ import ReactImageAppear from '../../../node_modules/react-image-appear'
 
 
 const warningStyles = {
-    verticalAlign: '12px',
+    // verticalAlign: '12px',
     fontSize: '18px',
     fontFamily: 'Arial',
     paddingLeft: '10px',

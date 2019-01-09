@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import {updateImages, imageDeleted, updatePrimaryImgIndex} from '../../actions/index';
-import {connect} from '../../../node_modules/react-redux';
-import ProgressBar from '../../../node_modules/react-bootstrap/lib/ProgressBar'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
-import '../../static/imagesCreateAd.css'
-import ReactDropzone from '../../../node_modules/react-dropzone';
-import isOK from '../../static/icons/isOk.png';
-import deleteIcon from '../../static/icons/deleteIcon.png';
+import {updateImages, imageDeleted, updatePrimaryImgIndex} from '../../../../actions/index';
+import {connect} from '../../../../../node_modules/react-redux';
+import ProgressBar from '../../../../../node_modules/react-bootstrap/lib/ProgressBar'
+import '../../../../../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../../../../static/imagesCreateAd.css'
+import ReactDropzone from '../../../../../node_modules/react-dropzone';
+import isOK from '../../../../static/icons/isOk.png';
+import deleteIcon from '../../../../static/icons/deleteIcon.png';
 
 const MapStateToProps = (state) => {
     return {

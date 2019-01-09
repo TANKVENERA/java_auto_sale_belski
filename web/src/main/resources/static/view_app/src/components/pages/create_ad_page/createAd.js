@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import {Link} from '../../../node_modules/react-router-dom';
-import '../../../node_modules/react-select-v1/dist/react-select.css';
-import Mark from '../createAd/Mark';
-import YearOfIssue from '../createAd/YearOfIssue';
-import Description from '../createAd/Description';
-import BodyStyle from '../createAd/BodyStyle';
-import GearBox from '../createAd/GearBox';
-import Transmission from '../createAd/Transmission';
-import Images from '../createAd/Images';
-import Color from '../createAd/Color';
-import PriceAndCurrency from '../createAd/PriceAndCurrency';
-import Fuel from '../createAd/Fuel';
-import Mileage from '../createAd/Mileage';
-import Engine from '../createAd/Engine';
-import PrimaryButton from '../createAd/PrimaryButton';
-import '../../static/createAd.css'
+import {Link} from '../../../../node_modules/react-router-dom';
+import '../../../../node_modules/react-select-v1/dist/react-select.css';
+import Mark from './form/Mark';
+import YearOfIssue from './form/YearOfIssue';
+import Description from './form/Description';
+import BodyStyle from './form/BodyStyle';
+import GearBox from './form/GearBox';
+import Transmission from './form/Transmission';
+import Images from './form/Images';
+import Color from './form/Color';
+import PriceAndCurrency from './form/PriceAndCurrency';
+import Fuel from './form/Fuel';
+import Mileage from './form/Mileage';
+import Engine from './form/Engine';
+import PrimaryButton from './form/PrimaryButton';
+import '../../../static/createAd.css'
 
 document.body.style = 'background: #eff2f3';
 

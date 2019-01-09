@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {RadioGroup, RadioButton} from '../../../node_modules/react-custom-radio';
-import {updateGearBoxType} from '../../actions/index';
-import {connect} from '../../../node_modules/react-redux';
+import {RadioGroup, RadioButton} from '../../../../../node_modules/react-custom-radio';
+import {updateGearBoxType} from '../../../../actions/index';
+import {connect} from '../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {
