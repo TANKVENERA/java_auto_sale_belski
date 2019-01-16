@@ -1,0 +1,26 @@
+.sign_up_title{
+    text-align: center;
+}
+
+.sign_up_label{
+    font-size: 14px;
+}
+
+.input_sign_up {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    font-size: 20px;
+    height: 38px;
+    font-family: Arial;
+    width: 100%;
+}
+
+.input_sign_up:focus {
+    border: 1.5px solid #007eff !important;
+}
+
+.sign_up_item {
+    margin-bottom: 15px;
+}

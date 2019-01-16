@@ -37,7 +37,7 @@ class Mileage extends Component {
     };
 
     handleChange = (event) => {
-        let mileage = event.target.value
+        let mileage = event.target.value;
         if (mileage.includes(' ')) {
             mileage = mileage.split(' ').join('');
         }

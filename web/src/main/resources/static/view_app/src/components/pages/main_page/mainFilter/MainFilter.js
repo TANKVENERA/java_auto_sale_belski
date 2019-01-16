@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MarkFilter from './MarkFilter';
 import PeriodFilter from './PeriodFilter';
 import PriceFilter from './PriceFilter'
-import '../../../../static/mainFilter.css';
+import './styles/mainFilter.css';
 
 class MainFilter extends Component {
 

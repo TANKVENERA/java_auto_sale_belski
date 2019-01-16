@@ -1,0 +1,11 @@
+/**
+ * Created by Mina on 16.01.2019.
+ */
+
+export const LOGIN_IS_UPDATED = "LOGIN_IS_UPDATED";
+
+export const EMAIL_IS_UPDATED = "EMAIL_IS_UPDATED";
+
+export const PASSWORD_IS_UPDATED = "PASSWORD_IS_UPDATED";
+
+export const CONFIRM_PASSWORD_IS_UPDATED = "CONFIRM_PASSWORD_IS_UPDATED";

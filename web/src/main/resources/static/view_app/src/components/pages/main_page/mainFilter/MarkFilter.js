@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Select from '../../../../../node_modules/react-responsive-select';
 import ModelFilter from './ModelFilter'
-import '../../../../static/markAndModel.css';
+import './styles/markFilter.css';
 import  '../../../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import ArrowDown from '../../../../static/ArrowDown';
 import {updateMark} from '../../../../actions/index'
