@@ -3,6 +3,7 @@ import Modal from '../../../../../../node_modules/react-responsive-modal'
 import SubmitButton from './SubmitButton'
 import './styles/signUpModal.css'
 import {updateLogin, updatePassword, updateEmail, updateConfirmPassword} from '../../actions/signUpActions/actions'
+import {FormErrors} from './FormErrors'
 import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
@@ -10,7 +11,8 @@ const MapStateToProps = (state) => {
         login: state.signUpParams.login,
         email: state.signUpParams.email,
         password: state.signUpParams.password,
-        confirmPassword: state.signUpParams.confirmPassword
+        confirmPassword: state.signUpParams.confirmPassword,
+        errorLogin: state.signUpErrors.errorLogin
     }
 };
 
@@ -67,6 +69,7 @@ class SignUpModal extends Component {
 
     render() {
         const open = this.state.open;
+        console.log('CHECK_LOGIN_ERROR', this.props.errorLogin)
         return (
             <div>
                 <button onClick={this.onOpenModal}>Регистрация</button>
@@ -76,38 +79,43 @@ class SignUpModal extends Component {
                         <div className="sign_up_title">
                             <h2>Регистрация</h2>
                         </div>
-                    <div className="sign_up_item">
-                        <div className="sign_up_label">
-                            <label>Логин</label>
+                        <div className="sign_up_item">
+                            <div className="sign_up_label">
+                                <label>Логин</label>
+                            </div>
+                            <div>
+                                <input value={this.props.login} onChange={this.handleLogin} className="input_sign_up"/>
+                            </div>
                         </div>
                         <div>
-                            <input value={this.props.login} onChange={this.handleLogin} className="input_sign_up"/>
+                            <FormErrors error={this.props.errorLogin}/>
                         </div>
-                    </div>
-                    <div className="sign_up_item">
-                        <div className="sign_up_label">
-                            <label>Почтовый адрес</label>
+                        <div className="sign_up_item">
+                            <div className="sign_up_label">
+                                <label>Почтовый адрес</label>
+                            </div>
+                            <div >
+                                <input value={this.props.email} onChange={this.handleEmail} className="input_sign_up"/>
+                            </div>
                         </div>
-                        <div >
-                            <input value={this.props.email} onChange={this.handleEmail} className="input_sign_up"/>
+                        <div className="sign_up_item">
+                            <div className="sign_up_label">
+                                <label>Пароль</label>
+                            </div>
+                            <div>
+                                <input value={this.props.password} onChange={this.handlePassword}
+                                       className="input_sign_up"/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="sign_up_item">
-                        <div className="sign_up_label">
-                            <label>Пароль</label>
+                        <div className="sign_up_item">
+                            <div className="sign_up_label">
+                                <label>Повторите пароль</label>
+                            </div>
+                            <div>
+                                <input value={this.props.confirmPassword} onChange={this.handleConfirmPassword}
+                                       className="input_sign_up"/>
+                            </div>
                         </div>
-                        <div>
-                            <input value={this.props.password} onChange={this.handlePassword} className="input_sign_up"/>
-                        </div>
-                    </div>
-                    <div className="sign_up_item">
-                        <div className="sign_up_label">
-                            <label>Повторите пароль</label>
-                        </div>
-                        <div>
-                            <input value={this.props.confirmPassword} onChange={this.handleConfirmPassword} className="input_sign_up"/>
-                        </div>
-                    </div>
                         <SubmitButton/>
                     </div>
                 </Modal>

@@ -3,4 +3,4 @@
  */
 
 import '../actions/signUpActions/action-types';
-
+import '../actions/signUpErrors/action-types';

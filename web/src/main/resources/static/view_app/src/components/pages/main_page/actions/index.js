@@ -4,4 +4,5 @@
 
 import './action-types'
 import '../actions/signUpActions/actions'
+import '../actions/signUpErrors/actions'
 

@@ -9,7 +9,8 @@ const warningStyles = {
     fontSize: '18px',
     fontFamily: 'Arial',
     paddingLeft: '10px',
-}
+};
+
 export const ErrorPrinter = (formError) => {
     if (formError.formErrors.length > 0) {
         return (
