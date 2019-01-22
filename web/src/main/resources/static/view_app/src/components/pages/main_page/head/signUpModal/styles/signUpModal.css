@@ -6,7 +6,7 @@
     font-size: 14px;
 }
 
-.input_sign_up {
+.input_sign_up, .input_error {
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 5px;
@@ -21,6 +21,10 @@
     border: 1.5px solid #007eff !important;
 }
 
+.input_error {
+    border: 1.5px solid #ff3a29;
+}
+
 .sign_up_item {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }

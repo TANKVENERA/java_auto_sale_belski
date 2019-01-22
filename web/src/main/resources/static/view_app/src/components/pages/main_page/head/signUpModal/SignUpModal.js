@@ -12,7 +12,10 @@ const MapStateToProps = (state) => {
         email: state.signUpParams.email,
         password: state.signUpParams.password,
         confirmPassword: state.signUpParams.confirmPassword,
-        errorLogin: state.signUpErrors.errorLogin
+        errorLogin: state.signUpErrors.errorLogin,
+        errorEmail: state.signUpErrors.errorEmail,
+        errorPassword: state.signUpErrors.errorPassword,
+        errorConfirmPassword: state.signUpErrors.errorConfirmPassword
     }
 };
 
@@ -69,7 +72,11 @@ class SignUpModal extends Component {
 
     render() {
         const open = this.state.open;
-        console.log('CHECK_LOGIN_ERROR', this.props.errorLogin)
+        var loginErr = this.props.errorLogin;
+        var emailErr = this.props.errorEmail;
+        var pwdErr = this.props.errorPassword;
+        var confirmPwdErr = this.props.errorConfirmPassword;
+
         return (
             <div>
                 <button onClick={this.onOpenModal}>Регистрация</button>
@@ -84,18 +91,23 @@ class SignUpModal extends Component {
                                 <label>Логин</label>
                             </div>
                             <div>
-                                <input value={this.props.login} onChange={this.handleLogin} className="input_sign_up"/>
+                                <input value={this.props.login} onChange={this.handleLogin}
+                                       className={loginErr === '' ? 'input_sign_up' : 'input_error' } />
                             </div>
-                        </div>
-                        <div>
-                            <FormErrors error={this.props.errorLogin}/>
+                            <div>
+                                <FormErrors error={loginErr}/>
+                            </div>
                         </div>
                         <div className="sign_up_item">
                             <div className="sign_up_label">
                                 <label>Почтовый адрес</label>
                             </div>
                             <div >
-                                <input value={this.props.email} onChange={this.handleEmail} className="input_sign_up"/>
+                                <input value={this.props.email} onChange={this.handleEmail}
+                                       className={emailErr === '' ? 'input_sign_up' : 'input_error' } />
+                            </div>
+                            <div>
+                                <FormErrors error={emailErr}/>
                             </div>
                         </div>
                         <div className="sign_up_item">
@@ -104,7 +116,10 @@ class SignUpModal extends Component {
                             </div>
                             <div>
                                 <input value={this.props.password} onChange={this.handlePassword}
-                                       className="input_sign_up"/>
+                                       className={pwdErr === '' ? 'input_sign_up' : 'input_error' } />
+                            </div>
+                            <div>
+                                <FormErrors error={pwdErr}/>
                             </div>
                         </div>
                         <div className="sign_up_item">
@@ -113,7 +128,10 @@ class SignUpModal extends Component {
                             </div>
                             <div>
                                 <input value={this.props.confirmPassword} onChange={this.handleConfirmPassword}
-                                       className="input_sign_up"/>
+                                       className={confirmPwdErr === '' ? 'input_sign_up' : 'input_error' } />
+                            </div>
+                            <div>
+                                <FormErrors error={confirmPwdErr}/>
                             </div>
                         </div>
                         <SubmitButton/>

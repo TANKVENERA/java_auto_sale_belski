@@ -23,23 +23,29 @@ const MapStateToProps = state => {
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        updateLoginError: (loginError) => dispatch(updateLoginError(loginError)),
-        updateEmailError: (emailError) => dispatch(updateEmailError(emailError)),
-        updatePasswordError: (passwordError) => dispatch(updatePasswordError(passwordError)),
-        updateConfirmPasswordError: (confirmPasswordError) => dispatch(updateConfirmPasswordError(confirmPasswordError))
+        updateLoginError: loginError => dispatch(updateLoginError(loginError)),
+        updateEmailError: errorEmail => dispatch(updateEmailError(errorEmail)),
+        updatePasswordError: passwordError => dispatch(updatePasswordError(passwordError)),
+        updateConfirmPasswordError: confirmPasswordError => dispatch(updateConfirmPasswordError(confirmPasswordError))
     }
 };
 
 class SubmitButton extends Component {
 
-    handelLoginErrors =() => {
+    handleLoginErrors = () => {
         var login = this.props.login;
         const latinSymbolRegex = /^[a-zA-Z0-9]+$/;
-        if (!latinSymbolRegex.test(login)) {
+        const numberRegex = /^[0-9]+$/;
+        if (login === '') {
+            this.props.updateLoginError('Введите логин')
+        }
+        else if (numberRegex.test(login)) {
+            this.props.updateLoginError('Логин не должен содержать только цифры')
+        }
+        else if (!latinSymbolRegex.test(login)) {
             this.props.updateLoginError('Используйте латиницу и римские цифры')
         }
         else if (login.length < 5 || login.length > 10) {
-            console.log('TRUE');
             this.props.updateLoginError('Длина логина должна быть не менее 5 и не более 10 символов')
         }
         else {
@@ -47,20 +53,54 @@ class SubmitButton extends Component {
         }
     };
 
-    handelEmailErrors = () => {
+    handleEmailErrors = () => {
         var email = this.props.email;
+        if (email === '') {
+            this.props.updateEmailError('Введите email')
+        }
+        else if (!email.includes('@')) {
+            this.props.updateEmailError('Email должен содержать символ "@"')
+        }
+        else {
+            this.props.updateEmailError('')
+        }
     };
 
-    handelPasswordErrors = () => {
-        var password = this.props.password;
+    handlePasswordErrors = () => {
+        var pwd = this.props.password;
+        const cyrillicRegex = /[а-яА-Я]+/;
+        if (pwd === '') {
+            this.props.updatePasswordError('Введите пароль')
+        }
+        else if (pwd.length < 6 || pwd.length > 10) {
+            this.props.updatePasswordError('Длина пароля должна быть не менее 6 и не более 10 символов')
+        }
+        else if (cyrillicRegex.test(pwd)) {
+            this.props.updatePasswordError('Пароль не должен содержать кирилличных символов')
+        }
+        else {
+            this.props.updatePasswordError('')
+        }
     };
 
-    handelConfirmPasswordErrors = () => {
-        var login = this.props.login;
+    handleConfirmPasswordErrors = () => {
+        var confirmPwd = this.props.confirmPassword;
+        if (confirmPwd === '') {
+            this.props.updateConfirmPasswordError('Подтвердите пароль')
+        }
+        else if (this.props.password !== confirmPwd) {
+            this.props.updateConfirmPasswordError('Пароли не совпадают')
+        }
+        else {
+            this.props.updateConfirmPasswordError('')
+        }
     };
 
     sendRQWithSignUpParams = () => {
-        this.handelLoginErrors()
+        this.handleLoginErrors();
+        this.handleEmailErrors();
+        this.handlePasswordErrors();
+        this.handleConfirmPasswordErrors();
     };
 
 

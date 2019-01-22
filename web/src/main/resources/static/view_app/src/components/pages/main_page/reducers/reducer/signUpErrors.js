@@ -15,14 +15,16 @@ const initialState = {
 export default function signUpErrors(state = initialState, action) {
     switch (action.type) {
         case 'LOGIN_ERROR_IS_UPDATED' :
-            console.log('FRMO', action.errorLogin)
             return {...state, errorLogin: action.errorLogin}
         case 'EMAIL_ERROR_IS_UPDATED' :
-            return {...state, errorLogin: action.errorEmail}
+            console.log('EMAIL)ERR', action.errorEmail)
+            return {...state, errorEmail: action.errorEmail}
         case 'PASSWORD_ERROR_IS_UPDATED' :
-            return {...state, errorLogin: action.errorPassword}
+            console.log('FRMOPASSW', action.errorPassword)
+            return {...state, errorPassword: action.errorPassword}
         case 'CONFIRM_PASSWORD_ERROR_IS_UPDATED' :
-            return {...state, errorLogin: action.errorConfirmPassword}
+            console.log('CONFIRM', action.errorConfirmPassword)
+            return {...state, errorConfirmPassword: action.errorConfirmPassword}
         default:
             return state;
     }
