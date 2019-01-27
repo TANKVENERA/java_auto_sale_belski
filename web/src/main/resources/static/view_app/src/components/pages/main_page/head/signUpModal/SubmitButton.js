@@ -55,11 +55,30 @@ class SubmitButton extends Component {
 
     handleEmailErrors = () => {
         var email = this.props.email;
+        const beforeDogSymbolRegex = /.{1,10}(?=@)/;
+        const afterDogSymbolRegex = /(?<=@).{1,10}/;
+        const wrongSymbolRegex = /[^.a-zA-Z0-9]+/;
+        const checkDogSmbNmbOfOccurrences = /@/g;
+        var parseEmail;
         if (email === '') {
             this.props.updateEmailError('Введите email')
         }
         else if (!email.includes('@')) {
             this.props.updateEmailError('Email должен содержать символ "@"')
+        }
+        else if (!beforeDogSymbolRegex.test(email)) {
+            this.props.updateEmailError('Введите часть Email, расположенного до символа "@"')
+        }
+        else if (!afterDogSymbolRegex.test(email)) {
+            this.props.updateEmailError('Введите часть Email, расположенного после символа "@"')
+        }
+        else if ((email.match(checkDogSmbNmbOfOccurrences)).length > 1) {
+            this.props.updateEmailError('Часть адреса после символа "@" не должна содержать символ "@"')
+        }
+        else if ((parseEmail = email.substring(email.indexOf('@') + 1, email.length)).match(wrongSymbolRegex) !== null) {
+            var wrongCharIndex = parseEmail.match(wrongSymbolRegex).index;
+            console.log('MATCH', parseEmail[wrongCharIndex], 'ddddd', parseEmail)
+            this.props.updateEmailError(`Часть адреса после символа "@" не должна содержать символ "${parseEmail[wrongCharIndex]}"`)
         }
         else {
             this.props.updateEmailError('')
@@ -101,6 +120,22 @@ class SubmitButton extends Component {
         this.handleEmailErrors();
         this.handlePasswordErrors();
         this.handleConfirmPasswordErrors();
+
+
+        fetch('http://localhost:8080/signUp', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                login: this.props.login,
+                email: this.props.email,
+                password: this.props.password,
+                confirmPassword: this.props.confirmPassword
+            })
+        })
+
     };
 
 

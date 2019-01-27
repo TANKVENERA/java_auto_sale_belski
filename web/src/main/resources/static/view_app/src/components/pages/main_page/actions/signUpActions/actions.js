@@ -3,7 +3,7 @@
  */
 
 import {LOGIN_IS_UPDATED, EMAIL_IS_UPDATED, PASSWORD_IS_UPDATED,
-        CONFIRM_PASSWORD_IS_UPDATED} from './action-types'
+        CONFIRM_PASSWORD_IS_UPDATED, CLEAR_USER_PARAMS} from './action-types'
 
 export const updateLogin = login => ({
     type: LOGIN_IS_UPDATED,
@@ -23,4 +23,8 @@ export const updatePassword = password => ({
 export const updateConfirmPassword = confirmPassword => ({
     type: CONFIRM_PASSWORD_IS_UPDATED,
     confirmPassword: confirmPassword
+});
+
+export const clearUserParams = () => ({
+    type: CLEAR_USER_PARAMS
 });

@@ -26,9 +26,10 @@ public class UserDTO {
 
     }
 
-    public UserDTO(String username, String email) {
+    public UserDTO(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     private Set<AdDTO> ads = new HashSet<>();

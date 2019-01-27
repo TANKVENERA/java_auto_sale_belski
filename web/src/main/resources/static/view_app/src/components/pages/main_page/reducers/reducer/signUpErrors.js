@@ -25,6 +25,8 @@ export default function signUpErrors(state = initialState, action) {
         case 'CONFIRM_PASSWORD_ERROR_IS_UPDATED' :
             console.log('CONFIRM', action.errorConfirmPassword)
             return {...state, errorConfirmPassword: action.errorConfirmPassword}
+        case 'CLEAR_ERRORS':
+            return {state: initialState}
         default:
             return state;
     }

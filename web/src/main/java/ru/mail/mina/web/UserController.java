@@ -17,6 +17,7 @@ import ru.mail.mina.service.model.AdDTO;
 import ru.mail.mina.service.model.AppUserPrincipal;
 import ru.mail.mina.service.model.NewsDTO;
 import ru.mail.mina.service.model.UserDTO;
+import ru.mail.mina.web.util.UserEntity;
 import ru.mail.mina.web.validator.UserValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * Created by Администратор on 15.08.2017.
  */
-@Controller
+@RestController
 public class UserController {
 
     public static final String Body_Style = "кузов";
@@ -63,16 +64,12 @@ public class UserController {
         return "createAd";
     }
 
-
-    @RequestMapping(value = {"/register", "/profile"}, method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") UserDTO userDTO, BindingResult result) {
-        userValidator.validate(userDTO, result);
-        if (!result.hasErrors()) {
-            userService.saveUser(userDTO);
-            return "redirect:/login";
-        } else {
-            return "filter";
-        }
+    @RequestMapping(value = {"/signUp"}, method = RequestMethod.POST)
+    public String signUpNewUser (@RequestBody UserEntity entity) {
+        UserDTO newUser = new UserDTO(entity.getLogin(), entity.getEmail(), entity.getPassword());
+        /** Need validations**/
+        userService.saveUser(newUser);
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)

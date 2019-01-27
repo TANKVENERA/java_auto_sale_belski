@@ -22,6 +22,8 @@ export default function signUpParams(state = initialState, action) {
             return {...state, password: action.password}
         case 'CONFIRM_PASSWORD_IS_UPDATED':
             return {...state, confirmPassword: action.confirmPassword}
+        case 'CLEAR_USER_PARAMS':
+            return {state : initialState}
         default:
             return state;
     }

@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import Modal from '../../../../../../node_modules/react-responsive-modal'
 import SubmitButton from './SubmitButton'
 import './styles/signUpModal.css'
-import {updateLogin, updatePassword, updateEmail, updateConfirmPassword} from '../../actions/signUpActions/actions'
+import {updateLogin, updatePassword, updateEmail, updateConfirmPassword,
+        clearUserParams} from '../../actions/signUpActions/actions'
+import {clearErrors} from '../../actions/signUpErrors/actions'
 import {FormErrors} from './FormErrors'
 import {connect} from '../../../../../../node_modules/react-redux';
 
@@ -24,7 +26,9 @@ const MapDispatchToProps = (dispatch) => {
         updateLogin: (login) => dispatch(updateLogin(login)),
         updateEmail: (email) => dispatch(updateEmail(email)),
         updatePassword: (password) => dispatch(updatePassword(password)),
-        updateConfirmPassword: (confirmPassword) => dispatch(updateConfirmPassword(confirmPassword))
+        updateConfirmPassword: (confirmPassword) => dispatch(updateConfirmPassword(confirmPassword)),
+        clearUserParams: () => dispatch(clearUserParams()),
+        clearErrors: () => dispatch(clearErrors())
     }
 };
 
@@ -47,6 +51,8 @@ class SignUpModal extends Component {
 
     onCloseModal = () => {
         this.setState({open: false});
+        this.props.clearUserParams();
+        this.props.clearErrors();
     };
 
     handleLogin = (event) => {
@@ -76,7 +82,7 @@ class SignUpModal extends Component {
         var emailErr = this.props.errorEmail;
         var pwdErr = this.props.errorPassword;
         var confirmPwdErr = this.props.errorConfirmPassword;
-
+        console.log('STRT', loginErr, 'LOGIN',  this.props.login)
         return (
             <div>
                 <button onClick={this.onOpenModal}>Регистрация</button>

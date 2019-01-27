@@ -3,7 +3,7 @@
  */
 
 import {LOGIN_ERROR_IS_UPDATED, EMAIL_ERROR_IS_UPDATED, PASSWORD_ERROR_IS_UPDATED,
-        CONFIRM_PASSWORD_ERROR_IS_UPDATED} from './action-types'
+        CONFIRM_PASSWORD_ERROR_IS_UPDATED, CLEAR_ERRORS} from './action-types'
 
 export const updateLoginError = errorLogin => ({
     type: LOGIN_ERROR_IS_UPDATED,
@@ -23,4 +23,8 @@ export const updatePasswordError = errorPassword => ({
 export const updateConfirmPasswordError = errorConfirmPassword => ({
     type: CONFIRM_PASSWORD_ERROR_IS_UPDATED,
     errorConfirmPassword: errorConfirmPassword
+});
+
+export const clearErrors = () => ({
+    type: CLEAR_ERRORS
 });
