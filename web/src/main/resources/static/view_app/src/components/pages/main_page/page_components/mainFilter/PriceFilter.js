@@ -3,13 +3,13 @@
  */
 
 import React, {Component} from 'react'
-import {CSSTransition} from '../../../../../node_modules/react-transition-group'
-import StyledReactSelect from '../../../../static/StyledReactSelect';
+import {CSSTransition} from '../../../../../../node_modules/react-transition-group'
+import StyledReactSelect from '../../../../../static/StyledReactSelect';
 import './styles/priceFilter.css';
-import ArrowDown from '../../../../static/ArrowDown';
-import {RadioGroup, RadioButton} from '../../../../../node_modules/react-custom-radio'
-import {updatePriceFrom, updatePriceOn} from '../../../../actions/index';
-import {connect} from '../../../../../node_modules/react-redux';
+import ArrowDown from '../../../../../static/ArrowDown';
+import {RadioGroup, RadioButton} from '../../../../../../node_modules/react-custom-radio'
+import {updatePriceFrom, updatePriceOn} from '../../../../../actions/index';
+import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {

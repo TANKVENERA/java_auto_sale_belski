@@ -1,34 +1,40 @@
 import React, {Component} from 'react'
-import Modal from '../../../../../../node_modules/react-responsive-modal'
+import Modal from '../../../../../../../node_modules/react-responsive-modal'
+import {Link} from '../../../../../../../node_modules/react-router-dom';
 import SubmitButton from './SubmitButton'
 import './styles/signUpModal.css'
 import {updateLogin, updatePassword, updateEmail, updateConfirmPassword,
-        clearUserParams} from '../../actions/signUpActions/actions'
-import {clearErrors} from '../../actions/signUpErrors/actions'
+        clearUserParams, updateOpenRegistrationSuccessModal, updateOpenModalFlag} from '../../../actions/signUpActions/actions'
+import {clearErrors} from '../../../actions/signUpErrors/actions'
 import {FormErrors} from './FormErrors'
-import {connect} from '../../../../../../node_modules/react-redux';
+import {connect} from '../../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {
-        login: state.signUpParams.login,
+        username: state.signUpParams.username,
         email: state.signUpParams.email,
         password: state.signUpParams.password,
         confirmPassword: state.signUpParams.confirmPassword,
+        modalIsOpen: state.signUpParams.modalIsOpen,
+        regSuccessModalIsOpen: state.signUpParams.regSuccessModalIsOpen,
         errorLogin: state.signUpErrors.errorLogin,
         errorEmail: state.signUpErrors.errorEmail,
         errorPassword: state.signUpErrors.errorPassword,
         errorConfirmPassword: state.signUpErrors.errorConfirmPassword
+
     }
 };
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        updateLogin: (login) => dispatch(updateLogin(login)),
+        updateLogin: (username) => dispatch(updateLogin(username)),
         updateEmail: (email) => dispatch(updateEmail(email)),
         updatePassword: (password) => dispatch(updatePassword(password)),
         updateConfirmPassword: (confirmPassword) => dispatch(updateConfirmPassword(confirmPassword)),
         clearUserParams: () => dispatch(clearUserParams()),
-        clearErrors: () => dispatch(clearErrors())
+        clearErrors: () => dispatch(clearErrors()),
+        updateOpenModalFlag: (modalIsOpen) => dispatch(updateOpenModalFlag(modalIsOpen)),
+        updateOpenRegistrationSuccessModal: regSuccessModalIsOpen => dispatch(updateOpenRegistrationSuccessModal(regSuccessModalIsOpen))
     }
 };
 
@@ -38,19 +44,16 @@ const styles = {
 
 class SignUpModal extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            open: false
-        }
+    onCloseRegSuccessModal = () => {
+        this.props.updateOpenRegistrationSuccessModal(false);
     }
 
     onOpenModal = () => {
-        this.setState({open: true});
+        this.props.updateOpenModalFlag(true);
     };
 
     onCloseModal = () => {
-        this.setState({open: false});
+        this.props.updateOpenModalFlag(false);
         this.props.clearUserParams();
         this.props.clearErrors();
     };
@@ -77,12 +80,12 @@ class SignUpModal extends Component {
     };
 
     render() {
-        const open = this.state.open;
+        const open = this.props.modalIsOpen;
         var loginErr = this.props.errorLogin;
         var emailErr = this.props.errorEmail;
         var pwdErr = this.props.errorPassword;
         var confirmPwdErr = this.props.errorConfirmPassword;
-        console.log('STRT', loginErr, 'LOGIN',  this.props.login)
+        console.log('STRT', loginErr, 'LOGIN',  this.props.username)
         return (
             <div>
                 <button onClick={this.onOpenModal}>Регистрация</button>
@@ -97,7 +100,7 @@ class SignUpModal extends Component {
                                 <label>Логин</label>
                             </div>
                             <div>
-                                <input value={this.props.login} onChange={this.handleLogin}
+                                <input value={this.props.username} onChange={this.handleLogin}
                                        className={loginErr === '' ? 'input_sign_up' : 'input_error' } />
                             </div>
                             <div>
@@ -142,6 +145,11 @@ class SignUpModal extends Component {
                         </div>
                         <SubmitButton/>
                     </div>
+                </Modal>
+                <Modal open={this.props.regSuccessModalIsOpen} onClose={this.onCloseRegSuccessModal}
+                       showCloseIcon={false}>
+                    Вы успешно зарегестрировались.
+                    <Link to='/'>Вернуться на главную</Link>
                 </Modal>
             </div>
         )

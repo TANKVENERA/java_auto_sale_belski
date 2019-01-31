@@ -2,6 +2,7 @@ package ru.mail.mina.web.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,9 @@ public class UserValidator implements Validator {
         }
         if (user.getPassword().length() < 8) {
             errors.rejectValue("password", "error.userpassword.length");
+        }
+        if (user.getPassword() != user.getConfirmPassword()) {
+            errors.rejectValue("confirmPassword", "error.userConfirmPassword.mismatch");
         }
         else {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());

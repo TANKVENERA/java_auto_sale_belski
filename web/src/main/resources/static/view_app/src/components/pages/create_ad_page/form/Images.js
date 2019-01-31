@@ -58,7 +58,6 @@ class Images extends Component {
            files.map((file, index) => {
                var reader = new FileReader();
                reader.readAsDataURL(file);
-               console.log('FILE_SIZE', file);
                reader.onloadend = () => {
                    this.props.updateImages(({index: index + this.state.i, preview: URL.createObjectURL(file),
                                              base64String: reader.result, name: file.name

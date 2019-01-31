@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Modal from '../../../../../../node_modules/react-responsive-modal'
+import Modal from '../../../../../../../node_modules/react-responsive-modal'
 
 class SignInModal extends Component {
 

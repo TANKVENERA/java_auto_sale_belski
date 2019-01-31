@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import Select from '../../../../../node_modules/react-responsive-select';
-import ArrowDown from '../../../../static/ArrowDown';
-import {uploadModels, updateModel, updatePrevMark} from '../../../../actions/index';
-import {connect} from '../../../../../node_modules/react-redux';
-import {initData} from  '../../../utils/util';
+import Select from '../../../../../../node_modules/react-responsive-select';
+import ArrowDown from '../../../../../static/ArrowDown';
+import {uploadModels, updateModel, updatePrevMark} from '../../../../../actions/index';
+import {connect} from '../../../../../../node_modules/react-redux';
+import {initData} from  '../../../../utils/util';
 
 const MapStateToProps = (state) => {
     return {

@@ -3,11 +3,11 @@
  */
 
 import React, {Component} from 'react'
-import {CSSTransition} from '../../../../../node_modules/react-transition-group'
-import StyledReactSelect from '../../../../static/StyledReactSelect';
-import ArrowDown from '../../../../static/ArrowDown';
-import {connect} from '../../../../../node_modules/react-redux';
-import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../../../actions/index';
+import {CSSTransition} from '../../../../../../node_modules/react-transition-group'
+import StyledReactSelect from '../../../../../static/StyledReactSelect';
+import ArrowDown from '../../../../../static/ArrowDown';
+import {connect} from '../../../../../../node_modules/react-redux';
+import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../../../../actions/index';
 
 const MapStateToProps = (state) => {
     return {

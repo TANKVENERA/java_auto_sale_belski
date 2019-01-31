@@ -26,7 +26,7 @@ export default function signUpErrors(state = initialState, action) {
             console.log('CONFIRM', action.errorConfirmPassword)
             return {...state, errorConfirmPassword: action.errorConfirmPassword}
         case 'CLEAR_ERRORS':
-            return {state: initialState}
+            return {...state = initialState}
         default:
             return state;
     }

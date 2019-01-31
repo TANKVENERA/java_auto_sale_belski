@@ -3,17 +3,19 @@
  */
 import React, {Component} from 'react'
 import './styles/submitButton.css'
-import {connect} from '../../../../../../node_modules/react-redux'
+import {connect} from '../../../../../../../node_modules/react-redux'
 import {
     updateLoginError,
     updateEmailError,
     updatePasswordError,
-    updateConfirmPasswordError
-} from '../../actions/signUpErrors/actions'
+    updateConfirmPasswordError,
+    clearErrors
+} from '../../../actions/signUpErrors/actions'
+import {updateOpenRegistrationSuccessModal, updateOpenModalFlag, clearUserParams} from '../../../actions/signUpActions/actions'
 
 const MapStateToProps = state => {
     return {
-        login: state.signUpParams.login,
+        username: state.signUpParams.username,
         email: state.signUpParams.email,
         password: state.signUpParams.password,
         confirmPassword: state.signUpParams.confirmPassword
@@ -26,14 +28,18 @@ const MapDispatchToProps = (dispatch) => {
         updateLoginError: loginError => dispatch(updateLoginError(loginError)),
         updateEmailError: errorEmail => dispatch(updateEmailError(errorEmail)),
         updatePasswordError: passwordError => dispatch(updatePasswordError(passwordError)),
-        updateConfirmPasswordError: confirmPasswordError => dispatch(updateConfirmPasswordError(confirmPasswordError))
+        updateConfirmPasswordError: confirmPasswordError => dispatch(updateConfirmPasswordError(confirmPasswordError)),
+        clearErrors: () => dispatch(clearErrors()),
+        clearUserParams: () => dispatch(clearUserParams()),
+        updateOpenModalFlag: modalIsOpen => dispatch(updateOpenModalFlag(modalIsOpen)),
+        updateOpenRegistrationSuccessModal: regSuccessModalIsOpen => dispatch(updateOpenRegistrationSuccessModal(regSuccessModalIsOpen))
     }
 };
 
 class SubmitButton extends Component {
 
     handleLoginErrors = () => {
-        var login = this.props.login;
+        var login = this.props.username;
         const latinSymbolRegex = /^[a-zA-Z0-9]+$/;
         const numberRegex = /^[0-9]+$/;
         if (login === '') {
@@ -77,7 +83,6 @@ class SubmitButton extends Component {
         }
         else if ((parseEmail = email.substring(email.indexOf('@') + 1, email.length)).match(wrongSymbolRegex) !== null) {
             var wrongCharIndex = parseEmail.match(wrongSymbolRegex).index;
-            console.log('MATCH', parseEmail[wrongCharIndex], 'ddddd', parseEmail)
             this.props.updateEmailError(`Часть адреса после символа "@" не должна содержать символ "${parseEmail[wrongCharIndex]}"`)
         }
         else {
@@ -121,7 +126,6 @@ class SubmitButton extends Component {
         this.handlePasswordErrors();
         this.handleConfirmPasswordErrors();
 
-
         fetch('http://localhost:8080/signUp', {
             method: 'POST',
             headers: {
@@ -129,13 +133,21 @@ class SubmitButton extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                login: this.props.login,
+                username: this.props.username,
                 email: this.props.email,
                 password: this.props.password,
                 confirmPassword: this.props.confirmPassword
             })
+        }).then(status => {
+            return status.json()
+        }).then(result => {
+            if (result.message === 'successfull') {
+                this.props.clearUserParams();
+                this.props.clearErrors();
+                this.props.updateOpenModalFlag(false)
+                this.props.updateOpenRegistrationSuccessModal(true)
+            }
         })
-
     };
 
 

@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import Select from '../../../../../node_modules/react-responsive-select';
+import Select from '../../../../../../node_modules/react-responsive-select';
 import ModelFilter from './ModelFilter'
 import './styles/markFilter.css';
-import  '../../../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
-import ArrowDown from '../../../../static/ArrowDown';
-import {updateMark} from '../../../../actions/index'
-import {connect} from '../../../../../node_modules/react-redux';
+import  '../../../../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
+import ArrowDown from '../../../../../static/ArrowDown';
+import {updateMark} from '../../../../../actions/index'
+import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {

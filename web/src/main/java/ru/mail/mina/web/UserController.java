@@ -1,11 +1,12 @@
 package ru.mail.mina.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,10 @@ import ru.mail.mina.service.model.AdDTO;
 import ru.mail.mina.service.model.AppUserPrincipal;
 import ru.mail.mina.service.model.NewsDTO;
 import ru.mail.mina.service.model.UserDTO;
+import ru.mail.mina.web.util.RegistrationStatusEntity;
 import ru.mail.mina.web.util.UserEntity;
 import ru.mail.mina.web.validator.UserValidator;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -36,6 +39,9 @@ public class UserController {
     private final UserValidator userValidator;
     private final NewsService newsService;
     private final CarFeatureService featureService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Autowired
     public UserController(UserService userService, UserValidator userValidator,
@@ -65,11 +71,13 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/signUp"}, method = RequestMethod.POST)
-    public String signUpNewUser (@RequestBody UserEntity entity) {
-        UserDTO newUser = new UserDTO(entity.getLogin(), entity.getEmail(), entity.getPassword());
+    public RegistrationStatusEntity signUpNewUser(@RequestBody UserEntity entity, BindingResult result) {
+        UserDTO newUser = new UserDTO(entity.getUsername(), entity.getEmail(), entity.getPassword(), entity.getConfirmPassword());
         /** Need validations**/
+        userValidator.validate(newUser, result);
+        System.out.println(messageSource.getMessage(result.getFieldError("email"), null)  + "DDDDD" + result.getAllErrors().get(0).getCode());
         userService.saveUser(newUser);
-        return "redirect:/login";
+        return new RegistrationStatusEntity(HttpStatus.OK, "successfull");
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -90,7 +98,7 @@ public class UserController {
         return "updateUser";
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    @RequestMapping(value = "autosale/updateUser", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute("user") UserDTO userDTO,
                              HttpServletRequest request) {
         String newPassword = request.getParameter("newPassword");
@@ -98,8 +106,7 @@ public class UserController {
         if (newPassword.equals(confirmPassword) && !newPassword.isEmpty() && !confirmPassword.isEmpty()) {
             userDTO.setPassword(newPassword);
             userService.update(userDTO, true);
-        }
-        else {
+        } else {
             userService.update(userDTO, false);
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

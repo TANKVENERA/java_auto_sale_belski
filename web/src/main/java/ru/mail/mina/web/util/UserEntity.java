@@ -5,17 +5,17 @@ package ru.mail.mina.web.util;
  */
 public class UserEntity {
 
-    private String login;
+    private String username;
     private String email;
     private String password;
     private String confirmPassword;
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -45,7 +45,7 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "login='" + login + '\'' +
+                "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +

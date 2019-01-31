@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from '../../../../node_modules/react-router-dom';
 import '../../../../node_modules/react-select-v1/dist/react-select.css';
 import Mark from './form/Mark';
 import YearOfIssue from './form/YearOfIssue';
@@ -29,9 +28,6 @@ class createAd extends Component {
     render() {
         return (
             <div className="main_wrapper">
-                <h2>
-                    <Link to='/'>Home Page</Link>
-                </h2>
                 <div>
                     <Mark/>
                 </div>
