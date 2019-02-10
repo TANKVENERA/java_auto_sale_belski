@@ -20,16 +20,19 @@ public class UserDTO {
 
     private String password;
 
+    private String confirmPassword;
+
     private Role role;
 
     public UserDTO() {
 
     }
 
-    public UserDTO(String username, String email, String password) {
+    public UserDTO(String username, String email, String password, String confirmPassword) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.confirmPassword = confirmPassword;
     }
 
     private Set<AdDTO> ads = new HashSet<>();
@@ -70,6 +73,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Set<AdDTO> getAds() {

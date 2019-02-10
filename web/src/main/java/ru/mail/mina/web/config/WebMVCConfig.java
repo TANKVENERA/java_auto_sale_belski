@@ -16,7 +16,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import ru.mail.mina.web.util.RegistrationStatusEntity;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import static javafx.scene.input.KeyCode.H;
@@ -33,6 +35,7 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter{
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
+        resolver.setContentType("application/json;charset=UTF-8");
         resolver.setPrefix("/WEB-INF/pages/");
         resolver.setSuffix(".jsp");
         return resolver;
@@ -42,8 +45,16 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter{
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
+        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
+
+    @Bean
+    public RegistrationStatusEntity registrationStatusEntity() {
+        RegistrationStatusEntity statusEntity = new RegistrationStatusEntity();
+        return statusEntity;
+    }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

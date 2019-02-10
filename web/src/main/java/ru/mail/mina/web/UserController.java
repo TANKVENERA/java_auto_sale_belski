@@ -19,11 +19,11 @@ import ru.mail.mina.service.model.AppUserPrincipal;
 import ru.mail.mina.service.model.NewsDTO;
 import ru.mail.mina.service.model.UserDTO;
 import ru.mail.mina.web.util.RegistrationStatusEntity;
-import ru.mail.mina.web.util.UserEntity;
 import ru.mail.mina.web.validator.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Администратор on 15.08.2017.
@@ -42,6 +42,9 @@ public class UserController {
 
     @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    private RegistrationStatusEntity statusEntity;
 
     @Autowired
     public UserController(UserService userService, UserValidator userValidator,
@@ -71,13 +74,33 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/signUp"}, method = RequestMethod.POST)
-    public RegistrationStatusEntity signUpNewUser(@RequestBody UserEntity entity, BindingResult result) {
-        UserDTO newUser = new UserDTO(entity.getUsername(), entity.getEmail(), entity.getPassword(), entity.getConfirmPassword());
+    public RegistrationStatusEntity signUpNewUser(@RequestBody UserDTO newUser, BindingResult result) {
         /** Need validations**/
+        System.out.println("RESULT" + " " +  statusEntity.getUsernameMsg() + " :" + statusEntity.getUsernameMsg());
+        statusEntity.refreshErrors();
         userValidator.validate(newUser, result);
-        System.out.println(messageSource.getMessage(result.getFieldError("email"), null)  + "DDDDD" + result.getAllErrors().get(0).getCode());
-        userService.saveUser(newUser);
-        return new RegistrationStatusEntity(HttpStatus.OK, "successfull");
+        if (result.hasErrors()) {
+            if ( result.hasFieldErrors("username")){
+                System.out.println("USER_DATA_ " + result.getFieldErrors("username").size());
+                statusEntity.setUsernameMsg(messageSource.getMessage(result.getFieldError("username"), null));
+            }
+            if (result.hasFieldErrors("email")) {
+                System.out.println("EMAIL_DATA_ " + result.getFieldErrors("email").size());
+                statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("email"), null));
+            }
+            if (result.hasFieldErrors("password")) {
+                statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("password"), null));
+            }
+            if (result.hasFieldErrors("confirmPassword")) {
+                statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("password"), null));
+            }
+            statusEntity.setStatus(HttpStatus.BAD_REQUEST).setMessage("unsuccess");
+        }
+        else {
+            statusEntity.setStatus(HttpStatus.OK).setMessage("success");
+        }
+        //userService.saveUser(newUser);
+        return statusEntity;
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)

@@ -17,7 +17,7 @@ export const FormErrors = (param) => {
         return (
             <div style={{display: 'table'}}>
                 <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
-                    <img src={warning} style={{width: '22px', height: '22px'}}/>
+                    <img alt="" src={warning} style={{width: '22px', height: '22px'}}/>
                 </div>
                 <div style={{display: 'table-cell'}}>
                     <label style={errorStyles}>{param.error}</label>

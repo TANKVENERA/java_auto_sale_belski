@@ -45,14 +45,14 @@ class SubmitButton extends Component {
         if (login === '') {
             this.props.updateLoginError('Введите логин')
         }
+        else if (login.length < 5 || login.length > 10) {
+            this.props.updateLoginError('Длина логина должна быть не менее 5 и не более 10 символов')
+        }
         else if (numberRegex.test(login)) {
             this.props.updateLoginError('Логин не должен содержать только цифры')
         }
         else if (!latinSymbolRegex.test(login)) {
             this.props.updateLoginError('Используйте латиницу и римские цифры')
-        }
-        else if (login.length < 5 || login.length > 10) {
-            this.props.updateLoginError('Длина логина должна быть не менее 5 и не более 10 символов')
         }
         else {
             this.props.updateLoginError('')
@@ -141,7 +141,7 @@ class SubmitButton extends Component {
         }).then(status => {
             return status.json()
         }).then(result => {
-            if (result.message === 'successfull') {
+            if (result.message === 'success') {
                 this.props.clearUserParams();
                 this.props.clearErrors();
                 this.props.updateOpenModalFlag(false)
