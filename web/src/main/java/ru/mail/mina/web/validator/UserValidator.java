@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.mail.mina.service.model.UserDTO;
@@ -45,33 +46,34 @@ public class UserValidator implements Validator {
         if (!user.getEmail().contains("@")) {
             errors.rejectValue("email", "error.useremail.dogSmb");
         }
-        if (!StringUtils.findMatch( ".{1,10}(?=@)", user.getEmail())) {
+        if (!StringUtils.findMatch(".{1,10}(?=@)", user.getEmail())) {
             errors.rejectValue("email", "error.useremail.beforeDogSmb");
         }
-        if (!StringUtils.findMatch( "(?<=@).{1,10}", user.getEmail())) {
+        if (!StringUtils.findMatch("(?<=@).{1,10}", user.getEmail())) {
             errors.rejectValue("email", "error.useremail.afterDogSmb");
         }
         if (StringUtils.numberOfCharOccurences(user.getEmail(), "@") > 1) {
             errors.rejectValue("email", "error.useremail.numberOfDogSmb");
         }
-        String regex = new String("[^.a-zA-Z0-9]+");
-        if ( StringUtils.findMatch("[^.a-zA-Z0-9]+", user.getEmail().substring(user.getEmail().indexOf('@') + 1))) {
-            Matcher m = Pattern.compile(regex).matcher(user.getEmail().substring(user.getEmail().indexOf('@') + 1));
-            System.out.println("LLL " + m.find());
-            System.out.println(m.group(0));
-
+        String afterDogSmblString = user.getEmail().substring(user.getEmail().indexOf('@') + 1);
+        if (StringUtils.findMatch("[^.a-zA-Z0-9]+", afterDogSmblString)) {
+            Matcher m = Pattern.compile("[^.a-zA-Z0-9]+").matcher(afterDogSmblString);
+            m.find();
+            errors.rejectValue("email", null, "Часть адреса после символа '@' не должна содержать символ " +
+                    "'" + m.group(0).charAt(0) + "' !");
         }
-//        if (user.getPassword().length() < 8) {
-//            errors.rejectValue("password", "error.userpassword.length");
-//        }
-//        if (user.getPassword() != user.getConfirmPassword()) {
-//            errors.rejectValue("confirmPassword", "error.userConfirmPassword.mismatch");
-//        } else {
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-//            if (userDetails != null) {
-//                errors.rejectValue("username", "error.username.exist");
-//            }
-//        }
+        ValidationUtils.rejectIfEmpty(errors, "password", "error.userpassword.empty");
+        if (user.getPassword().length() < 6 || user.getUsername().length() > 12) {
+            errors.rejectValue("password", "error.userpassword.length");
+        }
+        if (StringUtils.matches("[а-яА-Я]+", user.getPassword())) {
+            errors.rejectValue("password", "error.userpassword.cyrillic");
+        }
+        System.out.println("FFF" + user.getPassword() + " " + user.getConfirmPassword());
+        ValidationUtils.rejectIfEmpty(errors, "confirmPassword", "error.userConfirmPassword.empty");
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            errors.rejectValue("confirmPassword", "error.userConfirmPassword.mismatch");
+        }
     }
 }
 

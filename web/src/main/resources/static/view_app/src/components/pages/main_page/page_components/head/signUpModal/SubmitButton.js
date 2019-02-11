@@ -96,8 +96,8 @@ class SubmitButton extends Component {
         if (pwd === '') {
             this.props.updatePasswordError('Введите пароль')
         }
-        else if (pwd.length < 6 || pwd.length > 10) {
-            this.props.updatePasswordError('Длина пароля должна быть не менее 6 и не более 10 символов')
+        else if (pwd.length < 6 || pwd.length > 12) {
+            this.props.updatePasswordError('Длина пароля должна быть не менее 6 и не более 12 символов')
         }
         else if (cyrillicRegex.test(pwd)) {
             this.props.updatePasswordError('Пароль не должен содержать кирилличных символов')

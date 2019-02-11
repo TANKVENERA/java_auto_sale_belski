@@ -89,10 +89,10 @@ public class UserController {
                 statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("email"), null));
             }
             if (result.hasFieldErrors("password")) {
-                statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("password"), null));
+                statusEntity.setPswMsg(messageSource.getMessage(result.getFieldError("password"), null));
             }
             if (result.hasFieldErrors("confirmPassword")) {
-                statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("password"), null));
+                statusEntity.setConfirmPswMsg(messageSource.getMessage(result.getFieldError("confirmPassword"), null));
             }
             statusEntity.setStatus(HttpStatus.BAD_REQUEST).setMessage("unsuccess");
         }
