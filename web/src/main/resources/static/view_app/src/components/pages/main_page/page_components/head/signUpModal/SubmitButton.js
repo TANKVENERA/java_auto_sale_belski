@@ -11,6 +11,7 @@ import {
     updateConfirmPasswordError,
     clearErrors
 } from '../../../actions/signUpErrors/actions'
+import {store} from '../../../../../../store/index'
 import {updateOpenRegistrationSuccessModal, updateOpenModalFlag, clearUserParams} from '../../../actions/signUpActions/actions'
 
 const MapStateToProps = state => {
@@ -18,8 +19,11 @@ const MapStateToProps = state => {
         username: state.signUpParams.username,
         email: state.signUpParams.email,
         password: state.signUpParams.password,
-        confirmPassword: state.signUpParams.confirmPassword
-
+        confirmPassword: state.signUpParams.confirmPassword,
+        errorLogin: state.signUpErrors.errorLogin,
+        errorEmail: state.signUpErrors.errorEmail,
+        errorPassword: state.signUpErrors.errorPassword,
+        errorConfirmPassword: state.signUpErrors.errorConfirmPassword
     }
 };
 
@@ -43,19 +47,19 @@ class SubmitButton extends Component {
         const latinSymbolRegex = /^[a-zA-Z0-9]+$/;
         const numberRegex = /^[0-9]+$/;
         if (login === '') {
-            this.props.updateLoginError('Введите логин')
+             this.props.updateLoginError('Введите логин!');
         }
         else if (login.length < 5 || login.length > 10) {
-            this.props.updateLoginError('Длина логина должна быть не менее 5 и не более 10 символов')
+            this.props.updateLoginError('Длина логина должна быть не менее 5 и не более 10 символов!')
         }
         else if (numberRegex.test(login)) {
-            this.props.updateLoginError('Логин не должен содержать только цифры')
+            this.props.updateLoginError('Логин не должен содержать только цифры!')
         }
         else if (!latinSymbolRegex.test(login)) {
-            this.props.updateLoginError('Используйте латиницу и римские цифры')
+            this.props.updateLoginError('Используйте латиницу и арабские цифры!')
         }
         else {
-            this.props.updateLoginError('')
+            this.props.updateLoginError('ok')
         }
     };
 
@@ -67,26 +71,26 @@ class SubmitButton extends Component {
         const checkDogSmbNmbOfOccurrences = /@/g;
         var parseEmail;
         if (email === '') {
-            this.props.updateEmailError('Введите email')
+            this.props.updateEmailError('Введите email!')
         }
         else if (!email.includes('@')) {
-            this.props.updateEmailError('Email должен содержать символ "@"')
+            this.props.updateEmailError('Email должен содержать символ "@"!')
         }
         else if (!beforeDogSymbolRegex.test(email)) {
-            this.props.updateEmailError('Введите часть Email, расположенного до символа "@"')
+            this.props.updateEmailError('Введите часть Email, расположенного до символа "@"!')
         }
         else if (!afterDogSymbolRegex.test(email)) {
-            this.props.updateEmailError('Введите часть Email, расположенного после символа "@"')
+            this.props.updateEmailError('Введите часть Email, расположенного после символа "@"!')
         }
         else if ((email.match(checkDogSmbNmbOfOccurrences)).length > 1) {
-            this.props.updateEmailError('Часть адреса после символа "@" не должна содержать символ "@"')
+            this.props.updateEmailError('Часть адреса после символа "@" не должна содержать символ "@"!')
         }
         else if ((parseEmail = email.substring(email.indexOf('@') + 1, email.length)).match(wrongSymbolRegex) !== null) {
             var wrongCharIndex = parseEmail.match(wrongSymbolRegex).index;
-            this.props.updateEmailError(`Часть адреса после символа "@" не должна содержать символ "${parseEmail[wrongCharIndex]}"`)
+            this.props.updateEmailError(`Часть адреса после символа "@" не должна содержать символ "${parseEmail[wrongCharIndex]}"!`)
         }
         else {
-            this.props.updateEmailError('')
+            this.props.updateEmailError('ok')
         }
     };
 
@@ -94,29 +98,32 @@ class SubmitButton extends Component {
         var pwd = this.props.password;
         const cyrillicRegex = /[а-яА-Я]+/;
         if (pwd === '') {
-            this.props.updatePasswordError('Введите пароль')
+            this.props.updatePasswordError('Введите пароль!')
         }
         else if (pwd.length < 6 || pwd.length > 12) {
-            this.props.updatePasswordError('Длина пароля должна быть не менее 6 и не более 12 символов')
+            this.props.updatePasswordError('Длина пароля должна быть не менее 6 и не более 12 символов!')
         }
         else if (cyrillicRegex.test(pwd)) {
-            this.props.updatePasswordError('Пароль не должен содержать кирилличных символов')
+            this.propsupdatePasswordError('Пароль не должен содержать кирилличных символов!')
         }
         else {
-            this.props.updatePasswordError('')
+            this.props.updatePasswordError('ok')
         }
     };
 
     handleConfirmPasswordErrors = () => {
         var confirmPwd = this.props.confirmPassword;
         if (confirmPwd === '') {
-            this.props.updateConfirmPasswordError('Подтвердите пароль')
+            this.props.updateConfirmPasswordError('Подтвердите пароль!')
         }
         else if (this.props.password !== confirmPwd) {
-            this.props.updateConfirmPasswordError('Пароли не совпадают')
+            this.props.updateConfirmPasswordError('Пароли не совпадают!')
+        }
+        else if (this.props.password === confirmPwd && store.getState().signUpErrors.errorPassword !== 'ok') {
+            this.props.updateConfirmPasswordError('Пароль невалиден!')
         }
         else {
-            this.props.updateConfirmPasswordError('')
+            this.props.updateConfirmPasswordError('ok')
         }
     };
 
@@ -125,29 +132,42 @@ class SubmitButton extends Component {
         this.handleEmailErrors();
         this.handlePasswordErrors();
         this.handleConfirmPasswordErrors();
-
-        fetch('http://localhost:8080/signUp', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: this.props.username,
-                email: this.props.email,
-                password: this.props.password,
-                confirmPassword: this.props.confirmPassword
+        var currStore = store.getState();
+        console.log('TERMINATOR1000', currStore.signUpErrors.errorLogin, '...', this.props.errorEmail);
+        if (currStore.signUpErrors.errorLogin === 'ok' &&
+            currStore.signUpErrors.errorEmail === 'ok' &&
+            currStore.signUpErrors.errorPassword === 'ok' &&
+            currStore.signUpErrors.errorConfirmPassword === 'ok') {
+            console.log('TERMINATOR');
+            fetch('http://localhost:8080/signUp', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: this.props.username,
+                    email: this.props.email,
+                    password: this.props.password,
+                    confirmPassword: this.props.confirmPassword
+                })
+            }).then(status => {
+                return status.json()
+            }).then(result => {
+                if (result.message === 'success') {
+                    this.props.clearUserParams();
+                    this.props.clearErrors();
+                    this.props.updateOpenModalFlag(false);
+                    this.props.updateOpenRegistrationSuccessModal(true)
+                }
+                else {
+                    this.props.updateLoginError(result.usernameMsg);
+                    this.props.updateEmailError(result.emailMsg);
+                    this.props.updatePasswordError(result.pswMsg);
+                    this.props.updateConfirmPasswordError(result.confirmPswMsg);
+                }
             })
-        }).then(status => {
-            return status.json()
-        }).then(result => {
-            if (result.message === 'success') {
-                this.props.clearUserParams();
-                this.props.clearErrors();
-                this.props.updateOpenModalFlag(false)
-                this.props.updateOpenRegistrationSuccessModal(true)
-            }
-        })
+        }
     };
 
 

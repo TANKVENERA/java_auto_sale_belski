@@ -76,16 +76,13 @@ public class UserController {
     @RequestMapping(value = {"/signUp"}, method = RequestMethod.POST)
     public RegistrationStatusEntity signUpNewUser(@RequestBody UserDTO newUser, BindingResult result) {
         /** Need validations**/
-        System.out.println("RESULT" + " " +  statusEntity.getUsernameMsg() + " :" + statusEntity.getUsernameMsg());
         statusEntity.refreshErrors();
         userValidator.validate(newUser, result);
         if (result.hasErrors()) {
             if ( result.hasFieldErrors("username")){
-                System.out.println("USER_DATA_ " + result.getFieldErrors("username").size());
                 statusEntity.setUsernameMsg(messageSource.getMessage(result.getFieldError("username"), null));
             }
             if (result.hasFieldErrors("email")) {
-                System.out.println("EMAIL_DATA_ " + result.getFieldErrors("email").size());
                 statusEntity.setEmailMsg(messageSource.getMessage(result.getFieldError("email"), null));
             }
             if (result.hasFieldErrors("password")) {
@@ -97,7 +94,8 @@ public class UserController {
             statusEntity.setStatus(HttpStatus.BAD_REQUEST).setMessage("unsuccess");
         }
         else {
-            statusEntity.setStatus(HttpStatus.OK).setMessage("success");
+            statusEntity.setStatus(HttpStatus.OK).setMessage("success").setUsernameMsg("ok").
+                         setEmailMsg("ok").setPswMsg("ok").setConfirmPswMsg("ok");
         }
         //userService.saveUser(newUser);
         return statusEntity;
@@ -108,7 +106,6 @@ public class UserController {
         model.addAttribute("user", new UserDTO());
         return "profile";
     }
-
 
     @RequestMapping(value = "/updateBlank", method = RequestMethod.GET)
     public String showUpdateBlank(Model model) {

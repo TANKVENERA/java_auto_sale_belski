@@ -6,10 +6,10 @@
 import '../../actions/signUpErrors/action-types';
 
 const initialState = {
-    errorLogin: '',
-    errorEmail: '',
-    errorPassword: '',
-    errorConfirmPassword: ''
+    errorLogin: 'ok',
+    errorEmail: 'ok',
+    errorPassword: 'ok',
+    errorConfirmPassword: 'ok'
 };
 
 export default function signUpErrors(state = initialState, action) {
@@ -17,13 +17,10 @@ export default function signUpErrors(state = initialState, action) {
         case 'LOGIN_ERROR_IS_UPDATED' :
             return {...state, errorLogin: action.errorLogin}
         case 'EMAIL_ERROR_IS_UPDATED' :
-            console.log('EMAIL)ERR', action.errorEmail)
             return {...state, errorEmail: action.errorEmail}
         case 'PASSWORD_ERROR_IS_UPDATED' :
-            console.log('FRMOPASSW', action.errorPassword)
             return {...state, errorPassword: action.errorPassword}
         case 'CONFIRM_PASSWORD_ERROR_IS_UPDATED' :
-            console.log('CONFIRM', action.errorConfirmPassword)
             return {...state, errorConfirmPassword: action.errorConfirmPassword}
         case 'CLEAR_ERRORS':
             return {...state = initialState}

@@ -69,11 +69,11 @@ public class UserValidator implements Validator {
         if (StringUtils.matches("[а-яА-Я]+", user.getPassword())) {
             errors.rejectValue("password", "error.userpassword.cyrillic");
         }
-        System.out.println("FFF" + user.getPassword() + " " + user.getConfirmPassword());
         ValidationUtils.rejectIfEmpty(errors, "confirmPassword", "error.userConfirmPassword.empty");
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             errors.rejectValue("confirmPassword", "error.userConfirmPassword.mismatch");
         }
+        errors.rejectValue("username", "error.username.exist");
     }
 }
 

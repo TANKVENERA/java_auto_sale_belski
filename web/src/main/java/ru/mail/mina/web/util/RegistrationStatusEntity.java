@@ -21,7 +21,7 @@ public class RegistrationStatusEntity {
     }
 
     public void refreshErrors() {
-        this.setUsernameMsg(null).setEmailMsg(null).setPswMsg(null).setConfirmPswMsg(null);
+        this.setUsernameMsg("ok").setEmailMsg("ok").setPswMsg("ok").setConfirmPswMsg("ok");
     }
     public HttpStatus getStatus() {
         return status;

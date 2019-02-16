@@ -1,0 +1,33 @@
+
+.sign_up_error_server {
+    display: table-cell;
+    box-shadow: 5px 6px 20px 1px rgba(173,126,173,0.86);
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.sign_up_error {
+    display: table-cell;
+}
+
+.sign_up_error_img {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.error_img {
+    width: 22px;
+    height: 22px;
+}
+
+.sign_up_error_txt{
+    display: table-cell;
+}
+
+.error_txt_label {
+    font-size: 14px;
+    font-family: Arial;
+    color: #e34065;
+    margin-bottom: 0px;
+    margin-right: 3px;
+}
