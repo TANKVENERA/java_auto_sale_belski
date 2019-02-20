@@ -8,7 +8,7 @@ import StyledReactSelect from '../../../../../static/StyledReactSelect';
 import './styles/priceFilter.css';
 import ArrowDown from '../../../../../static/ArrowDown';
 import {RadioGroup, RadioButton} from '../../../../../../node_modules/react-custom-radio'
-import {updatePriceFrom, updatePriceOn} from '../../../../../actions/index';
+import {updatePriceFrom, updatePriceOn, updateCurrencyType} from '../../actions/mainFilterActions/actions';
 import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
@@ -22,7 +22,8 @@ const MapStateToProps = (state) => {
 const MapDispatchToProps = (dispatch) => {
     return {
         updatePriceFrom: (priceFrom) => dispatch(updatePriceFrom(priceFrom)),
-        updatePriceOn: (priceFrom) => dispatch(updatePriceOn(priceFrom))
+        updatePriceOn: (priceFrom) => dispatch(updatePriceOn(priceFrom)),
+        updateCurrencyType: (priceFrom) => dispatch(updateCurrencyType(priceFrom))
     }
 };
 
@@ -39,7 +40,7 @@ class PriceFilter extends Component {
 
     handleCurrencyChange = (selectedCurrency) => {
         this.setState({selectedCurrency: selectedCurrency});
-        this.props.onSelectCurrency(selectedCurrency);
+        this.props.updateCurrencyType(selectedCurrency);
     }
 
     handleChangePriceFrom = (selectedPriceFrom) => {

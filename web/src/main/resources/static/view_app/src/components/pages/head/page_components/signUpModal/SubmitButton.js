@@ -3,16 +3,16 @@
  */
 import React, {Component} from 'react'
 import './styles/submitButton.css'
-import {connect} from '../../../../../../../node_modules/react-redux'
+import {connect} from '../../../../../../node_modules/react-redux'
 import {
     updateLoginError,
     updateEmailError,
     updatePasswordError,
     updateConfirmPasswordError,
     clearErrors
-} from '../../../actions/signUpErrors/actions'
-import {store} from '../../../../../../store/index'
-import {updateOpenRegistrationSuccessModal, updateOpenModalFlag, clearUserParams} from '../../../actions/signUpActions/actions'
+} from '../../actions/signUpErrors/actions'
+import {store} from '../../../../../store/index'
+import {updateOpenRegistrationSuccessModal, updateOpenModalFlag, clearUserParams} from '../../actions/signUpActions/actions'
 
 const MapStateToProps = state => {
     return {
@@ -133,7 +133,7 @@ class SubmitButton extends Component {
         this.handlePasswordErrors();
         this.handleConfirmPasswordErrors();
         var currStore = store.getState();
-        console.log('TERMINATOR1000', currStore.signUpErrors.errorLogin, '...', this.props.errorEmail);
+
         if (currStore.signUpErrors.errorLogin === 'ok' &&
             currStore.signUpErrors.errorEmail === 'ok' &&
             currStore.signUpErrors.errorPassword === 'ok' &&

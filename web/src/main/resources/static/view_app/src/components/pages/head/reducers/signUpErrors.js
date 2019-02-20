@@ -3,7 +3,7 @@
  */
 
 
-import '../../actions/signUpErrors/action-types';
+import '../actions/signUpErrors/action-types';
 
 const initialState = {
     errorLogin: 'ok',

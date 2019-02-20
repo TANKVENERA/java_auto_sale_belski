@@ -2,8 +2,8 @@
  * Created by Mina on 21.01.2019.
  */
 import React from 'react';
-import warning from '../../../../../../static/icons/warningTriangle.png';
-import Flip from '../../../../../../../node_modules/react-reveal/Flip';
+import warning from '../../../../../static/icons/warningTriangle.png';
+import Flip from '../../../../../../node_modules/react-reveal/Flip';
 import './styles/formErrors.css';
 
 export const FormErrors = (param) => {

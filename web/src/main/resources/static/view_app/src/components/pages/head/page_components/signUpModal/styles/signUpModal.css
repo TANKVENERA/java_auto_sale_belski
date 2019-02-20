@@ -25,10 +25,20 @@
     border: 1.5px solid #ff3a29;
 }
 
-.sign_up_item {
+.reg_success_block {
+    overflow: hidden;
+    width: 450px;
+}
 
+.reg_success_img {
+    float: left;
+    width: 35px;
 }
 
 .sign_up_field {
     margin-bottom: 5px;
+}
+
+.reg_success_txt {
+    padding-top: 3px;
 }

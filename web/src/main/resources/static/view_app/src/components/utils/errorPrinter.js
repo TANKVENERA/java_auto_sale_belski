@@ -3,7 +3,6 @@ import isOK from '../../static/icons/isOk.png';
 import warning from '../../static/icons/warning.png';
 import ReactImageAppear from '../../../node_modules/react-image-appear'
 
-
 const warningStyles = {
     // verticalAlign: '12px',
     fontSize: '18px',

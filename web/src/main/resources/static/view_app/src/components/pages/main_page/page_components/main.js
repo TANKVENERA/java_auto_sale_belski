@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Head from './head/Head';
+import Head from '../../head/page_components/Head';
 import MainFilter from './mainFilter/MainFilter'
 
 class main extends Component {

@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
-import Modal from '../../../../../../../node_modules/react-responsive-modal'
-import {Link} from '../../../../../../../node_modules/react-router-dom';
+import Modal from '../../../../../../node_modules/react-responsive-modal'
+import {Link} from '../../../../../../node_modules/react-router-dom';
 import SubmitButton from './SubmitButton'
 import './styles/signUpModal.css'
 import {updateLogin, updatePassword, updateEmail, updateConfirmPassword,
-        clearUserParams, updateOpenRegistrationSuccessModal, updateOpenModalFlag} from '../../../actions/signUpActions/actions'
-import {clearErrors} from '../../../actions/signUpErrors/actions'
+        clearUserParams, updateOpenRegistrationSuccessModal, updateOpenModalFlag} from '../../actions/signUpActions/actions'
+import {clearErrors} from '../../actions/signUpErrors/actions'
 import {FormErrors} from './FormErrors'
-import {connect} from '../../../../../../../node_modules/react-redux';
+import isOk from  '../../../../../static/icons/isOk.png'
+import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
     return {
@@ -84,7 +85,7 @@ class SignUpModal extends Component {
         var emailErr = this.props.errorEmail;
         var pwdErr = this.props.errorPassword;
         var confirmPwdErr = this.props.errorConfirmPassword;
-        console.log('STRT', loginErr, 'LOGIN',  this.props.username)
+         console.log('LOGIN',  this.props.regSuccessModalIsOpen)
         return (
             <div>
                 <button onClick={this.onOpenModal}>Регистрация</button>
@@ -147,8 +148,15 @@ class SignUpModal extends Component {
                 </Modal>
                 <Modal open={this.props.regSuccessModalIsOpen} onClose={this.onCloseRegSuccessModal}
                        showCloseIcon={false}>
-                    Вы успешно зарегестрировались.
-                    <Link to='/'>Вернуться на главную</Link>
+                    <div className="reg_success_block">
+                        <div className="reg_success_img">
+                            <img alt="" src={isOk} className=""/>
+                        </div>
+                        <div className="reg_success_txt">
+                             <text>Вы успешно зарегестрировались! </text>
+                            <Link to="" onClick={this.onCloseRegSuccessModal}>Вернуться на главную</Link>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         )

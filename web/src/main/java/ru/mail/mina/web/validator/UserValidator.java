@@ -73,7 +73,7 @@ public class UserValidator implements Validator {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             errors.rejectValue("confirmPassword", "error.userConfirmPassword.mismatch");
         }
-        errors.rejectValue("username", "error.username.exist");
+//        errors.rejectValue("username", "error.username.exist");
     }
 }
 

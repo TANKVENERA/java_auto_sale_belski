@@ -1,10 +1,10 @@
 import {
     PREVMARK_IS_UPDATED, UPLOAD_MODELS,
     YEAR_OF_ISSUE_FROM_IS_UPDATED,
-    YEAR_OF_ISSUE_ON_IS_UPDATED, PRICE_FROM_IS_UPDATED, PRICE_ON_IS_UPDATED
-} from '../actions/action-types';
+    YEAR_OF_ISSUE_ON_IS_UPDATED, PRICE_FROM_IS_UPDATED, PRICE_ON_IS_UPDATED, CURRENCY_TYPE_IS_UPDATED
+} from '../actions/mainFilterActions/action-types';
 
-import {store} from '../store/index';
+import {store} from '../../../../store/index';
 
 const initialState = {
     mark: '',
