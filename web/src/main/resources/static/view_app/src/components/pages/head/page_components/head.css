@@ -9,3 +9,7 @@
 .main-button-block-tab:focus {
     outline: none;
 }
+
+.main-button-block-tab:hover {
+    text-decoration: none;
+}

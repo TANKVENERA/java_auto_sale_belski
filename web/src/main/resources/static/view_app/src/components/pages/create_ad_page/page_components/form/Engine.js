@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {ErrorPrinter} from '../../../utils/errorPrinter';
-import {validateField, addWhiteSpace} from '../../../utils/util'
-import {updateEngineValue} from '../../../../actions/index';
-import {connect} from '../../../../../node_modules/react-redux';
+import {ErrorPrinter} from '../../../../utils/errorPrinter';
+import {validateField, addWhiteSpace} from '../../../../utils/util'
+import {updateEngineValue} from '../../actions/formActions/actions';
+import {connect} from '../../../../../../node_modules/react-redux';
 
 const errors = ['Укажите объём двигателя',
                 'Объём превышает допустимый максимум']

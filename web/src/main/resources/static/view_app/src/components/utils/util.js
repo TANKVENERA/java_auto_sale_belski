@@ -1,6 +1,5 @@
 
 export function initData(someFunc, param) {
-    console.log('INIT')
     fetch(`http://localhost:8080/${param}`)
         .then(result => {
             return result.json();

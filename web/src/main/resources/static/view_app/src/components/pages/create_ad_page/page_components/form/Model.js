@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import StyledSelect from '../../../../static/StyledReactSelect';
-import {validateField} from '../../../utils/util';
-import {ErrorPrinter} from '../../../utils/errorPrinter';
-import {connect} from '../../../../../node_modules/react-redux';
-import {updatePrevMark, updateModel, uploadModels} from '../../../../actions/index';
-import {initData} from  '../../../utils/util';
+import StyledSelect from '../../../../../static/StyledReactSelect';
+import {validateField} from '../../../../utils/util';
+import {ErrorPrinter} from '../../../../utils/errorPrinter';
+import {connect} from '../../../../../../node_modules/react-redux';
+import {initData} from  '../../../../utils/util';
+import {updatePrevMark, updateModel, uploadModels} from '../../actions/formActions/actions';
 
 const error = 'Введите марку авто';
 

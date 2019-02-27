@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Head from '../../head/page_components/Head';
+import Head from '../../head/page_components/head';
 import MainFilter from './mainFilter/MainFilter'
 
 class main extends Component {
@@ -8,10 +8,10 @@ class main extends Component {
         return (
             <div>
                 <div>
-                    <Head/>
+                    <Head />
                 </div>
                 <div>
-                    <MainFilter/>
+                    <MainFilter />
                 </div>
             </div>
         );

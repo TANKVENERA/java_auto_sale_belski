@@ -16,6 +16,7 @@ const MapStateToProps = (state) => {
         prices: state.staticData.dataObject.prices,
         priceFrom: state.mainFilterParams.priceFrom,
         priceOn: state.mainFilterParams.priceOn,
+        currencyType: state.mainFilterParams.currencyType
     }
 }
 
@@ -23,7 +24,7 @@ const MapDispatchToProps = (dispatch) => {
     return {
         updatePriceFrom: (priceFrom) => dispatch(updatePriceFrom(priceFrom)),
         updatePriceOn: (priceFrom) => dispatch(updatePriceOn(priceFrom)),
-        updateCurrencyType: (priceFrom) => dispatch(updateCurrencyType(priceFrom))
+        updateCurrencyType: (currencyType) => dispatch(updateCurrencyType(currencyType))
     }
 };
 

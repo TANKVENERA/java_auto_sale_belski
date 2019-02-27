@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import {uploadStaticData} from '../../actions/index'
 import {connect} from '../../../node_modules/react-redux'
+
+export const uploadStaticData = data => ({
+    type: 'UPLOAD_STATIC_DATA',
+    dataObject: data
+});
 
 const MapDispatchToProps = (dispatch) => {
     return {

@@ -14,13 +14,13 @@ const initialState = {
     yearOfIssueFrom: '',
     yearOfIssueOn: '',
     priceFrom: '',
-    priceOn: ''
+    priceOn: '',
+    currencyType: ''
 };
 
 export default function mainFilterParams(state = initialState, action) {
     switch (action.type) {
         case 'MARK_IS_UPDATED_MAIN_FILTER':
-            console.log('MAINFILTERPARAMS', store.getState());
             return {...state, mark: action.mark};
         case PREVMARK_IS_UPDATED:
             return {...state, previousMark: action.prevMark}
@@ -36,6 +36,9 @@ export default function mainFilterParams(state = initialState, action) {
             return {...state, priceFrom: action.priceFrom};
         case PRICE_ON_IS_UPDATED:
             return {...state, priceOn: action.priceOn};
+        case CURRENCY_TYPE_IS_UPDATED:
+            console.log('MAINFILTERPARAMS', action.currencyType, 'STORE', store.getState());
+            return {...state, currencyType: action.currencyType};
         default:
             return state;
     }

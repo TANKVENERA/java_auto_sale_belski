@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import StyledSelect from '../../../../static/StyledReactSelect';
-import {validateField} from '../../../utils/util';
-import {ErrorPrinter} from '../../../utils/errorPrinter';
-import {connect} from '../../../../../node_modules/react-redux';
-import {updateTransmission} from '../../../../actions/index';
+import StyledSelect from '../../../../../static/StyledReactSelect';
+import {validateField} from '../../../../utils/util';
+import {ErrorPrinter} from '../../../../utils/errorPrinter';
+import {connect} from '../../../../../../node_modules/react-redux';
+import {updateTransmission} from '../../actions/formActions/actions';
+
 const error = 'Выберите тип привода';
 
 const MapStateToProps = (state) => {

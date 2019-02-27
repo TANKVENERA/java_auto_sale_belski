@@ -7,7 +7,7 @@ import {CSSTransition} from '../../../../../../node_modules/react-transition-gro
 import StyledReactSelect from '../../../../../static/StyledReactSelect';
 import ArrowDown from '../../../../../static/ArrowDown';
 import {connect} from '../../../../../../node_modules/react-redux';
-import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../../../../actions/index';
+import {updateYearOfIssueFrom, updateYearOfIssueON} from '../../actions/mainFilterActions/actions';
 
 const MapStateToProps = (state) => {
     return {

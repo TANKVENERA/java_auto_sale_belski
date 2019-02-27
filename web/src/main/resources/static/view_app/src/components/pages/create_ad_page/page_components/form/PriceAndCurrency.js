@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {ErrorPrinter} from '../../../utils/errorPrinter';
-import {validateField, addWhiteSpace} from '../../../utils/util'
-import StyledSelect from '../../../../static/StyledReactSelect'
-import {updatePrice, updateCurrencyType} from '../../../../actions/index';
-import {connect} from '../../../../../node_modules/react-redux';
+import {ErrorPrinter} from '../../../../utils/errorPrinter';
+import {validateField, addWhiteSpace} from '../../../../utils/util'
+import StyledSelect from '../../../../../static/StyledReactSelect'
+import {connect} from '../../../../../../node_modules/react-redux';
+import {updatePrice, updateCurrencyType} from '../../actions/formActions/actions';
 
 const errors = ['Укажите цену',
                'Цена превышает допустимый максимум']
@@ -32,7 +32,6 @@ class PriceAndCurrency extends Component {
     }
 
     handleCurrencyChange = (selectedOption) => {
-        console.log('FROM_ACTION', selectedOption)
         this.props.updateCurrencyType(selectedOption)
     };
 

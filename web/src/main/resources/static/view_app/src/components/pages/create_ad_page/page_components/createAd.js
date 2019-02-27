@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../../../node_modules/react-select-v1/dist/react-select.css';
+import '../../../../../node_modules/react-select-v1/dist/react-select.css';
 import Mark from './form/Mark';
 import YearOfIssue from './form/YearOfIssue';
 import Description from './form/Description';
@@ -13,7 +13,7 @@ import Fuel from './form/Fuel';
 import Mileage from './form/Mileage';
 import Engine from './form/Engine';
 import PrimaryButton from './form/PrimaryButton';
-import '../../../static/createAd.css'
+import './createAd.css'
 
 document.body.style = 'background: #eff2f3';
 

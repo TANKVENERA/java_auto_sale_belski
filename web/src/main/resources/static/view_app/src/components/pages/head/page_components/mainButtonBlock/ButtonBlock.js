@@ -3,67 +3,55 @@
  */
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-// import classNames from 'classnames'
 import '../head.css'
 import  AppBar from '../../../../../../node_modules/@material-ui/core/AppBar'
 import Tabs from '../../../../../../node_modules/@material-ui/core/Tabs'
 import Tab from '../../../../../../node_modules/@material-ui/core/Tab'
-import { withStyles } from '../../../../../../node_modules/@material-ui/core/styles';
+import {Link} from '../../../../../../node_modules/react-router-dom'
+import {changeTabAction} from '../../actions/changeTabAction/actions'
+import {connect} from '../../../../../../node_modules/react-redux';
 
-const styles = () => ({
-    root: {
-        '&$focus': {
-            outline: 'none'
-        },
-    },
-    select :{
-        outline: 'none !important'
-    },
-    focus :{
-
+const MapStateToProps = (state) => {
+    return {
+        index: state.changeTab.index
     }
-});
+};
+
+const MapDispatchToProps = (dispatch) => {
+    return {
+        changeTab: (index) => dispatch(changeTabAction(index))
+    }
+};
 
 class ButtonBlock extends Component {
-    state = {
-        value: 0,
-    };
 
     handleChange = (event, value) => {
-        this.setState({ value });
+        console.log('!!!!!!', value)
+        this.props.changeTab(value);
+
     };
 
-    handleChangeIndex = index => {
-        this.setState({ value: index });
-    };
-
-render () {
-    const {classes} = this.props;
-    return (
-        <div>
-            <AppBar position="static" color="default"  >
-                <Tabs
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="fullWidth"
-                >
-                    <Tab selected className="main-button-block-tab"  label="Главная" />
-                    <Tab selected className="main-button-block-tab" label="Объявления" />
-                    <Tab selected className="main-button-block-tab" label="Новости" />
-                    <Tab selected className="main-button-block-tab" label="Кабинет" />
-                </Tabs>
-            </AppBar>
-         </div>
-    )
+    render() {
+        console.log('}}}}}}', this.props.index);
+        return (
+            <div>
+                <AppBar position="static" color="default">
+                    <Tabs
+                        value={this.props.index}
+                        onChange={this.handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="fullWidth"
+                    >
+                        <Tab className="main-button-block-tab" label="Главная" component={Link} to="/"/>
+                        <Tab className="main-button-block-tab" label="Объявления"/>
+                        <Tab className="main-button-block-tab" label="Новости" component={Link} to="/createAd"/>
+                        <Tab className="main-button-block-tab" label="Кабинет" component={Link} to="/profile" />
+                    </Tabs>
+                </AppBar>
+            </div>
+        )
     }
 }
 
-// ButtonBlock.propTypes = {
-//     classes: PropTypes.object.isRequired,
-//     theme: PropTypes.object.isRequired,
-// };
-
-export default withStyles(styles)(ButtonBlock);
+export default connect(MapStateToProps, MapDispatchToProps)(ButtonBlock);

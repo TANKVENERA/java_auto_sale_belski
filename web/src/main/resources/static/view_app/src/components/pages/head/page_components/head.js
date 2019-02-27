@@ -15,7 +15,7 @@ class Head extends Component {
                 <div className="head-element">
                     <SignUpModal/>
                 </div>
-                <div >
+                <div>
                     <ButtonBlock/>
                 </div>
             </div>

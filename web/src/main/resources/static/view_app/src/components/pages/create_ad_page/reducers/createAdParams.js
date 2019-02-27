@@ -1,3 +1,6 @@
+/**
+ * Created by Mina on 21.02.2019.
+ */
 import {
     PREVMARK_IS_UPDATED, UPLOAD_MODELS, YEAR_OF_ISSUE_IS_UPDATED,
     PRICE_IS_UPDATED, BODY_STYLE_IS_UPDATED, TRANSMISSION_IS_UPDATED,
@@ -5,7 +8,7 @@ import {
     GEAR_BOX_TYPE_IS_UPDATED, MILEAGE_VALUE_IS_UPDATED, UNIT_OF_DISTANSE_MEASURE_IS_UPDATED,
     CURRENCY_TYPE_IS_UPDATED, DESCRIPTION_IS_UPDATED, IMAGES_ARE_UPDATED, IMAGE_IS_DELETED,
     PRIMARY_IMG_INDEX
-} from '../actions/action-types';
+} from '../actions/formActions/action-types';
 
 const initialState = {
     mark: '',
@@ -78,4 +81,3 @@ export default function createAdParams(state = initialState, action) {
             return state;
     }
 }
-

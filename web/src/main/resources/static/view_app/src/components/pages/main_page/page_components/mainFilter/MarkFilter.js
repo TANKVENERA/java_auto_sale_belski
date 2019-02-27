@@ -4,7 +4,7 @@ import ModelFilter from './ModelFilter'
 import './styles/markFilter.css';
 import  '../../../../../../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css';
 import ArrowDown from '../../../../../static/ArrowDown';
-import {updateMark} from '../../../../../actions/index'
+import {updateMark} from '../../actions/mainFilterActions/actions'
 import {connect} from '../../../../../../node_modules/react-redux';
 
 const MapStateToProps = (state) => {
